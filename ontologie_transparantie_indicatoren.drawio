@@ -1,0 +1,180 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.0.16 Chrome/132.0.6834.196 Electron/34.2.0 Safari/537.36" version="26.0.16">
+  <diagram id="hCl-pSp_Il2UjLL40g3n" name="Page-1">
+    <mxGraphModel dx="2752" dy="895" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="mens" value="&lt;b&gt;mens&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;NCBITAXON_9606&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-730" y="420" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="afwijking" value="&lt;b&gt;fysieke afwijking&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;OGMS_0000045&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="-730" y="270" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="prothese" value="&lt;b&gt;prothese&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;zinl:prosthesis&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="-730" y="760" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="locatie" value="&lt;b&gt;zorglocatie&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;zinl:CareLocation&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-1150" y="260" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dv_mens" value="deel van" style="html=1;dashed=1;strokeColor=#0F6E56;fontColor=#0F6E56;fontSize=9;" parent="1" source="afwijking" target="mens" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zorgproces" value="&lt;b&gt;zorgproces&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;OGMS_0000096&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="-1150" y="420" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="behandeling" value="&lt;b&gt;behandeling&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;OGMS_0000090&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="-1110" y="533" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="chirurgie" value="&lt;b&gt;chirurgische ingreep&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;zinl:SurgicalProcedure&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-1070" y="647" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="promadmin" value="&lt;b&gt;PROM afname&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;zinl:PROMAdministration&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-730" y="600" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sub_ch_zp" value="subklasse van" style="html=1;dashed=1;strokeColor=#B5D4F4;endArrow=open;endFill=0;fontColor=#888780;fontSize=9;" parent="1" source="chirurgie" target="behandeling" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sub_beh_zp" value="subklasse van" style="html=1;dashed=1;strokeColor=#B5D4F4;endArrow=open;endFill=0;fontColor=#888780;fontSize=9;" parent="1" source="behandeling" target="zorgproces" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sub_thp_ch" value="subklasse van" style="html=1;dashed=1;strokeColor=#B5D4F4;endArrow=open;endFill=0;fontColor=#888780;fontSize=9;" parent="1" source="thp" target="chirurgie" edge="1">
+          <mxGeometry x="0.1546" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_vpi" value="vindt plaats in" style="html=1;dashed=1;strokeColor=#185FA5;fontColor=#185FA5;fontSize=9;" parent="1" source="zorgproces" target="locatie" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_hd_mens" value="heeft deelnemer" style="html=1;dashed=1;strokeColor=#185FA5;fontColor=#185FA5;fontSize=9;" parent="1" source="zorgproces" target="mens" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_thp_prot" value="heeft deelnemer" style="html=1;dashed=1;strokeColor=#185FA5;fontColor=#185FA5;fontSize=9;" parent="1" source="thp" target="prothese" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pa_mens" value="heeft deelnemer" style="html=1;dashed=1;strokeColor=#185FA5;fontColor=#185FA5;fontSize=9;edgeStyle=orthogonalEdgeStyle;" parent="1" source="promadmin" target="mens" edge="1">
+          <mxGeometry x="-0.4581" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="crid" value="&lt;b&gt;centraal reg. id.&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;IAO_0000578&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-850" y="80" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="lit_string" value="xsd:string" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#888780;fontColor=#5F5E5A;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="-510" y="91" width="90" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="codesys" value="&lt;b&gt;codesysteem&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;zinl:CodeSystem&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-1150" y="80" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="prom" value="&lt;b&gt;PROM&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;zinl:PatientReportedOutcomeMeasure&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-440" y="600" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="promscore" value="&lt;b&gt;PROM score&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;zinl:PROMScore&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-440" y="760" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="eq5d" value="&lt;b&gt;EQ-5D score&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;zinl:EQ5DScore&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-180" y="600" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="lit_decimal" value="xsd:decimal" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#888780;fontColor=#5F5E5A;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="-160" y="771" width="90" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="e_score_dec" value="heeft meetwaarde" style="html=1;dashed=1;strokeColor=#888780;fontColor=#5F5E5A;fontSize=9;endArrow=open;endFill=0;" parent="1" source="promscore" target="lit_decimal" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sub_crid" value="&lt;meta charset=&quot;utf-8&quot;&gt;&lt;span style=&quot;color: rgb(95, 94, 90); font-family: Helvetica; font-size: 9px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;heeft identifiersymbool&lt;/span&gt;" style="html=1;dashed=1;strokeColor=#534AB7;endArrow=classic;endFill=0;fontColor=#534AB7;fontSize=9;rounded=1;align=center;verticalAlign=middle;fontFamily=Helvetica;labelBackgroundColor=default;" parent="1" source="crid" target="lit_string" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-440" y="1278" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_sub_eq5d" value="subklasse van" style="html=1;dashed=1;strokeColor=#AFA9EC;endArrow=open;endFill=0;fontColor=#888780;fontSize=9;" parent="1" source="eq5d" target="promscore" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_crid_cs" value="heeft codesysteem" style="html=1;dashed=1;strokeColor=#534AB7;fontColor=#534AB7;fontSize=9;" parent="1" source="crid" target="codesys" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_crid_duidt" value="duidt aan" style="html=1;dashed=1;strokeColor=#534AB7;fontColor=#534AB7;fontSize=9;edgeStyle=orthogonalEdgeStyle;" parent="1" source="crid" target="afwijking" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-740" y="203" />
+              <mxPoint x="-650" y="203" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_prom_ps" value="heeft deel" style="html=1;dashed=1;strokeColor=#534AB7;fontColor=#534AB7;fontSize=9;" parent="1" source="prom" target="promscore" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ps_qol" value="gaat over" style="html=1;dashed=1;strokeColor=#534AB7;fontColor=#534AB7;fontSize=9;edgeStyle=orthogonalEdgeStyle;" parent="1" source="eq5d" target="qol" edge="1">
+          <mxGeometry x="-0.5087" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-100" y="448" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_pa_prom" value="heeft output" style="html=1;dashed=1;strokeColor=#185FA5;fontColor=#185FA5;fontSize=9;" parent="1" source="promadmin" target="prom" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qol" value="&lt;b&gt;kwaliteit van leven&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;zinl:QualityOfLife&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="-440" y="420" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="e_qol_mens" value="inhereert in" style="html=1;dashed=1;strokeColor=#BA7517;fontColor=#BA7517;fontSize=9;" parent="1" source="qol" target="mens" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="thp" value="&lt;b&gt;totale heup procedure&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;zinl:THP&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" parent="1" vertex="1">
+          <mxGeometry x="-1000" y="760" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="p1n15FZZml4AR3L6vw5x-3" value="duidt aan" style="html=1;dashed=1;strokeColor=#534AB7;fontColor=#534AB7;fontSize=9;edgeStyle=orthogonalEdgeStyle;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="crid" target="behandeling">
+          <mxGeometry x="-0.8088" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-810" y="561" />
+            </Array>
+            <mxPoint x="-730" y="146" as="sourcePoint" />
+            <mxPoint x="-640" y="280" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p1n15FZZml4AR3L6vw5x-4" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="-185" y="20" width="170" height="276" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=1;arcSize=10;fontColor=#333333;" parent="p1n15FZZml4AR3L6vw5x-4" vertex="1">
+          <mxGeometry width="170" height="276" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1" value="material entity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" parent="p1n15FZZml4AR3L6vw5x-4" vertex="1">
+          <mxGeometry x="12" y="22" width="108" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2" value="process" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" parent="p1n15FZZml4AR3L6vw5x-4" vertex="1">
+          <mxGeometry x="12" y="60" width="108" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3" value="information item" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1;fontSize=11;" parent="p1n15FZZml4AR3L6vw5x-4" vertex="1">
+          <mxGeometry x="12" y="98" width="108" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4" value="quality" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontSize=11;" parent="p1n15FZZml4AR3L6vw5x-4" vertex="1">
+          <mxGeometry x="12" y="136" width="108" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg6" value="xsd:literal" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#888780;fontColor=#5F5E5A;fontSize=10;" parent="p1n15FZZml4AR3L6vw5x-4" vertex="1">
+          <mxGeometry x="12" y="178" width="80" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg7s" value="" style="html=1;dashed=1;strokeColor=#888780;endArrow=open;endFill=0;" parent="p1n15FZZml4AR3L6vw5x-4" edge="1">
+          <mxGeometry x="460" y="354" width="80" height="20" as="geometry">
+            <mxPoint x="12" y="230" as="sourcePoint" />
+            <mxPoint x="70" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg7t" value="relatie / axioma" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="p1n15FZZml4AR3L6vw5x-4" vertex="1">
+          <mxGeometry x="80" y="220" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg8s" value="" style="html=1;dashed=1;strokeColor=#B5D4F4;endArrow=open;endFill=0;" parent="p1n15FZZml4AR3L6vw5x-4" edge="1">
+          <mxGeometry x="460" y="374" width="80" height="20" as="geometry">
+            <mxPoint x="12" y="252" as="sourcePoint" />
+            <mxPoint x="70" y="252" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg8t" value="subklasse van" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;" parent="p1n15FZZml4AR3L6vw5x-4" vertex="1">
+          <mxGeometry x="80" y="240" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="p1n15FZZml4AR3L6vw5x-5" value="Ontologie transparantieindicatoren - deel PROMS en volume" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="-880" y="10" width="620" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
