@@ -1,0 +1,197 @@
+@prefix rdf:              <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:             <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:              <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:              <http://www.w3.org/2001/XMLSchema#> .
+@prefix time:             <http://www.w3.org/2006/time#> .
+@prefix :                 <http://onto.fairify.com#> .
+
+# OBO properties en klassen met leesbare aliassen
+@prefix deel_van:         <http://purl.obolibrary.org/obo/BFO_0000050> .   # part of
+@prefix heeft_deel:       <http://purl.obolibrary.org/obo/BFO_0000051> .   # has part
+@prefix heeft_meetwaarde: <http://purl.obolibrary.org/obo/IAO_0000004> .   # has measurement value
+@prefix gaat_over:        <http://purl.obolibrary.org/obo/IAO_0000136> .   # is about
+@prefix duidt_aan:        <http://purl.obolibrary.org/obo/IAO_0000219> .   # denotes
+@prefix heeft_id_symbool: <http://purl.obolibrary.org/obo/IAO_0000577> .   # has identifier symbol
+@prefix CRID:             <http://purl.obolibrary.org/obo/IAO_0000578> .   # centrally registered identifier
+@prefix mens:             <http://purl.obolibrary.org/obo/NCBITAXON_9606> . # Homo sapiens
+@prefix ziekte:           <http://purl.obolibrary.org/obo/OGMS_0000031> .  # disease
+@prefix kwaliteit_van:    <http://purl.obolibrary.org/obo/RO_0000052> .   # quality of
+@prefix heeft_deelnemer:  <http://purl.obolibrary.org/obo/RO_0000057> .   # has participant
+@prefix inhereert_in:     <http://purl.obolibrary.org/obo/RO_0000092> .   # inheres in
+@prefix heeft_input:      <http://purl.obolibrary.org/obo/RO_0002233> .   # has input
+@prefix heeft_output:     <http://purl.obolibrary.org/obo/RO_0002234> .   # has output
+
+# =============================================================================
+# PROM indicator 4c voorbeelddata
+# Scenario: verschilscore EQ-5D heup PROMs, 3 maanden postoperatief
+#
+# Patient A: complete data — preoperatief + 3 maanden postoperatief => telt mee
+# Patient B: alleen preoperatieve meting, geen 3-maands meting => valt uit
+# =============================================================================
+
+
+# -----------------------------------------------------------------------------
+# Gedeelde infrastructuur: diagnose code M16 (artrose heup, ICD-10)
+# en zorgactiviteitcode voor primaire totale heupprothese
+# -----------------------------------------------------------------------------
+
+:crid_M16
+    rdf:type             CRID: ;
+    heeft_id_symbool:    "M16" ;
+    :has_code_system     :ICD10 ;
+    rdfs:label           "ICD-10 M16 - Coxartrose" .
+
+:crid_35461
+    rdf:type             CRID: ;
+    heeft_id_symbool:    "035461" ;
+    :has_code_system     :ZorgactiviteitCode ;
+    rdfs:label           "ZA 035461 - Primaire totale heupprothese" .
+
+
+# =============================================================================
+# PATIENT A — volledige PROM cyclus (telt mee in indicator 4c)
+# =============================================================================
+
+:patient_A
+    rdf:type    mens: ;
+    rdfs:label  "Patient A" .
+
+:disease_A
+    rdf:type        ziekte: ;
+    inhereert_in:   :patient_A ;
+    rdfs:label      "Coxartrose patient A" .
+
+:crid_M16 duidt_aan: :disease_A .
+
+:surgery_A
+    rdf:type            :SurgicalProcedure ;
+    heeft_deelnemer:    :patient_A ;
+    time:hasTime        :t_surgery_A ;
+    rdfs:label          "Primaire totale heupprothese patient A" .
+
+:crid_35461 duidt_aan: :surgery_A .
+
+:t_surgery_A
+    rdf:type             time:Instant ;
+    time:inXSDDateTime   "2025-03-15T09:00:00"^^xsd:dateTime .
+
+# --- Preoperatieve PROM afname (7 dagen voor operatie) ---
+
+:prom_admin_A_pre
+    rdf:type            :PROMAdministration ;
+    heeft_deelnemer:    :patient_A ;
+    heeft_input:        :EQ-5D-3L ;
+    heeft_output:       :prom_filled_A_pre ;
+    time:hasTime        :t_prom_A_pre ;
+    rdfs:label          "EQ-5D afname preoperatief patient A" .
+
+:t_prom_A_pre
+    rdf:type             time:Instant ;
+    time:inXSDDateTime   "2025-03-08T10:00:00"^^xsd:dateTime .
+
+:prom_filled_A_pre
+    rdf:type        :PatientReportedOutcomeMeasure ;
+    time:hasTime    :t_prom_A_pre ;    
+    heeft_deel:     :score_eq5d_A_pre ;
+    rdfs:label      "Ingevulde EQ-5D preoperatief patient A" .
+
+:score_eq5d_A_pre
+    rdf:type            :EQ5DScore ;
+    deel_van:           :prom_filled_A_pre ;
+    gaat_over:          :patient_A ;
+    gaat_over:          :qol_A ;
+    heeft_meetwaarde:   "0.54"^^xsd:decimal ;
+    rdfs:label          "EQ-5D indexscore preoperatief patient A" .
+
+:qol_A
+    rdf:type        :QualityOfLife ;
+    kwaliteit_van:  :patient_A ;
+    rdfs:label      "Kwaliteit van leven patient A" .
+
+# --- Postoperatieve PROM afname (~3 maanden na operatie) ---
+
+:prom_admin_A_post3
+    rdf:type            :PROMAdministration ;
+    heeft_deelnemer:    :patient_A ;
+    heeft_input:        :EQ-5D-3L ;
+    heeft_output:       :prom_filled_A_post3 ;
+    time:hasTime        :t_prom_A_post3 ;
+    rdfs:label          "EQ-5D afname 3 maanden postoperatief patient A" .
+
+:t_prom_A_post3
+    rdf:type             time:Instant ;
+    time:inXSDDateTime   "2025-06-20T10:00:00"^^xsd:dateTime .
+
+:prom_filled_A_post3
+    rdf:type        :PatientReportedOutcomeMeasure ;
+    time:hasTime    :t_prom_A_post3 ;
+    heeft_deel:     :score_eq5d_A_post3 ;
+    rdfs:label      "Ingevulde EQ-5D 3 maanden postoperatief patient A" .
+
+:score_eq5d_A_post3
+    rdf:type            :EQ5DScore ;
+    deel_van:           :prom_filled_A_post3 ;
+    gaat_over:          :patient_A ;
+    gaat_over:          :qol_A ;
+    heeft_meetwaarde:   "0.78"^^xsd:decimal ;
+    rdfs:label          "EQ-5D indexscore 3 maanden postoperatief patient A" .
+
+
+# =============================================================================
+# PATIENT B — alleen preoperatieve meting (valt uit indicator 4c)
+# =============================================================================
+
+:patient_B
+    rdf:type    mens: ;
+    rdfs:label  "Patient B" .
+
+:disease_B
+    rdf:type        ziekte: ;
+    inhereert_in:   :patient_B ;
+    rdfs:label      "Coxartrose patient B" .
+
+:crid_M16 duidt_aan: :disease_B .
+
+:surgery_B
+    rdf:type            :SurgicalProcedure ;
+    heeft_deelnemer:    :patient_B ;
+    time:hasTime        :t_surgery_B ;
+    rdfs:label          "Primaire totale heupprothese patient B" .
+
+:crid_35461 duidt_aan: :surgery_B .
+
+:t_surgery_B
+    rdf:type             time:Instant ;
+    time:inXSDDateTime   "2025-04-10T08:30:00"^^xsd:dateTime .
+
+:prom_admin_B_pre
+    rdf:type            :PROMAdministration ;
+    heeft_deelnemer:    :patient_B ;
+    heeft_input:        :EQ-5D-3L ;
+    heeft_output:       :prom_filled_B_pre ;
+    time:hasTime        :t_prom_B_pre ;
+    rdfs:label          "EQ-5D afname preoperatief patient B" .
+
+:t_prom_B_pre
+    rdf:type             time:Instant ;
+    time:inXSDDateTime   "2025-04-03T11:00:00"^^xsd:dateTime .
+
+:prom_filled_B_pre
+    rdf:type        :PatientReportedOutcomeMeasure ;
+    heeft_deel:     :score_eq5d_B_pre ;
+    rdfs:label      "Ingevulde EQ-5D preoperatief patient B" .
+
+:score_eq5d_B_pre
+    rdf:type            :EQ5DScore ;
+    deel_van:           :prom_filled_B_pre ;
+    gaat_over:          :patient_B ;
+    gaat_over:          :qol_B ;
+    heeft_meetwaarde:   "0.48"^^xsd:decimal ;
+    rdfs:label          "EQ-5D indexscore preoperatief patient B" .
+
+:qol_B
+    rdf:type        :QualityOfLife ;
+    kwaliteit_van:  :patient_B ;
+    rdfs:label      "Kwaliteit van leven patient B" .
+
+# Patient B heeft geen postoperatieve meting — stopt hier.

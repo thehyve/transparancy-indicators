@@ -1,0 +1,181 @@
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix obo:     <http://purl.obolibrary.org/obo/> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix fairify: <http://onto.fairify.com#> .
+@prefix ex:      <http://example.org/data#> .
+
+# ===========================================================================
+# Code systems (named individuals, already in ontology — repeated here for
+# self-containedness of this data file)
+# ===========================================================================
+
+fairify:SNOMEDCT   a fairify:CodeSystem .
+fairify:ZorgactiviteitCode a fairify:CodeSystem .
+
+# ===========================================================================
+# Care location
+# ===========================================================================
+
+ex:ZiekenhuisA
+    a obo:BFO_0000029 ;          # site (IndependentContinuant)
+    rdfs:label "Ziekenhuis A"@nl .
+
+# ===========================================================================
+# PATIENT 1 – Coxartrose (heuparthrose), geen heupfractuur → INCLUSIE
+# ===========================================================================
+
+# Patient
+ex:Patient1
+    a obo:NCBITAXON_9606 ;
+    rdfs:label "Patiënt 1"@nl .
+
+# Fysieke afwijking: coxartrose
+ex:Disorder1_Coxartrose
+    a obo:OGMS_0000045 ,          # FysiekeAfwijking
+      obo:OGMS_0000102 .          # Disorder
+
+ex:CRID_Snomed_Coxartrose
+    a obo:IAO_0000578 ;
+    obo:BFO_0000050  fairify:SNOMEDCT ;
+    obo:IAO_0000577  "416940007"^^xsd:string .   # SNOMED: primary osteoarthritis of hip
+
+ex:CRID_Snomed_Coxartrose obo:IAO_0000219 ex:Disorder1_Coxartrose .
+
+# Prothese
+ex:Prosthesis1
+    a fairify:prosthesis .
+
+ex:CRID_Prosthesis1
+    a obo:IAO_0000578 ;
+    obo:BFO_0000050  fairify:ZorgactiviteitCode ;
+    obo:IAO_0000577  "38401"^^xsd:string .        # fictieve ZA-code heupprothese
+
+ex:CRID_Prosthesis1 obo:IAO_0000219 ex:Prosthesis1 .
+
+# Tijdsinterval
+ex:THP1_Interval
+    a time:ProperInterval ;
+    time:hasBeginning [ a time:Instant ; time:inXSDDate "2023-04-12"^^xsd:date ] ;
+    time:hasEnd       [ a time:Instant ; time:inXSDDate "2023-04-12"^^xsd:date ] .
+
+# THP procedure
+ex:THP1
+    a fairify:THP ;
+    rdfs:label "THP Patiënt 1 – Coxartrose 2023"@nl ;
+    obo:RO_0000057   ex:Patient1 ;
+    obo:RO_0000057   ex:Prosthesis1 ;
+    obo:RO_0000057   ex:Disorder1_Coxartrose ;
+    obo:BFO_0000066  ex:ZiekenhuisA ;
+    time:hasTime     ex:THP1_Interval .
+
+ex:CRID_THP1
+    a obo:IAO_0000578 ;
+    obo:BFO_0000050  fairify:ZorgactiviteitCode ;
+    obo:IAO_0000577  "036250"^^xsd:string .       # ZA-code totale heupprothese
+
+ex:CRID_THP1 obo:IAO_0000219 ex:THP1 .
+
+
+# ===========================================================================
+# PATIENT 2 – Avasculaire necrose van de heup, geen heupfractuur → INCLUSIE
+# ===========================================================================
+
+ex:Patient2
+    a obo:NCBITAXON_9606 ;
+    rdfs:label "Patiënt 2"@nl .
+
+ex:Disorder2_AvasculaireNecrose
+    a obo:OGMS_0000045 ,
+      obo:OGMS_0000102 .
+
+ex:CRID_Snomed_AvasculaireNecrose
+    a obo:IAO_0000578 ;
+    obo:BFO_0000050  fairify:SNOMEDCT ;
+    obo:IAO_0000577  "31384009"^^xsd:string .     # SNOMED: avascular necrosis of femoral head
+
+ex:CRID_Snomed_AvasculaireNecrose obo:IAO_0000219 ex:Disorder2_AvasculaireNecrose .
+
+ex:Prosthesis2
+    a fairify:prosthesis .
+
+ex:CRID_Prosthesis2
+    a obo:IAO_0000578 ;
+    obo:BFO_0000050  fairify:ZorgactiviteitCode ;
+    obo:IAO_0000577  "38401"^^xsd:string .
+
+ex:CRID_Prosthesis2 obo:IAO_0000219 ex:Prosthesis2 .
+
+ex:THP2_Interval
+    a time:ProperInterval ;
+    time:hasBeginning [ a time:Instant ; time:inXSDDate "2023-09-03"^^xsd:date ] ;
+    time:hasEnd       [ a time:Instant ; time:inXSDDate "2023-09-03"^^xsd:date ] .
+
+ex:THP2
+    a fairify:THP ;
+    rdfs:label "THP Patiënt 2 – Avasculaire necrose 2023"@nl ;
+    obo:RO_0000057   ex:Patient2 ;
+    obo:RO_0000057   ex:Prosthesis2 ;
+    obo:RO_0000057   ex:Disorder2_AvasculaireNecrose ;
+    obo:BFO_0000066  ex:ZiekenhuisA ;
+    time:hasTime     ex:THP2_Interval .
+
+ex:CRID_THP2
+    a obo:IAO_0000578 ;
+    obo:BFO_0000050  fairify:ZorgactiviteitCode ;
+    obo:IAO_0000577  "036250"^^xsd:string .
+
+ex:CRID_THP2 obo:IAO_0000219 ex:THP2 .
+
+
+# ===========================================================================
+# PATIENT 3 – Heupfractuur → EXCLUSIE in query
+# ===========================================================================
+
+ex:Patient3
+    a obo:NCBITAXON_9606 ;
+    rdfs:label "Patiënt 3"@nl .
+
+ex:Disorder3_HipFracture
+    a obo:OGMS_0000045 ,
+      obo:OGMS_0000102 ,
+      fairify:HipFracture .       # subclass van Disorder; dit is de reden van exclusie
+
+ex:CRID_Snomed_HipFracture
+    a obo:IAO_0000578 ;
+    obo:BFO_0000050  fairify:SNOMEDCT ;
+    obo:IAO_0000577  "263225007"^^xsd:string .    # SNOMED: fracture of hip
+
+ex:CRID_Snomed_HipFracture obo:IAO_0000219 ex:Disorder3_HipFracture .
+
+ex:Prosthesis3
+    a fairify:prosthesis .
+
+ex:CRID_Prosthesis3
+    a obo:IAO_0000578 ;
+    obo:BFO_0000050  fairify:ZorgactiviteitCode ;
+    obo:IAO_0000577  "38401"^^xsd:string .
+
+ex:CRID_Prosthesis3 obo:IAO_0000219 ex:Prosthesis3 .
+
+ex:THP3_Interval
+    a time:ProperInterval ;
+    time:hasBeginning [ a time:Instant ; time:inXSDDate "2023-11-20"^^xsd:date ] ;
+    time:hasEnd       [ a time:Instant ; time:inXSDDate "2023-11-20"^^xsd:date ] .
+
+ex:THP3
+    a fairify:THP ;
+    rdfs:label "THP Patiënt 3 – Heupfractuur 2023"@nl ;
+    obo:RO_0000057   ex:Patient3 ;
+    obo:RO_0000057   ex:Prosthesis3 ;
+    obo:RO_0000057   ex:Disorder3_HipFracture ;
+    obo:BFO_0000066  ex:ZiekenhuisA ;
+    time:hasTime     ex:THP3_Interval .
+
+ex:CRID_THP3
+    a obo:IAO_0000578 ;
+    obo:BFO_0000050  fairify:ZorgactiviteitCode ;
+    obo:IAO_0000577  "036250"^^xsd:string .
+
+ex:CRID_THP3 obo:IAO_0000219 ex:THP3 .

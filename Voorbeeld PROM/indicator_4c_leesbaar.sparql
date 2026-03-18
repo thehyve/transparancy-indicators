@@ -1,0 +1,102 @@
+# =============================================================================
+# Indicator 4c: Verschilscore EQ-5D heup PROMs, 3 maanden postoperatief
+#
+# Noemer: patiënten met artrose (ICD-10 M16) bij wie een primaire totale
+#         heupprothese (ZA 035461) is geplaatst, met zowel een preoperatieve
+#         als een postoperatieve EQ-5D score op ~3 maanden na de ingreep.
+#
+# Teller (verschilscore): postoperatieve score minus preoperatieve score
+#         per patiënt.
+#
+# Temporele logica (timestamps only):
+#   - preoperatief:  PROM-afname maximaal 30 dagen VOOR operatiedatum
+#   - postoperatief: PROM-afname 60–120 dagen NA operatiedatum (~3 maanden)
+#
+# Opmerking: xsd:duration arithmetic wordt ondersteund door productie-
+# triplestores (Fuseki, GraphDB, Virtuoso) maar niet door rdflib.
+# =============================================================================
+
+PREFIX rdf:              <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd:              <http://www.w3.org/2001/XMLSchema#>
+PREFIX time:             <http://www.w3.org/2006/time#>
+PREFIX :                 <http://onto.fairify.com#>
+
+# OBO properties en klassen met leesbare aliassen
+PREFIX heeft_deel:       <http://purl.obolibrary.org/obo/BFO_0000051>
+PREFIX heeft_meetwaarde: <http://purl.obolibrary.org/obo/IAO_0000004>
+PREFIX gaat_over:        <http://purl.obolibrary.org/obo/IAO_0000136>
+PREFIX duidt_aan:        <http://purl.obolibrary.org/obo/IAO_0000219>
+PREFIX heeft_id_symbool: <http://purl.obolibrary.org/obo/IAO_0000577>
+PREFIX CRID:             <http://purl.obolibrary.org/obo/IAO_0000578>
+PREFIX mens:             <http://purl.obolibrary.org/obo/NCBITAXON_9606>
+PREFIX ziekte:           <http://purl.obolibrary.org/obo/OGMS_0000031>
+PREFIX heeft_deelnemer:  <http://purl.obolibrary.org/obo/RO_0000057>
+PREFIX inhereert_in:     <http://purl.obolibrary.org/obo/RO_0000092>
+PREFIX heeft_input:      <http://purl.obolibrary.org/obo/RO_0002233>
+PREFIX heeft_output:     <http://purl.obolibrary.org/obo/RO_0002234>
+
+SELECT
+    ?patient
+    ?t_surgery
+    ?score_pre
+    ?t_pre
+    ?score_post
+    ?t_post
+    (?score_post - ?score_pre AS ?verschilscore)
+
+{
+    # --- 1. Patiënt heeft een ziekte aangeduid met ICD-10 M16 (artrose heup) ---
+    ?crid_diagnose  rdf:type                CRID: ;
+                    heeft_id_symbool:       "M16" ;
+                    :has_code_system        :ICD10 ;
+                    duidt_aan:              ?disease .
+
+    ?disease        rdf:type                ziekte: ;
+                    inhereert_in:           ?patient .
+
+    ?patient        rdf:type                mens: .
+
+    # --- 2. Patiënt ondergaat primaire totale heupprothese (ZA 035461) ---
+    ?crid_ingreep   rdf:type                CRID: ;
+                    heeft_id_symbool:       "035461" ;
+                    :has_code_system        :ZorgactiviteitCode ;
+                    duidt_aan:              ?surgery .
+
+    ?surgery        rdf:type                :SurgicalProcedure ;
+                    heeft_deelnemer:        ?patient ;
+                    time:hasTime            ?t_inst_surgery .
+
+    ?t_inst_surgery time:inXSDDateTime      ?t_surgery .
+
+    # --- 3. Preoperatieve EQ-5D score (maximaal 30 dagen voor operatie) ---
+    ?filled_pre     rdf:type                :PatientReportedOutcomeMeasure ;     
+                    heeft_deel:             ?score_item_pre ;                   
+                    time:hasTime
+            		/time:inXSDDateTime     ?t_pre .
+	
+    ?score_item_pre rdf:type                :EQ5DScore ;
+    				gaat_over:              ?patient ;
+                    heeft_meetwaarde:       ?score_pre .
+
+    # Preoperatief: voor de operatie, maar niet meer dan 30 dagen ervoor
+    FILTER ( ?t_pre < ?t_surgery )
+    FILTER ( ?t_pre >= ?t_surgery - "P30D"^^xsd:duration )
+
+    # --- 4. Postoperatieve EQ-5D score (~3 maanden = 60-120 dagen na operatie) ---
+    ?filled_post     rdf:type                :PatientReportedOutcomeMeasure ;     
+                    heeft_deel:             ?score_item_post ;                   
+                    time:hasTime
+            		/time:inXSDDateTime     ?t_post .
+	
+    ?score_item_post rdf:type                :EQ5DScore ;
+    				gaat_over:              ?patient ;
+                    heeft_meetwaarde:       ?score_post .
+
+    # Postoperatief ~3 maanden: 60 tot 120 dagen na operatie
+    FILTER ( ?t_post >= ?t_surgery + "P60D"^^xsd:duration )
+    FILTER ( ?t_post <= ?t_surgery + "P120D"^^xsd:duration )
+
+    # Voorkom dat pre en post dezelfde afname zijn (overbodig met huidige periodes)
+    FILTER ( ?admin_pre != ?admin_post )
+}
+ORDER BY ?patient

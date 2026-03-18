@@ -1,0 +1,53 @@
+PREFIX obo:     <http://purl.obolibrary.org/obo/>
+PREFIX time:    <http://www.w3.org/2006/time#>
+PREFIX fairify: <http://onto.fairify.com#>
+PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+
+# Variabelen:
+#   ?behandelingCodes  – set van ZA-codes die de behandeling identificeren
+#   ?exclusieCodes     – set van SNOMED-codes waarvan de disorder leidt tot exclusie
+#   ?rapportageJaar    – het verslagjaar als integer
+#
+# Pas de VALUES blokken aan per indicator.
+
+SELECT ?locatie (COUNT(DISTINCT ?behandeling) AS ?aantal)
+WHERE {
+
+    # --- Rapportagejaardefinitie ---
+    BIND(2023 AS ?jaar)
+    BIND(STRDT(CONCAT(STR(?jaar),       "-01-01"), xsd:date) AS ?jaarStart)
+    BIND(STRDT(CONCAT(STR(?jaar + 1),   "-01-01"), xsd:date) AS ?jaarEind)
+
+    # --- Behandelingscodes (pas aan per indicator) ---
+    VALUES ?behandelingCode { "036250" }
+
+    # --- Exclusiecodes op basis van SNOMED (pas aan per indicator) ---
+    VALUES ?exclusieCode { "263225007" }
+
+    # --- Selectie behandeling via CRID ---
+    ?cridBehandeling a obo:IAO_0000578 ;
+        obo:BFO_0000050  fairify:ZorgactiviteitCode ;
+        obo:IAO_0000577  ?behandelingCode ;
+        obo:IAO_0000219  ?behandeling .
+
+    # --- Tijdsbinding: begindatum van de behandeling valt binnen rapportagejaar ---
+    ?behandeling time:hasTime ?interval .
+    ?interval time:hasBeginning ?beginMoment .
+    ?beginMoment time:inXSDDate ?datum .
+    FILTER ( ?datum >= ?jaarStart && ?datum < ?jaarEind )
+
+    # --- Zorglocatie ---
+    ?behandeling obo:BFO_0000066 ?locatie .
+
+    # --- Exclusie: behandeling heeft geen deelnemende disorder
+    #     die aangeduid wordt door een van de exclusiecodes ---
+    FILTER NOT EXISTS {
+        ?behandeling obo:RO_0000057 ?disorder .
+        ?cridDisorder a obo:IAO_0000578 ;
+            obo:BFO_0000050  fairify:SNOMEDCT ;
+            obo:IAO_0000577  ?exclusieCode ;
+            obo:IAO_0000219  ?disorder .
+    }
+}
+GROUP BY ?locatie
+ORDER BY ?locatie

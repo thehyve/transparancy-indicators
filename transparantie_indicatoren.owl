@@ -1,0 +1,854 @@
+@prefix : <https://w3id.org/zinl/onto#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sno: <http://snomed.info/id/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix core: <http://purl.obolibrary.org/obo/uberon/core#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix protege: <http://protege.stanford.edu/plugins/owl/protege#> .
+@prefix subsets: <http://purl.obolibrary.org/obo/ro/subsets#> .
+@prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#> .
+@base <https://w3id.org/zinl/onto#> .
+
+<https://w3id.org/zinl/onto#> rdf:type owl:Ontology ;
+                               owl:imports <http://purl.obolibrary.org/obo/ogms/2021-08-19/ogms.owl> ,
+                                           <http://www.w3.org/2006/time#2016> .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2004/02/skos/core#closeMatch
+skos:closeMatch rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.obolibrary.org/obo/BFO_0000050
+obo:BFO_0000050 rdf:type owl:ObjectProperty ;
+                rdfs:label "deel van"@nl .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000051
+obo:BFO_0000051 rdf:type owl:ObjectProperty ;
+                rdfs:label "heeft deel"@nl .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000055
+obo:BFO_0000055 rdf:type owl:ObjectProperty ;
+                obo:IAO_0000115 "Paraphrase of elucidation: a relation between a process and a realizable entity, where there is some material entity that is bearer of the realizable entity and participates in the process, and the realizable entity comes to be realized in the course of the process"@en ;
+                rdfs:label "realizes"@en .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000062
+obo:BFO_0000062 rdf:type owl:ObjectProperty ;
+                obo:IAO_0000115 "x is preceded by y if and only if the time point at which y ends is before or equivalent to the time point at which x starts. Formally: x preceded by y iff ω(y) <= α(x), where α is a function that maps a process to a start point, and ω is a function that maps a process to an end point."@en ;
+                rdfs:label "preceded by"@en .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000066
+obo:BFO_0000066 rdf:type owl:ObjectProperty ;
+                rdfs:label "occurs in"@en ,
+                           "vindt plaats in"@nl .
+
+
+###  http://purl.obolibrary.org/obo/IAO_0000136
+obo:IAO_0000136 rdf:type owl:ObjectProperty ;
+                rdfs:label "is about"@en .
+
+
+###  http://purl.obolibrary.org/obo/IAO_0000219
+obo:IAO_0000219 rdf:type owl:ObjectProperty ;
+                owl:inverseOf obo:IAO_0000235 ;
+                rdfs:domain obo:IAO_0000030 ;
+                rdfs:range obo:BFO_0000001 ;
+                obo:IAO_0000115 "A primitive, instance-level, relation obtaining between an information content entity and some portion of reality. Denotation is what happens when someone creates an information content entity E in order to specifically refer to something. The only relation between E and the thing is that E can be used to 'pick out' the thing. This relation connects those two together. Freedictionary.com sense 3: To signify directly; refer to specifically"@en ;
+                rdfs:label "denotes"@en ,
+                           "duidt aan"@nl .
+
+
+###  http://purl.obolibrary.org/obo/IAO_0000235
+obo:IAO_0000235 rdf:type owl:ObjectProperty ;
+                rdfs:label "denoted by"@en .
+
+
+###  http://purl.obolibrary.org/obo/RO_0000056
+obo:RO_0000056 rdf:type owl:ObjectProperty ;
+               rdfs:label "participates in"@en ,
+                          "participeert in"@nl .
+
+
+###  http://purl.obolibrary.org/obo/RO_0000057
+obo:RO_0000057 rdf:type owl:ObjectProperty ;
+               rdfs:label "has participant"@en ,
+                          "heeft deelnemer"@nl .
+
+
+###  http://purl.obolibrary.org/obo/RO_0000080
+obo:RO_0000080 rdf:type owl:ObjectProperty ;
+               obo:IAO_0000115 "a relation between a quality and an independent continuant (the bearer), in which the quality specifically depends on the bearer for its existence"@en ;
+               rdfs:label "quality of"@en .
+
+
+###  http://purl.obolibrary.org/obo/RO_0000086
+obo:RO_0000086 rdf:type owl:ObjectProperty ;
+               rdfs:label "has quality"@en ,
+                          "heeft kwaliteit"@nl .
+
+
+###  http://purl.obolibrary.org/obo/RO_0000087
+obo:RO_0000087 rdf:type owl:ObjectProperty ;
+               rdfs:label "has role"@en ,
+                          "heeft rol"@nl .
+
+
+###  http://purl.obolibrary.org/obo/RO_0000091
+obo:RO_0000091 rdf:type owl:ObjectProperty ;
+               owl:inverseOf obo:RO_0000092 ;
+               obo:IAO_0000115 "a relation between an independent continuant (the bearer) and a disposition, in which the disposition specifically depends on the bearer for its existence"@en ;
+               rdfs:label "has disposition"@en .
+
+
+###  http://purl.obolibrary.org/obo/RO_0000092
+obo:RO_0000092 rdf:type owl:ObjectProperty ;
+               obo:IAO_0000115 "inverse of has disposition"@en ;
+               rdfs:label "disposition of"@en .
+
+
+###  http://purl.obolibrary.org/obo/RO_0001015
+obo:RO_0001015 rdf:type owl:ObjectProperty ;
+               rdfs:label "is locatie van"@nl ,
+                          "is location of"@en .
+
+
+###  http://purl.obolibrary.org/obo/RO_0002233
+obo:RO_0002233 rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf obo:RO_0000057 ;
+               obo:IAO_0000115 "p has input c iff: p is a process, c is a material entity, c is a participant in p, c is present at the start of p, and the state of c is modified during p."@en ;
+               rdfs:label "has input"@en .
+
+
+###  http://purl.obolibrary.org/obo/RO_0002234
+obo:RO_0002234 rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf obo:RO_0000057 ;
+               obo:IAO_0000115 "p has output c iff c is a participant in p, c is present at the end of p, and c is not present in the same state at the beginning of p."@en ;
+               rdfs:label "has output"@en .
+
+
+###  https://w3id.org/zinl/onto#hasCodeSystem
+:hasCodeSystem rdf:type owl:ObjectProperty ;
+               rdfs:domain obo:IAO_0000578 ;
+               rdfs:range :CodeSystem ;
+               rdfs:label "has code system"@en ,
+                          "heeft coderingssysteem"@nl ;
+               skos:definition "Relateert een centraal geregistreerde identifier aan het coderingssysteem waarbinnen deze is gedefinieerd."@nl ,
+                               "Relates a centrally registered identifier to the code system within which it is defined."@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://purl.obolibrary.org/obo/IAO_0000004
+obo:IAO_0000004 rdf:type owl:DatatypeProperty ;
+                rdfs:domain obo:IAO_0000027 ;
+                rdfs:range xsd:decimal ;
+                rdfs:label "has measurement value"@en ,
+                           "heeft meetwaarde"@nl ;
+                skos:definition "Relateert een gegevensitem aan zijn scalaire numerieke waarde. Gebruikt om het gekwantificeerde resultaat van een meting te registreren, zoals een PROM-score of BMI-waarde, als een decimaal getal. De interpretatie van de waarde (eenheid, schaal, richting) wordt bepaald door het type van het dragende gegevensitem."@nl ,
+                                "Relates a data item to its scalar numeric value. Used to record the quantified result of a measurement, such as a PROM score or BMI value, as a decimal literal. The interpretation of the value (unit, scale, direction) is determined by the type of the data item bearer."@en .
+
+
+###  http://purl.obolibrary.org/obo/IAO_0000577
+obo:IAO_0000577 rdf:type owl:DatatypeProperty ;
+                rdfs:domain obo:IAO_0000578 ;
+                rdfs:range xsd:string ;
+                rdfs:label "has identifier symbol"@en ,
+                           "heeft identifiersymbool"@nl ;
+                skos:definition "De tekenreekswaarde van een centraal geregistreerde identifier; bijv. 'C67' voor een ICD-10 code."@nl ,
+                                "The string value of a centrally registered identifier; e.g. 'C67' for an ICD-10 code."@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.obolibrary.org/obo/BFO_0000015
+obo:BFO_0000015 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                  owl:onProperty <http://www.w3.org/2006/time#hasTime> ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass <http://www.w3.org/2006/time#ProperInterval>
+                                ] ;
+                rdfs:label "proces"@nl .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000023
+obo:BFO_0000023 rdf:type owl:Class ;
+                rdfs:label "rol"@nl ,
+                           "role"@en .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000027
+obo:BFO_0000027 rdf:type owl:Class ;
+                rdfs:label "object aggregate"@en ,
+                           "objectaggregaat"@nl .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000029
+obo:BFO_0000029 rdf:type owl:Class ;
+                rdfs:label "locatie"@nl ,
+                           "site"@en .
+
+
+###  http://purl.obolibrary.org/obo/BFO_0000035
+obo:BFO_0000035 rdf:type owl:Class ;
+                rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                  owl:onProperty <http://www.w3.org/2006/time#hasTime> ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass <http://www.w3.org/2006/time#Instant>
+                                ] ;
+                rdfs:label "procesbegrenzing"@nl ,
+                           "process boundary"@en ;
+                skos:definition "An instantaneous temporal boundary of a process; either the moment at which the process begins or the moment at which it ends."@en ,
+                                "Een instantane temporele begrenzing van een proces; het moment waarop het proces begint of eindigt."@nl .
+
+
+###  http://purl.obolibrary.org/obo/IAO_0000109
+obo:IAO_0000109 rdf:type owl:Class ;
+                rdfs:subClassOf obo:IAO_0000027 ;
+                rdfs:label "measurement datum"@en .
+
+
+###  http://purl.obolibrary.org/obo/IAO_0000578
+obo:IAO_0000578 rdf:type owl:Class ;
+                rdfs:subClassOf obo:IAO_0020000 ;
+                rdfs:label "centraal geregistreerde identifier"@nl ,
+                           "centrally registered identifier"@en ;
+                skos:definition "An information content entity that is the officially assigned identifier of some entity within the context of a particular identifier system."@en ,
+                                "Een informatiecontententiteit die de officieel toegewezen identifier is van een entiteit binnen de context van een bepaald identificatiesysteem."@nl .
+
+
+###  http://purl.obolibrary.org/obo/IAO_0000582
+obo:IAO_0000582 rdf:type owl:Class ;
+                rdfs:subClassOf obo:IAO_0000109 ;
+                rdfs:label "time stamped measurement datum"@en .
+
+
+###  http://purl.obolibrary.org/obo/IAO_0020000
+obo:IAO_0020000 rdf:type owl:Class ;
+                rdfs:subClassOf obo:IAO_0000030 ;
+                obo:IAO_0000115 "An information content entity that is the outcome of a dubbing process and is used to refer to one instance of entity shared by a group of people to refer to that individual entity."@en ;
+                rdfs:label "identifier"@en .
+
+
+###  http://purl.obolibrary.org/obo/NCBITAXON_9606
+obo:NCBITAXON_9606 rdf:type owl:Class ;
+                   rdfs:subClassOf obo:OGMS_0000087 ;
+                   rdfs:label "homo sapiens"@en ,
+                              "mens"@nl .
+
+
+###  http://purl.obolibrary.org/obo/OBI_0000070
+obo:OBI_0000070 rdf:type owl:Class ;
+                rdfs:subClassOf obo:OGMS_0000096 ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty obo:RO_0002234 ;
+                                  owl:someValuesFrom obo:IAO_0000027
+                                ] ;
+                rdfs:label "assay"@en ,
+                           "meting"@nl ;
+                skos:definition "A planned process with the objective to produce information about a material entity by examining it."@en ,
+                                "Een gepland proces met als doel informatie te produceren over een materiële entiteit door deze te onderzoeken."@nl .
+
+
+###  http://purl.obolibrary.org/obo/OBI_0001169
+obo:OBI_0001169 rdf:type owl:Class ;
+                rdfs:subClassOf obo:IAO_0000109 ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty obo:IAO_0000136 ;
+                                  owl:someValuesFrom obo:PATO_0000011
+                                ] ;
+                rdfs:label "age since birth measurement datum"@en ,
+                           "leeftijd vanaf geboorte meetgegeven"@nl ;
+                skos:definition "Het meetresultaat van een meting van de eigenschap leeftijd; gemeten vanaf geboorte."@nl .
+
+
+###  http://purl.obolibrary.org/obo/OGMS_0000020
+obo:OGMS_0000020 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:BFO_0000066 ;
+                                   owl:someValuesFrom obo:NCBITAXON_9606
+                                 ] ;
+                 rdfs:label "klacht beleving"@nl ;
+                 skos:definition "Een proces, ervaren door een patient, dat alleen ervaren kan worden door die patient, welke verondersteld wordt klinisch relevant te zijn."@nl .
+
+
+###  http://purl.obolibrary.org/obo/OGMS_0000031
+obo:OGMS_0000031 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:BFO_0000062 ;
+                                   owl:someValuesFrom obo:OGMS_0000045
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:RO_0000092 ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass obo:NCBITAXON_9606
+                                 ] ;
+                 rdfs:label "ziekte"@nl ;
+                 skos:definition "Een dispositie (i) om pathologische processen te ondergaan die (ii) in een organisme bestaat vanwege één of meer aandoeningen in dat organisme."@nl .
+
+
+###  http://purl.obolibrary.org/obo/OGMS_0000045
+obo:OGMS_0000045 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:BFO_0000050 ;
+                                   owl:someValuesFrom obo:NCBITAXON_9606
+                                 ] ;
+                 rdfs:label "fysieke afwijking"@nl ;
+                 skos:definition "Een fysieke entiteit die klinisch abnormaal is en onderdeel van een extended organisme. Fysieke afwijkingen vormen de basis van een ziekte."@nl .
+
+
+###  http://purl.obolibrary.org/obo/OGMS_0000063
+obo:OGMS_0000063 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:BFO_0000051 ;
+                                   owl:someValuesFrom obo:OGMS_0000020
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:BFO_0000055 ;
+                                   owl:someValuesFrom obo:OGMS_0000031
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:RO_0000057 ;
+                                   owl:someValuesFrom obo:NCBITAXON_9606
+                                 ] ;
+                 rdfs:label "ziekteproces"@nl .
+
+
+###  http://purl.obolibrary.org/obo/OGMS_0000073
+obo:OGMS_0000073 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:IAO_0000136 ;
+                                   owl:someValuesFrom obo:OGMS_0000031
+                                 ] ;
+                 rdfs:label "diagnose"@nl ;
+                 skos:definition "De representatie van de conclusie van een diagnostisch proces"@nl .
+
+
+###  http://purl.obolibrary.org/obo/OGMS_0000090
+obo:OGMS_0000090 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:BFO_0000050 ;
+                                   owl:someValuesFrom obo:OGMS_0000063
+                                 ] ;
+                 rdfs:label "behandeling"@nl ;
+                 skos:definition "Het proces dat uitgevoerd wordt op basis van een Diagnose dat tot doel heeft de symptomen en/of klachten als gevolg van een ziekte te verhelpen en/of verminderen, en/of de gevolgen"@nl .
+
+
+###  http://purl.obolibrary.org/obo/OGMS_0000096
+obo:OGMS_0000096 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:BFO_0000066 ;
+                                   owl:someValuesFrom :CareLocation
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:RO_0000057 ;
+                                   owl:someValuesFrom obo:NCBITAXON_9606
+                                 ] ;
+                 rdfs:label "health care process"@en ,
+                            "zorgproces"@nl .
+
+
+###  http://purl.obolibrary.org/obo/OGMS_0000104
+obo:OGMS_0000104 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:RO_0002234 ;
+                                   owl:someValuesFrom obo:OGMS_0000073
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:RO_0002233 ;
+                                   owl:allValuesFrom [ rdf:type owl:Class ;
+                                                       owl:unionOf ( obo:IAO_0000027
+                                                                     obo:NCBITAXON_9606
+                                                                   )
+                                                     ]
+                                 ] ;
+                 rdfs:label "diagnostisch proces"@nl .
+
+
+###  http://purl.obolibrary.org/obo/PATO_0000011
+obo:PATO_0000011 rdf:type owl:Class ;
+                 rdfs:subClassOf obo:BFO_0000019 ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:RO_0000080 ;
+                                   owl:someValuesFrom obo:NCBITAXON_9606
+                                 ] ;
+                 rdfs:label "age"@en ,
+                            "leeftijd"@nl ;
+                 skos:definition "A time quality inhering in a bearer by virtue of how long the bearer has existed."@en .
+
+
+###  http://purl.obolibrary.org/obo/PATO_0000047
+obo:PATO_0000047 rdf:type owl:Class ;
+                 rdfs:subClassOf obo:BFO_0000019 ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:RO_0000080 ;
+                                   owl:someValuesFrom obo:NCBITAXON_9606
+                                 ] ;
+                 rdfs:label "biological sex"@en ,
+                            "biologisch geslacht"@nl ;
+                 skos:definition "A quality of an organism based on the reproductive organs and functions that derive from chromosomal complement."@en ,
+                                 "Een kwaliteit van een organisme gebaseerd op de reproductieve organen en functies die voortvloeien uit het chromosomale complement."@nl .
+
+
+###  http://purl.obolibrary.org/obo/PATO_0000122
+obo:PATO_0000122 rdf:type owl:Class ;
+                 rdfs:subClassOf obo:BFO_0000019 ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:RO_0000080 ;
+                                   owl:someValuesFrom obo:NCBITAXON_9606
+                                 ] ;
+                 rdfs:label "lengte"@nl ,
+                            "length"@en ;
+                 skos:definition "A quality of a material entity inhering in it by virtue of its spatial extent along its longest axis."@en ,
+                                 "Een kwaliteit van een materiële entiteit, inherent aan die entiteit vanwege haar ruimtelijke uitgestrektheid langs de langste as."@nl .
+
+
+###  http://purl.obolibrary.org/obo/PATO_0000128
+obo:PATO_0000128 rdf:type owl:Class ;
+                 rdfs:subClassOf obo:BFO_0000019 ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty obo:RO_0000080 ;
+                                   owl:someValuesFrom obo:NCBITAXON_9606
+                                 ] ;
+                 rdfs:label "mass"@en ,
+                            "massa"@nl ;
+                 skos:definition "A quality of a material entity inhering in it by virtue of the amount of matter it contains."@en ,
+                                 "Een kwaliteit van een materiële entiteit, inherent aan die entiteit vanwege de hoeveelheid materie die ze bevat."@nl .
+
+
+###  http://www.w3.org/2006/time#ProperInterval
+<http://www.w3.org/2006/time#ProperInterval> rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <http://www.w3.org/2006/time#hasBeginning> ;
+                                                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                               owl:onClass <http://www.w3.org/2006/time#Instant>
+                                                             ] ,
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <http://www.w3.org/2006/time#hasEnd> ;
+                                                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                               owl:onClass <http://www.w3.org/2006/time#Instant>
+                                                             ] .
+
+
+###  https://w3id.org/zinl/onto#BMIMeasurementDatum
+:BMIMeasurementDatum rdf:type owl:Class ;
+                     rdfs:subClassOf obo:IAO_0000027 ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty obo:IAO_0000136 ;
+                                       owl:someValuesFrom obo:NCBITAXON_9606
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty <http://www.w3.org/2006/time#hasTime> ;
+                                       owl:someValuesFrom <http://www.w3.org/2006/time#Instant>
+                                     ] ;
+                     rdfs:label "BMI measurement datum"@en ,
+                                "BMI meetgegeven"@nl ;
+                     skos:definition "A data item representing the calculated Body Mass Index of a patient at a specific point in time. BMI is not a quality of the patient; it is a ratio derived from measurements of mass (PATO_0000128) and length (PATO_0000122), computed as kg/m². The associated time instant captures the moment of measurement, enabling contextual use such as BMI at time of diagnosis or BMI at time of surgical intervention. Pattern consistent with OBI_0001169 (age since birth measurement datum)."@en ,
+                                     "Een gegevensitem dat de berekende Body Mass Index van een patiënt op een specifiek tijdstip vertegenwoordigt. BMI is geen kwaliteit van de patiënt; het is een ratio afgeleid van metingen van massa (PATO_0000128) en lengte (PATO_0000122), berekend als kg/m². Het geassocieerde tijdstip legt het meetmoment vast, wat contextueel gebruik mogelijk maakt zoals BMI ten tijde van de diagnose of ten tijde van chirurgische interventie. Patroon consistent met OBI_0001169."@nl .
+
+
+###  https://w3id.org/zinl/onto#CareLocation
+:CareLocation rdf:type owl:Class ;
+              rdfs:subClassOf obo:BFO_0000029 ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty obo:RO_0001015 ;
+                                owl:someValuesFrom :HealthcareOrganisation
+                              ] ;
+              rdfs:label "care location"@en ,
+                         "zorglocatie"@nl ;
+              skos:definition "A physical site at which healthcare processes occur and which is associated with one or more healthcare organisations. A care location is a site, not an organisation."@en ,
+                              "Een fysieke locatie waar zorgprocessen plaatsvinden, geassocieerd met één of meer zorginstellingen. Een zorglocatie is een fysieke plek, geen organisatie."@nl .
+
+
+###  https://w3id.org/zinl/onto#CareProviderRole
+:CareProviderRole rdf:type owl:Class ;
+                  rdfs:subClassOf obo:BFO_0000023 ;
+                  rdfs:label "care provider role"@en ,
+                             "zorgverlenerrol"@nl ;
+                  skos:definition "De rol van een persoon als verlener van zorg in de context van een zorgproces."@nl ,
+                                  "The role of a person as a provider of healthcare in the context of a healthcare process."@en .
+
+
+###  https://w3id.org/zinl/onto#ClinicalAdmission
+:ClinicalAdmission rdf:type owl:Class ;
+                   rdfs:subClassOf obo:OGMS_0000096 ;
+                   rdfs:label "clinical admission"@en ,
+                              "klinische opname"@nl ;
+                   skos:definition "A healthcare process during which a patient stays at a care location overnight or for an extended period, enabling continuous monitoring and treatment."@en ,
+                                   "Een zorgproces waarbij een patiënt voor een nacht of langere periode verblijft op een zorglocatie, met continue monitoring en behandeling."@nl .
+
+
+###  https://w3id.org/zinl/onto#ClinicalStagingProcess
+:ClinicalStagingProcess rdf:type owl:Class ;
+                        rdfs:subClassOf :StagingProcess ;
+                        rdfs:label "clinical staging process"@en ,
+                                   "klinisch stadiëringsproces"@nl ;
+                        skos:definition "A staging process based on clinical examination, imaging (e.g. CT, MRI, PET), endoscopy, and/or biopsy without surgical resection. Corresponds to the 'c' prefix in TNM notation (cTNM). Typically performed before surgical treatment. Tumour extent is inferred from indirect evidence. The distinction from pathological staging is multi-dimensional: method (indirect observation vs. direct tissue examination), timing (pre-surgical vs. post-surgical), and epistemic status (inferred vs. directly measured); not axiomatised."@en ,
+                                        "Een stadiëringsproces gebaseerd op klinisch onderzoek, beeldvorming (bijv. CT, MRI, PET), endoscopie en/of biopsie zonder chirurgische resectie. Correspondeert met het 'c'-prefix in TNM-notatie (cTNM). Doorgaans uitgevoerd vóór chirurgische behandeling. Tumoruitbreiding wordt afgeleid uit indirecte gegevens. Het onderscheid met pathologische stadiëring is meerdimensionaal: methode, tijdstip en epistemische status; niet geaxiomatiseerd."@nl .
+
+
+###  https://w3id.org/zinl/onto#CodeSystem
+:CodeSystem rdf:type owl:Class ;
+            rdfs:subClassOf obo:IAO_0000030 ;
+            rdfs:label "code system"@en ,
+                       "coderingssysteem"@nl ;
+            skos:definition "An information content entity that defines a set of codes and their meanings, used to classify or identify entities in a domain."@en ,
+                            "Een informatiecontententiteit die een verzameling codes en hun betekenissen definieert, gebruikt om entiteiten in een domein te classificeren of te identificeren."@nl .
+
+
+###  https://w3id.org/zinl/onto#Death
+:Death rdf:type owl:Class ;
+       rdfs:subClassOf obo:BFO_0000035 ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty obo:BFO_0000050 ;
+                         owl:someValuesFrom :DyingProcess
+                       ] ;
+       rdfs:label "death"@en ,
+                  "overlijden"@nl ;
+       skos:definition "De procesbegrenzing die het onomkeerbaar ophouden van alle vitale functies markeert; de terminale begrenzing van het overlijdensproces. Heeft precies één geassocieerd tijdstip."@nl ,
+                       "The process boundary marking the irreversible cessation of all vital functions of an organism; the terminal boundary of the dying process. Has exactly one associated time:Instant."@en .
+
+
+###  https://w3id.org/zinl/onto#Discharge
+:Discharge rdf:type owl:Class ;
+           rdfs:subClassOf obo:BFO_0000035 ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty obo:BFO_0000050 ;
+                             owl:someValuesFrom :ClinicalAdmission
+                           ] ;
+           rdfs:label "discharge"@en ,
+                      "ontslag"@nl ;
+           skos:definition "De procesbegrenzing die het einde van een klinische opname markeert; het moment waarop de patiënt formeel ontslagen wordt uit de zorg van de opnemende instelling."@nl ,
+                           "The process boundary marking the end of a clinical admission; the moment at which the patient formally leaves the care of the admitting institution."@en .
+
+
+###  https://w3id.org/zinl/onto#DistantMetastasis
+:DistantMetastasis rdf:type owl:Class ;
+                   rdfs:subClassOf :TumourExtent ;
+                   rdfs:label "distant metastasis"@en ,
+                              "verre metastasering"@nl ;
+                   skos:definition "De fysieke aanwezigheid van maligne tumorcellen in organen of weefsels op afstand van de primaire tumor en buiten de regionale lymfklieren. Correspondeert met de M-component van het TNM-classificatiesysteem. M0 = afwezig; M1 = aanwezig. Subcategorieën zijn tumortype- en editie-specifiek; niet geaxiomatiseerd in deze ontologie."@nl ,
+                                   "The physical presence of malignant tumour cells in organs or tissues distant from the primary tumour and beyond the regional lymph nodes. Corresponds to the M component of the TNM classification system. M0 denotes absence; M1 denotes presence. Subcategories are tumour-type specific and TNM-edition specific; not axiomatised in this ontology."@en .
+
+
+###  https://w3id.org/zinl/onto#DyingProcess
+:DyingProcess rdf:type owl:Class ;
+              rdfs:subClassOf obo:BFO_0000015 ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty obo:RO_0000057 ;
+                                owl:someValuesFrom obo:NCBITAXON_9606
+                              ] ;
+              rdfs:label "dying process"@en ,
+                         "overlijdensproces"@nl ;
+              skos:definition "Het biologische proces dat leidt tot het onomkeerbaar ophouden van alle vitale functies van een organisme, eindigend met het overlijden."@nl ,
+                              "The biological process leading to the irreversible cessation of all vital functions of an organism, ending at death."@en .
+
+
+###  https://w3id.org/zinl/onto#EQ5DScore
+:EQ5DScore rdf:type owl:Class ;
+           rdfs:subClassOf :PROMScore ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty obo:IAO_0000136 ;
+                             owl:someValuesFrom :QualityOfLife
+                           ] ;
+           rdfs:label "EQ-5D score"@en ,
+                      "EQ-5D score"@nl ;
+           skos:definition "A PROM score representing a summary assessment of quality of life as measured by the EQ-5D instrument. Covers the composite index score or VAS thermometer score derived from the EQ-5D questionnaire. Sub-dimension scores (mobility, self-care, usual activities, pain/discomfort, anxiety/depression) are modelled as parts of the containing PatientReportedOutcomeMeasure and are not separately subclassed here."@en ,
+                           "Een PROM-score die een samengestelde beoordeling van kwaliteit van leven vertegenwoordigt zoals gemeten met het EQ-5D-instrument. Betreft de samengestelde indexscore of VAS-thermometerscore afgeleid van de EQ-5D-vragenlijst. Subdimensiescores (mobiliteit, zelfzorg, dagelijkse activiteiten, pijn/ongemak, angst/depressie) worden gemodelleerd als onderdelen van de bijbehorende PatientReportedOutcomeMeasure en worden hier niet apart geclassificeerd."@nl .
+
+
+###  https://w3id.org/zinl/onto#HealthcareOrganisation
+:HealthcareOrganisation rdf:type owl:Class ;
+                        rdfs:subClassOf :Organisation ;
+                        rdfs:label "healthcare organisation"@en ,
+                                   "zorginstelling"@nl ;
+                        skos:definition "An organisation whose primary purpose is the delivery of health care to patients."@en ,
+                                        "Een organisatie waarvan het primaire doel de verlening van zorg aan patiënten is."@nl .
+
+
+###  https://w3id.org/zinl/onto#HipFracture
+:HipFracture rdf:type owl:Class ;
+             rdfs:subClassOf obo:OGMS_0000102 ;
+             skos:closeMatch <http://snomed.info/id/263225007> .
+
+
+###  https://w3id.org/zinl/onto#Organisation
+:Organisation rdf:type owl:Class ;
+              rdfs:subClassOf obo:BFO_0000027 ;
+              rdfs:label "organisatie"@nl ,
+                         "organisation"@en ;
+              skos:definition "An object aggregate consisting of persons acting together toward a shared purpose, typically with a defined structure and governance."@en ,
+                              "Een objectaggregaat bestaande uit personen die samenwerken met een gemeenschappelijk doel, doorgaans met een gedefinieerde structuur en bestuur."@nl .
+
+
+###  https://w3id.org/zinl/onto#OutpatientVisit
+:OutpatientVisit rdf:type owl:Class ;
+                 rdfs:subClassOf obo:OGMS_0000096 ;
+                 rdfs:label "outpatient visit"@en ,
+                            "poliklinisch bezoek"@nl ;
+                 skos:definition "A healthcare process in which a patient attends a care location for assessment or treatment without being admitted for an overnight stay."@en ,
+                                 "Een zorgproces waarbij een patiënt een zorglocatie bezoekt voor beoordeling of behandeling zonder klinische opname."@nl .
+
+
+###  https://w3id.org/zinl/onto#PROMAdministration
+:PROMAdministration rdf:type owl:Class ;
+                    rdfs:subClassOf obo:OBI_0000070 ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty obo:RO_0000057 ;
+                                      owl:someValuesFrom obo:NCBITAXON_9606
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty obo:RO_0002233 ;
+                                      owl:someValuesFrom :PROMInstrument
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty obo:RO_0002234 ;
+                                      owl:someValuesFrom :PatientReportedOutcomeMeasure
+                                    ] ;
+                    rdfs:label "PROM administration"@en ,
+                               "PROM afname"@nl ;
+                    skos:definition "A planned process in which a person completes a PROM instrument, producing a completed patient reported outcome measure as output. The person is the participant whose qualities are being assessed; they are not modelled as a patient role, since completing a questionnaire does not presuppose a care relationship. The PROM instrument is the input that structures the process. The temporal location of this process provides the measurement time, independently of any clinical intervention."@en ,
+                                    "Een gepland proces waarbij een persoon een PROM-instrument invult, met als uitkomst een ingevulde patiënt gerapporteerde uitkomstmaat. De persoon is de deelnemer wiens kwaliteiten worden beoordeeld; deze wordt niet gemodelleerd als patiëntrol, omdat het invullen van een vragenlijst geen zorgrelatie veronderstelt. Het PROM-instrument is de input die het proces structureert. De temporele locatie van dit proces levert het meetmoment, onafhankelijk van een klinische interventie."@nl .
+
+
+###  https://w3id.org/zinl/onto#PROMInstrument
+:PROMInstrument rdf:type owl:Class ;
+                rdfs:subClassOf obo:IAO_0000030 ;
+                rdfs:label "PROM instrument"@en ,
+                           "PROM instrument"@nl ;
+                skos:definition "An information content entity that defines the structure, questions, and scoring rules of a standardised self-report questionnaire used to collect patient-reported assessments of health, functioning, or quality of life. A PROM instrument is the template from which individual completed questionnaires (PatientReportedOutcomeMeasure) are produced."@en ,
+                                "Een informatiecontententiteit die de structuur, vragen en scoringsregels definieert van een gestandaardiseerde zelfrapportagevragenlijst die wordt gebruikt om patiëntgerapporteerde beoordelingen van gezondheid, functioneren of kwaliteit van leven te verzamelen. Een PROM-instrument is het sjabloon waaruit individuele ingevulde vragenlijsten (PatientReportedOutcomeMeasure) worden geproduceerd."@nl .
+
+
+###  https://w3id.org/zinl/onto#PROMScore
+:PROMScore rdf:type owl:Class ;
+           rdfs:subClassOf obo:IAO_0000027 ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty obo:BFO_0000050 ;
+                             owl:someValuesFrom :PatientReportedOutcomeMeasure
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty obo:IAO_0000136 ;
+                             owl:someValuesFrom obo:BFO_0000019
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty obo:IAO_0000136 ;
+                             owl:someValuesFrom obo:NCBITAXON_9606
+                           ] ;
+           rdfs:label "PROM score"@en ,
+                      "PROM score"@nl ;
+           skos:definition "A data item that is part of a completed patient reported outcome measure and represents a quantified assessment of a specific quality inhering in a person, as reported by that person at a specific point in time."@en ,
+                           "Een gegevensitem dat deel uitmaakt van een ingevulde patiënt gerapporteerde uitkomstmaat en een gekwantificeerde beoordeling vertegenwoordigt van een specifieke kwaliteit die inhereert in een persoon, zoals door die persoon zelf gerapporteerd op een specifiek tijdstip."@nl .
+
+
+###  https://w3id.org/zinl/onto#PathologicalStagingProcess
+:PathologicalStagingProcess rdf:type owl:Class ;
+                            rdfs:subClassOf :StagingProcess ;
+                            rdfs:label "pathological staging process"@en ,
+                                       "pathologisch stadiëringsproces"@nl ;
+                            skos:definition "A staging process based on histopathological examination of surgically resected tumour tissue. Corresponds to the 'p' prefix in TNM notation (pTNM). Requires prior surgical removal of tumour tissue. Tumour extent is directly measured from excised tissue. The distinction from clinical staging is multi-dimensional: method (direct tissue examination vs. indirect observation), timing (post-surgical vs. pre-surgical), and epistemic status (directly measured vs. inferred); not axiomatised."@en ,
+                                            "Een stadiëringsproces gebaseerd op histopathologisch onderzoek van chirurgisch gereseceerd tumorweefsel. Correspondeert met het 'p'-prefix in TNM-notatie (pTNM). Vereist voorafgaande chirurgische verwijdering van tumorweefsel. Tumoruitbreiding wordt direct gemeten aan gereseceerd weefsel. Het onderscheid met klinische stadiëring is meerdimensionaal: methode, tijdstip en epistemische status; niet geaxiomatiseerd."@nl .
+
+
+###  https://w3id.org/zinl/onto#PatientReportedOutcomeMeasure
+:PatientReportedOutcomeMeasure rdf:type owl:Class ;
+                               rdfs:subClassOf obo:IAO_0000030 ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty obo:BFO_0000051 ;
+                                                 owl:someValuesFrom :PROMScore
+                                               ] ;
+                               rdfs:label "patient reported outcome measure"@en ,
+                                          "patiënt gerapporteerde uitkomstmaat"@nl ;
+                               skos:definition "An information content entity representing a completed instance of a standardised self-report questionnaire, produced by a person at a specific point in time as the output of a PROM administration process. Contains one or more PROM scores as parts. Not to be confused with the instrument (PROMInstrument) which defines the questionnaire structure."@en ,
+                                               "Een informatiecontententiteit die een ingevulde instantie vertegenwoordigt van een gestandaardiseerde zelfrapportagevragenlijst, door een persoon ingevuld op een specifiek tijdstip als uitkomst van een PROM-afnameproces. Bevat één of meer PROM-scores als onderdelen. Niet te verwarren met het instrument (PROMInstrument) dat de structuur van de vragenlijst definieert."@nl .
+
+
+###  https://w3id.org/zinl/onto#PatientRole
+:PatientRole rdf:type owl:Class ;
+             rdfs:subClassOf obo:BFO_0000023 ;
+             rdfs:label "patient role"@en ,
+                        "patiëntrol"@nl ;
+             skos:definition "De rol van een persoon als ontvanger van zorg, inherent aan die persoon vanwege deelname aan een zorgproces."@nl ,
+                             "The role of a person as a recipient of healthcare, inhering in that person by virtue of their participation in a healthcare process."@en .
+
+
+###  https://w3id.org/zinl/onto#PrimaryTumourExtent
+:PrimaryTumourExtent rdf:type owl:Class ;
+                     rdfs:subClassOf :TumourExtent ;
+                     rdfs:label "primaire tumoruitbreiding"@nl ,
+                                "primary tumour extent"@en ;
+                     skos:definition "De fysieke uitbreiding van de primaire maligne tumor, gekenmerkt door grootte en mate van lokale weefselinfiltratie. Correspondeert met de T-component van het TNM-classificatiesysteem. Grenswaarden voor T-categorieën (T1 t/m T4) zijn tumortype- en editie-specifiek; niet geaxiomatiseerd in deze ontologie."@nl ,
+                                     "The physical extent of the primary malignant tumour, characterised by its size and degree of local tissue infiltration. Corresponds to the T component of the TNM classification system. The boundary criteria for T categories (T1 through T4) are tumour-type specific and TNM-edition specific; they are not axiomatised in this ontology."@en .
+
+
+###  https://w3id.org/zinl/onto#QualityOfLife
+:QualityOfLife rdf:type owl:Class ;
+               rdfs:subClassOf obo:BFO_0000019 ;
+               rdfs:label "kwaliteit van leven"@nl ,
+                          "quality of life"@en ;
+               skos:definition "A quality inhering in a person that reflects their subjective assessment of their own physical, mental, and social well-being at a given point in time. Quality of life is not restricted to health-related aspects; the scope of assessment is determined by the instrument used to measure it. Multiple instruments (e.g. EQ-5D, SF-36, OHS) may measure different facets of this quality."@en ,
+                               "Een kwaliteit die inhereert in een persoon en die hun subjectieve beoordeling weerspiegelt van hun eigen fysiek, mentaal en sociaal welbevinden op een bepaald tijdstip. Kwaliteit van leven is niet beperkt tot gezondheidsgebonden aspecten; de reikwijdte van de beoordeling wordt bepaald door het gebruikte meetinstrument. Meerdere instrumenten (bijv. EQ-5D, SF-36, OHS) kunnen verschillende facetten van deze kwaliteit meten."@nl .
+
+
+###  https://w3id.org/zinl/onto#RegionalLymphNodeInvolvement
+:RegionalLymphNodeInvolvement rdf:type owl:Class ;
+                              rdfs:subClassOf :TumourExtent ;
+                              rdfs:label "regional lymph node involvement"@en ,
+                                         "regionale lymfklierbetrokkenheid"@nl ;
+                              skos:definition "De fysieke toestand van regionale lymfklieren met betrekking tot betrokkenheid door metastatische tumorcellen. Correspondeert met de N-component van het TNM-classificatiesysteem. Criteria voor N-categorieën zijn tumortype- en editie-specifiek; niet geaxiomatiseerd in deze ontologie."@nl ,
+                                              "The physical state of regional lymph nodes with respect to metastatic tumour cell involvement. Corresponds to the N component of the TNM classification system. Criteria for N categories are tumour-type specific and TNM-edition specific; not axiomatised in this ontology."@en .
+
+
+###  https://w3id.org/zinl/onto#StagingAssessment
+:StagingAssessment rdf:type owl:Class ;
+                   rdfs:subClassOf obo:IAO_0000027 ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty obo:IAO_0000136 ;
+                                     owl:someValuesFrom :TumourExtent
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty <http://www.w3.org/2006/time#hasTime> ;
+                                     owl:someValuesFrom <http://www.w3.org/2006/time#Instant>
+                                   ] ;
+                   rdfs:label "stadiëringsbeoordeling"@nl ,
+                              "staging assessment"@en ;
+                   skos:definition "A data item recording the result of a staging process for a specific patient at a specific point in time. Is about (IAO_0000136) the tumour extent of the patient. The classification code (e.g. 'pT2N1M0' or 'FIGO IIB') attaches via a CRID (IAO_0000578) that denotes this assessment. The mapping between code and modelled biological entities is tumour-type specific, staging-system specific, and edition specific; not axiomatised."@en ,
+                                   "Een gegevensitem dat het resultaat vastlegt van een stadiëringsproces voor een specifieke patiënt op een specifiek tijdstip. Gaat over (IAO_0000136) de tumoruitbreiding van de patiënt. De classificatiecode (bijv. 'pT2N1M0' of 'FIGO IIB') wordt gekoppeld via een CRID (IAO_0000578) die deze beoordeling aanduidt. De mapping tussen code en gemodelleerde biologische entiteiten is tumortype-, stadiëringssysteem- en editie-specifiek; niet geaxiomatiseerd."@nl .
+
+
+###  https://w3id.org/zinl/onto#StagingProcess
+:StagingProcess rdf:type owl:Class ;
+                rdfs:subClassOf obo:OGMS_0000104 ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty obo:RO_0002234 ;
+                                  owl:someValuesFrom :StagingAssessment
+                                ] ;
+                rdfs:label "stadiëringsproces"@nl ,
+                           "staging process"@en ;
+                skos:definition "A diagnostic process whose objective is to determine the extent of a malignant neoplasm in a patient's body, resulting in a staging assessment that classifies the tumour extent according to a staging system such as TNM or FIGO."@en ,
+                                "Een diagnostisch proces met als doel de uitbreiding van een maligne neoplasma in het lichaam van een patiënt vast te stellen, resulterend in een stadiëringsbeoordeling die de tumoruitbreiding classificeert volgens een stadiëringssysteem zoals TNM of FIGO."@nl .
+
+
+###  https://w3id.org/zinl/onto#SurgicalProcedure
+:SurgicalProcedure rdf:type owl:Class ;
+                   rdfs:subClassOf obo:OGMS_0000090 ;
+                   rdfs:label "chirurgische ingreep"@nl ,
+                              "surgical procedure"@en ;
+                   skos:definition "A treatment process in which a care provider manually or instrumentally intervenes in or on a patient's body for therapeutic purposes."@en ,
+                                   "Een behandelproces waarbij een zorgverlener manueel of instrumenteel ingrijpt in of op het lichaam van een patiënt met therapeutisch doel."@nl .
+
+
+###  https://w3id.org/zinl/onto#THP
+:THP rdf:type owl:Class ;
+     rdfs:subClassOf :SurgicalProcedure ;
+     rdfs:label "totale heup procedure"@nl ;
+     skos:closeMatch <http://snomed.info/id/52734007> .
+
+
+###  https://w3id.org/zinl/onto#TumourExtent
+:TumourExtent rdf:type owl:Class ;
+              rdfs:subClassOf obo:OGMS_0000045 ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty obo:BFO_0000050 ;
+                                owl:someValuesFrom obo:NCBITAXON_9606
+                              ] ;
+              rdfs:label "tumoruitbreiding"@nl ,
+                         "tumour extent"@en ;
+              skos:definition "De totale fysieke uitbreiding van een maligne neoplasma in het lichaam van een patiënt op een bepaald tijdstip, bestaande uit de primaire tumor, eventuele regionale lymfklierbetrokkenheid en eventuele verre metastasen. Dit is de biologische realiteit die stadiëringssystemen zoals TNM en FIGO classificeren en coderen."@nl ,
+                              "The overall physical extent of a malignant neoplasm in a patient's body at a given point in time, comprising the primary tumour, any regional lymph node involvement, and any distant metastases. This is the biological reality that tumour staging systems such as TNM and FIGO classify and encode."@en .
+
+
+###  https://w3id.org/zinl/onto#prosthesis
+:prosthesis rdf:type owl:Class ;
+            rdfs:subClassOf obo:BFO_0000030 ;
+            rdfs:label "prothese"@nl ;
+            skos:closeMatch <http://snomed.info/id/53350007> .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://w3id.org/zinl/onto#DBCCode
+:DBCCode rdf:type owl:NamedIndividual ,
+                  :CodeSystem ;
+         rdfs:label "DBC code"@en ,
+                    "DBC-code"@nl ;
+         skos:definition "Diagnose Behandel Combinatie code; a Dutch administrative code combining diagnosis and treatment for reimbursement purposes."@en ,
+                         "Diagnose Behandel Combinatie code; een Nederlandse administratieve code die diagnose en behandeling combineert voor declaratiedoeleinden."@nl .
+
+
+###  https://w3id.org/zinl/onto#EQ-5D-3L
+:EQ-5D-3L rdf:type owl:NamedIndividual ,
+                   :PROMInstrument ;
+          rdfs:label "EQ-5D-3L"@en ,
+                     "EQ-5D-3L"@nl ;
+          skos:definition "Het EQ-5D-3L instrument, een gestandaardiseerde zelfrapportagevragenlijst ontwikkeld door de EuroQol Groep die gezondheidsgerelateerde kwaliteit van leven meet op vijf dimensies (mobiliteit, zelfzorg, dagelijkse activiteiten, pijn/ongemak, angst/depressie) elk op drie ernstniveaus, plus een visuele analoge schaal (VAS-thermometer). Breed toegepast in Nederlandse MSZ-transparantie-indicatoren voor orthopedische en andere electieve ingrepen."@nl ,
+                          "The EQ-5D-3L instrument, a standardised self-report questionnaire developed by the EuroQol Group measuring health-related quality of life across five dimensions (mobility, self-care, usual activities, pain/discomfort, anxiety/depression) each at three severity levels, plus a visual analogue scale (VAS thermometer). Widely used in Dutch MSZ transparency indicators for orthopaedic and other elective procedures."@en .
+
+
+###  https://w3id.org/zinl/onto#FIGOSystem
+:FIGOSystem rdf:type owl:NamedIndividual ,
+                     :CodeSystem ;
+            rdfs:label "FIGO staging system"@en ,
+                       "FIGO-stadiëringssysteem"@nl ;
+            skos:definition "Het stadiëringssysteem van de FIGO, gebruikt voor gynaecologische maligniteiten. FIGO-stadia (I–IV met substadia) combineren PrimaryTumourExtent, RegionalLymphNodeInvolvement en DistantMetastasis tot één ordinale classificatie. Overlapt gedeeltelijk met TNM; mapping is tumortype- en editie-specifiek; niet geaxiomatiseerd."@nl ,
+                            "The staging system of the International Federation of Gynecology and Obstetrics (FIGO), used for gynaecological malignancies. FIGO stages (I–IV with substages) combine PrimaryTumourExtent, RegionalLymphNodeInvolvement, and DistantMetastasis into a single ordinal classification. Partially overlaps with TNM; mapping is tumour-type specific and edition specific; not axiomatised."@en .
+
+
+###  https://w3id.org/zinl/onto#ICD10
+:ICD10 rdf:type owl:NamedIndividual ,
+                :CodeSystem ;
+       rdfs:label "ICD-10"@en ,
+                  "ICD-10"@nl ;
+       skos:definition "International Classification of Diseases, 10th revision."@en .
+
+
+###  https://w3id.org/zinl/onto#SNOMEDCT
+:SNOMEDCT rdf:type owl:NamedIndividual ,
+                   :CodeSystem ;
+          rdfs:label "SNOMED CT"@en ,
+                     "SNOMED CT"@nl ;
+          skos:definition "Systematized Nomenclature of Medicine – Clinical Terms."@en .
+
+
+###  https://w3id.org/zinl/onto#TNMSystem
+:TNMSystem rdf:type owl:NamedIndividual ,
+                    :CodeSystem ;
+           rdfs:label "TNM classification system"@en ,
+                      "TNM-classificatiesysteem"@nl ;
+           skos:definition "De TNM-classificatie van maligne tumoren, beheerd door de UICC. T codeert primaire tumoruitbreiding (PrimaryTumourExtent), N codeert regionale lymfklierbetrokkenheid (RegionalLymphNodeInvolvement), M codeert verre metastasering (DistantMetastasis). Prefixen 'c' en 'p' corresponderen met respectievelijk ClinicalStagingProcess en PathologicalStagingProcess. Meerdere edities bestaan; de editie moet samen met de code worden vastgelegd."@nl ,
+                           "The TNM Classification of Malignant Tumours, maintained by the Union for International Cancer Control (UICC). T encodes primary tumour extent (PrimaryTumourExtent), N encodes regional lymph node involvement (RegionalLymphNodeInvolvement), M encodes distant metastasis (DistantMetastasis). Prefixes 'c' and 'p' correspond to ClinicalStagingProcess and PathologicalStagingProcess respectively. Multiple editions exist (6, 7, 8); edition must be recorded alongside the code."@en .
+
+
+###  https://w3id.org/zinl/onto#ZorgactiviteitCode
+:ZorgactiviteitCode rdf:type owl:NamedIndividual ,
+                             :CodeSystem ;
+                    rdfs:label "zorgactiviteit code"@en ,
+                               "zorgactiviteitcode"@nl ;
+                    skos:definition "Dutch care activity code (zorgactiviteitcode) used in the DBC/DOT system to identify specific clinical activities."@en ,
+                                    "Nederlandse zorgactiviteitcode gebruikt in het DBC/DOT-systeem om specifieke klinische activiteiten te identificeren."@nl .
+
+
+###  https://w3id.org/zinl/onto#ZorgproductCode
+:ZorgproductCode rdf:type owl:NamedIndividual ,
+                          :CodeSystem ;
+                 rdfs:label "zorgproduct code"@en ,
+                            "zorgproductcode"@nl ;
+                 skos:definition "Dutch care product code used in the DOT system to identify a care product (grouping of care activities)."@en ,
+                                 "Nederlandse zorgproductcode gebruikt in het DOT-systeem om een zorgproduct (groepering van zorgactiviteiten) te identificeren."@nl .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
