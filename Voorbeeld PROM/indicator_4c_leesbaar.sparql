@@ -19,7 +19,7 @@
 PREFIX rdf:              <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd:              <http://www.w3.org/2001/XMLSchema#>
 PREFIX time:             <http://www.w3.org/2006/time#>
-PREFIX :                 <http://onto.fairify.com#>
+PREFIX :                 <https://w3id.org/zinl/onto#>
 
 # OBO properties en klassen met leesbare aliassen
 PREFIX heeft_deel:       <http://purl.obolibrary.org/obo/BFO_0000051>

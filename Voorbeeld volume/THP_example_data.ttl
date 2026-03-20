@@ -3,7 +3,7 @@
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 @prefix obo:     <http://purl.obolibrary.org/obo/> .
 @prefix time:    <http://www.w3.org/2006/time#> .
-@prefix fairify: <http://onto.fairify.com#> .
+@prefix onto:    <https://w3id.org/zinl/onto#> .
 @prefix ex:      <http://example.org/data#> .
 
 # ===========================================================================
@@ -11,8 +11,8 @@
 # self-containedness of this data file)
 # ===========================================================================
 
-fairify:SNOMEDCT   a fairify:CodeSystem .
-fairify:ZorgactiviteitCode a fairify:CodeSystem .
+onto:SNOMEDCT   a onto:CodeSystem .
+onto:ZorgactiviteitCode a onto:CodeSystem .
 
 # ===========================================================================
 # Care location
@@ -38,18 +38,18 @@ ex:Disorder1_Coxartrose
 
 ex:CRID_Snomed_Coxartrose
     a obo:IAO_0000578 ;
-    obo:BFO_0000050  fairify:SNOMEDCT ;
+    obo:BFO_0000050  onto:SNOMEDCT ;
     obo:IAO_0000577  "416940007"^^xsd:string .   # SNOMED: primary osteoarthritis of hip
 
 ex:CRID_Snomed_Coxartrose obo:IAO_0000219 ex:Disorder1_Coxartrose .
 
 # Prothese
 ex:Prosthesis1
-    a fairify:prosthesis .
+    a onto:prosthesis .
 
 ex:CRID_Prosthesis1
     a obo:IAO_0000578 ;
-    obo:BFO_0000050  fairify:ZorgactiviteitCode ;
+    obo:BFO_0000050  onto:ZorgactiviteitCode ;
     obo:IAO_0000577  "38401"^^xsd:string .        # fictieve ZA-code heupprothese
 
 ex:CRID_Prosthesis1 obo:IAO_0000219 ex:Prosthesis1 .
@@ -62,7 +62,7 @@ ex:THP1_Interval
 
 # THP procedure
 ex:THP1
-    a fairify:THP ;
+    a onto:THP ;
     rdfs:label "THP Patiënt 1 – Coxartrose 2023"@nl ;
     obo:RO_0000057   ex:Patient1 ;
     obo:RO_0000057   ex:Prosthesis1 ;
@@ -72,7 +72,7 @@ ex:THP1
 
 ex:CRID_THP1
     a obo:IAO_0000578 ;
-    obo:BFO_0000050  fairify:ZorgactiviteitCode ;
+    obo:BFO_0000050  onto:ZorgactiviteitCode ;
     obo:IAO_0000577  "036250"^^xsd:string .       # ZA-code totale heupprothese
 
 ex:CRID_THP1 obo:IAO_0000219 ex:THP1 .
@@ -92,17 +92,17 @@ ex:Disorder2_AvasculaireNecrose
 
 ex:CRID_Snomed_AvasculaireNecrose
     a obo:IAO_0000578 ;
-    obo:BFO_0000050  fairify:SNOMEDCT ;
+    obo:BFO_0000050  onto:SNOMEDCT ;
     obo:IAO_0000577  "31384009"^^xsd:string .     # SNOMED: avascular necrosis of femoral head
 
 ex:CRID_Snomed_AvasculaireNecrose obo:IAO_0000219 ex:Disorder2_AvasculaireNecrose .
 
 ex:Prosthesis2
-    a fairify:prosthesis .
+    a onto:prosthesis .
 
 ex:CRID_Prosthesis2
     a obo:IAO_0000578 ;
-    obo:BFO_0000050  fairify:ZorgactiviteitCode ;
+    obo:BFO_0000050  onto:ZorgactiviteitCode ;
     obo:IAO_0000577  "38401"^^xsd:string .
 
 ex:CRID_Prosthesis2 obo:IAO_0000219 ex:Prosthesis2 .
@@ -113,7 +113,7 @@ ex:THP2_Interval
     time:hasEnd       [ a time:Instant ; time:inXSDDate "2023-09-03"^^xsd:date ] .
 
 ex:THP2
-    a fairify:THP ;
+    a onto:THP ;
     rdfs:label "THP Patiënt 2 – Avasculaire necrose 2023"@nl ;
     obo:RO_0000057   ex:Patient2 ;
     obo:RO_0000057   ex:Prosthesis2 ;
@@ -123,7 +123,7 @@ ex:THP2
 
 ex:CRID_THP2
     a obo:IAO_0000578 ;
-    obo:BFO_0000050  fairify:ZorgactiviteitCode ;
+    obo:BFO_0000050  onto:ZorgactiviteitCode ;
     obo:IAO_0000577  "036250"^^xsd:string .
 
 ex:CRID_THP2 obo:IAO_0000219 ex:THP2 .
@@ -140,21 +140,21 @@ ex:Patient3
 ex:Disorder3_HipFracture
     a obo:OGMS_0000045 ,
       obo:OGMS_0000102 ,
-      fairify:HipFracture .       # subclass van Disorder; dit is de reden van exclusie
+      onto:HipFracture .       # subclass van Disorder; dit is de reden van exclusie
 
 ex:CRID_Snomed_HipFracture
     a obo:IAO_0000578 ;
-    obo:BFO_0000050  fairify:SNOMEDCT ;
+    obo:BFO_0000050  onto:SNOMEDCT ;
     obo:IAO_0000577  "263225007"^^xsd:string .    # SNOMED: fracture of hip
 
 ex:CRID_Snomed_HipFracture obo:IAO_0000219 ex:Disorder3_HipFracture .
 
 ex:Prosthesis3
-    a fairify:prosthesis .
+    a onto:prosthesis .
 
 ex:CRID_Prosthesis3
     a obo:IAO_0000578 ;
-    obo:BFO_0000050  fairify:ZorgactiviteitCode ;
+    obo:BFO_0000050  onto:ZorgactiviteitCode ;
     obo:IAO_0000577  "38401"^^xsd:string .
 
 ex:CRID_Prosthesis3 obo:IAO_0000219 ex:Prosthesis3 .
@@ -165,7 +165,7 @@ ex:THP3_Interval
     time:hasEnd       [ a time:Instant ; time:inXSDDate "2023-11-20"^^xsd:date ] .
 
 ex:THP3
-    a fairify:THP ;
+    a onto:THP ;
     rdfs:label "THP Patiënt 3 – Heupfractuur 2023"@nl ;
     obo:RO_0000057   ex:Patient3 ;
     obo:RO_0000057   ex:Prosthesis3 ;
@@ -175,7 +175,7 @@ ex:THP3
 
 ex:CRID_THP3
     a obo:IAO_0000578 ;
-    obo:BFO_0000050  fairify:ZorgactiviteitCode ;
+    obo:BFO_0000050  onto:ZorgactiviteitCode ;
     obo:IAO_0000577  "036250"^^xsd:string .
 
 ex:CRID_THP3 obo:IAO_0000219 ex:THP3 .
