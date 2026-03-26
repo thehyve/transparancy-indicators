@@ -145,6 +145,13 @@ obo:RO_0002234 rdf:type owl:ObjectProperty ;
                rdfs:label "has output"@en .
 
 
+###  https://w3id.org/zinl/onto#hasBirthDate
+:hasBirthDate rdf:type owl:ObjectProperty ;
+              rdfs:domain obo:OGMS_0000087 ;
+              rdfs:range :BirthInstant ;
+              rdfs:label "heeft geboortedatum"@nl .
+
+
 ###  https://w3id.org/zinl/onto#hasCodeSystem
 :hasCodeSystem rdf:type owl:ObjectProperty ;
                rdfs:domain obo:IAO_0000578 ;
@@ -153,6 +160,13 @@ obo:RO_0002234 rdf:type owl:ObjectProperty ;
                           "heeft coderingssysteem"@nl ;
                skos:definition "Relateert een centraal geregistreerde identifier aan het coderingssysteem waarbinnen deze is gedefinieerd."@nl ,
                                "Relates a centrally registered identifier to the code system within which it is defined."@en .
+
+
+###  https://w3id.org/zinl/onto#hasDeathDate
+:hasDeathDate rdf:type owl:ObjectProperty ;
+              rdfs:domain obo:OGMS_0000087 ;
+              rdfs:range :DeathInstant ;
+              rdfs:label "heeft overlijdensdatum"@nl .
 
 
 #################################################################
@@ -459,6 +473,35 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                      "Een gegevensitem dat de berekende Body Mass Index van een patiënt op een specifiek tijdstip vertegenwoordigt. BMI is geen kwaliteit van de patiënt; het is een ratio afgeleid van metingen van massa (PATO_0000128) en lengte (PATO_0000122), berekend als kg/m². Het geassocieerde tijdstip legt het meetmoment vast, wat contextueel gebruik mogelijk maakt zoals BMI ten tijde van de diagnose of ten tijde van chirurgische interventie. Patroon consistent met OBI_0001169."@nl .
 
 
+###  https://w3id.org/zinl/onto#BirthInstant
+:BirthInstant rdf:type owl:Class ;
+              rdfs:subClassOf obo:BFO_0000148 ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty <http://www.w3.org/2006/time#hasTime> ;
+                                owl:someValuesFrom <http://www.w3.org/2006/time#Instant>
+                              ] ;
+              obo:IAO_0000115 "Het temporele moment waarop een menselijk organisme wordt geboren; het eindpunt van het geboorteproces."@nl ;
+              obo:IAO_0000116 "Bewust gemodelleerd als subklasse van bfo:zero-dimensional temporal region en niet van time:Instant, zodat de ontologie geen semantische commitment maakt aan de relatie tussen BFO en W3C Time. Een bridge-axioma elders kan time:Instant en bfo:TemporalInstant gelijkstellen indien gewenst."@nl ,
+                              "De naam 'BirthInstant' is bewust gekozen boven 'BirthDate': een datum impliceert kalendergranuarliteit, terwijl het werkelijke moment ook als tijdstip, jaar, of decade bekend kan zijn. W3C Time biedt hiervoor de nodige flexibiliteit via time:inXSDDate, time:inXSDDateTime en time:inXSDgYear."@nl ;
+              rdfs:label "geboortemoment"@nl .
+
+
+###  https://w3id.org/zinl/onto#BirthProcess
+:BirthProcess rdf:type owl:Class ;
+              rdfs:subClassOf obo:BFO_0000015 ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty <http://www.w3.org/2006/time#hasEnd> ;
+                                owl:someValuesFrom :BirthInstant
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty obo:RO_0000057 ;
+                                owl:allValuesFrom obo:OGMS_0000087
+                              ] ;
+              obo:IAO_0000115 "Het biologische proces dat eindigt op het geboortemoment waarop een menselijk organisme zelfstandig bestaat. Het geboortemoment is het eindpunt van dit proces, niet het beginpunt."@nl ;
+              obo:IAO_0000116 "De keuze dat geboorte het *einde* van het geboorteproces is (de partus), en niet het begin van het postnatale leven, is een expliciete ontwerpkeuze. Andere ontologieën hanteren soms de omgekeerde conventie. Door deze keuze hier te benoemen is het onderscheid aantoonbaar." ;
+              rdfs:label "geboorteproces"@nl .
+
+
 ###  https://w3id.org/zinl/onto#CareLocation
 :CareLocation rdf:type owl:Class ;
               rdfs:subClassOf obo:BFO_0000029 ,
@@ -521,6 +564,19 @@ obo:PATO_0000128 rdf:type owl:Class ;
                        "The process boundary marking the irreversible cessation of all vital functions of an organism; the terminal boundary of the dying process. Has exactly one associated time:Instant."@en .
 
 
+###  https://w3id.org/zinl/onto#DeathInstant
+:DeathInstant rdf:type owl:Class ;
+              rdfs:subClassOf obo:BFO_0000148 ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty <http://www.w3.org/2006/time#hasTime> ;
+                                owl:someValuesFrom <http://www.w3.org/2006/time#Instant>
+                              ] ;
+              obo:IAO_0000115 "Het temporele moment waarop een menselijk organisme overlijdt; het eindpunt van het stervensproces."@nl ;
+              obo:IAO_0000116 "Bewust gemodelleerd als subklasse van bfo:zero-dimensional temporal region en niet van time:Instant, zodat de ontologie geen semantische commitment maakt aan de relatie tussen BFO en W3C Time. Een bridge-axioma elders kan time:Instant en bfo:TemporalInstant gelijkstellen indien gewenst."@nl ,
+                              "De naam 'DeathInstant' is bewust gekozen boven 'DeathDate': een datum impliceert kalendergranuarliteit, terwijl het werkelijke moment ook als tijdstip, jaar, of decade bekend kan zijn. W3C Time biedt hiervoor de nodige flexibiliteit via time:inXSDDate, time:inXSDDateTime en time:inXSDgYear."@nl ;
+              rdfs:label "overlijdensmoment"@nl .
+
+
 ###  https://w3id.org/zinl/onto#Discharge
 :Discharge rdf:type owl:Class ;
            rdfs:subClassOf obo:BFO_0000035 ,
@@ -547,8 +603,12 @@ obo:PATO_0000128 rdf:type owl:Class ;
 :DyingProcess rdf:type owl:Class ;
               rdfs:subClassOf obo:BFO_0000015 ,
                               [ rdf:type owl:Restriction ;
+                                owl:onProperty <http://www.w3.org/2006/time#hasEnd> ;
+                                owl:someValuesFrom :DeathInstant
+                              ] ,
+                              [ rdf:type owl:Restriction ;
                                 owl:onProperty obo:RO_0000057 ;
-                                owl:someValuesFrom obo:NCBITAXON_9606
+                                owl:allValuesFrom obo:OGMS_0000087
                               ] ;
               rdfs:label "dying process"@en ,
                          "overlijdensproces"@nl ;

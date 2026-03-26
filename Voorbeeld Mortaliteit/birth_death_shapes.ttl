@@ -1,0 +1,74 @@
+@prefix :        <https://w3id.org/zinl/onto#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix shapes:  <https://w3id.org/zinl/shapes#> .
+@prefix obo:     <http://purl.obolibrary.org/obo/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+
+# ---------------------------------------------------------------------------
+# SHACL shapes voor geboortemoment en overlijdensmoment
+#
+# Datapatroon:
+#   mens :hasBirthDate  :BirthInstant   (precies 1 vereist)
+#   mens :hasDeathDate  :DeathInstant   (0 of 1 toegestaan)
+#   :BirthInstant / :DeathInstant dragen time:inXSDDate direct
+#
+# Doel: validatie van aangeleverde data; staat los van de OWA in de ontologie.
+# ---------------------------------------------------------------------------
+
+shapes:HumanOrganismShape
+    a               sh:NodeShape ;
+    sh:targetClass  obo:NCBITAXON_9606 ;
+    rdfs:label      "Shape: menselijk organisme"@nl ;
+    rdfs:comment    "Valideert dat elk menselijk organisme precies één geboortemoment en maximaal één overlijdensmoment heeft."@nl ;
+
+    sh:property [
+        sh:path      :hasBirthDate ;
+        sh:class     :BirthInstant ;
+        sh:minCount  1 ;
+        sh:maxCount  1 ;
+        sh:name      "heeft geboortemoment"@nl ;
+        sh:message   "Een menselijk organisme moet precies één :BirthInstant hebben via :hasBirthDate."@nl ;
+    ] ;
+
+    sh:property [
+        sh:path      :hasDeathDate ;
+        sh:class     :DeathInstant ;
+        sh:minCount  0 ;
+        sh:maxCount  1 ;
+        sh:name      "heeft overlijdensmoment"@nl ;
+        sh:message   "Een menselijk organisme mag maximaal één :DeathInstant hebben via :hasDeathDate."@nl ;
+    ] .
+
+# ---------------------------------------------------------------------------
+# Shape: BirthInstant — draagt kalenderwaarde direct
+# ---------------------------------------------------------------------------
+
+shapes:BirthInstantShape
+    a               sh:NodeShape ;
+    sh:targetClass  :BirthInstant ;
+    rdfs:label      "Shape: geboortemoment"@nl ;
+
+    sh:or (
+        [ sh:property [ sh:path time:inXSDDate ;     sh:datatype xsd:date ;     sh:minCount 1 ; sh:maxCount 1 ] ]
+        [ sh:property [ sh:path time:inXSDDateTime ; sh:datatype xsd:dateTime ; sh:minCount 1 ; sh:maxCount 1 ] ]
+        [ sh:property [ sh:path time:inXSDgYear ;    sh:datatype xsd:gYear ;    sh:minCount 1 ; sh:maxCount 1 ] ]
+    ) ;
+    sh:message "Een :BirthInstant moet precies één kalenderwaarde dragen: time:inXSDDate, time:inXSDDateTime of time:inXSDgYear."@nl .
+
+# ---------------------------------------------------------------------------
+# Shape: DeathInstant — zelfde structuur
+# ---------------------------------------------------------------------------
+
+shapes:DeathInstantShape
+    a               sh:NodeShape ;
+    sh:targetClass  :DeathInstant ;
+    rdfs:label      "Shape: overlijdensmoment"@nl ;
+
+    sh:or (
+        [ sh:property [ sh:path time:inXSDDate ;     sh:datatype xsd:date ;     sh:minCount 1 ; sh:maxCount 1 ] ]
+        [ sh:property [ sh:path time:inXSDDateTime ; sh:datatype xsd:dateTime ; sh:minCount 1 ; sh:maxCount 1 ] ]
+        [ sh:property [ sh:path time:inXSDgYear ;    sh:datatype xsd:gYear ;    sh:minCount 1 ; sh:maxCount 1 ] ]
+    ) ;
+    sh:message "Een :DeathInstant moet precies één kalenderwaarde dragen: time:inXSDDate, time:inXSDDateTime of time:inXSDgYear."@nl .

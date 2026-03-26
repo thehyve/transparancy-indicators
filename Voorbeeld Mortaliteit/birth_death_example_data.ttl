@@ -1,0 +1,68 @@
+@prefix :        <https://w3id.org/zinl/onto#> .
+@prefix ex:      <https://w3id.org/zinl/data/example#> .
+@prefix obo:     <http://purl.obolibrary.org/obo/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# ---------------------------------------------------------------------------
+# Voorbeeld instance data
+# Persoon: Maria de Vries, geboren 14 maart 1952, overleden 3 november 2023
+# ---------------------------------------------------------------------------
+
+# Het menselijk organisme (patiënt)
+ex:MariaDeVries
+    a                  obo:NCBITAXON_9606 ;
+    rdfs:label         "Maria de Vries" ;
+    :hasBirthDate      ex:MariaGeboorteMoment ;
+    :hasDeathDate      ex:MariaOverlijdensMoment .
+
+# ---------------------------------------------------------------------------
+# Geboortemoment
+# ---------------------------------------------------------------------------
+
+ex:MariaGeboorteMoment
+    a                  :BirthInstant ;
+    time:inXSDDate     "1952-03-14"^^xsd:date .
+
+# ---------------------------------------------------------------------------
+# Geboorteproces (optioneel)
+# ---------------------------------------------------------------------------
+
+ex:MariaGeboorteProces
+    a                  :BirthProcess ;
+    time:hasEnd        ex:MariaGeboorteMoment ;
+    obo:RO_0000057     ex:MariaDeVries .
+
+# ---------------------------------------------------------------------------
+# Overlijdensmoment
+# ---------------------------------------------------------------------------
+
+ex:MariaOverlijdensMoment
+    a                  :DeathInstant ;
+    time:inXSDDate     "2023-11-03"^^xsd:date .
+
+# ---------------------------------------------------------------------------
+# Overlijdensproces (optioneel)
+# ---------------------------------------------------------------------------
+
+ex:MariaOverlijdensProces
+    a                  :DyingProcess ;
+    time:hasEnd        ex:MariaOverlijdensMoment ;
+    obo:RO_0000057     ex:MariaDeVries .
+
+# ---------------------------------------------------------------------------
+# Voorbeeld 2: Jan Bakker, alleen geboortedatum bekend (nog in leven of
+# overlijden niet geregistreerd — OWA: geen uitspraak over levend/dood)
+# ---------------------------------------------------------------------------
+
+ex:JanBakker
+    a                  obo:NCBITAXON_9606 ;
+    rdfs:label         "Jan Bakker" ;
+    :hasBirthDate      ex:JanGeboorteMoment .
+
+ex:JanGeboorteMoment
+    a                  :BirthInstant ;
+    time:inXSDDate     "1978-07-22"^^xsd:date .
