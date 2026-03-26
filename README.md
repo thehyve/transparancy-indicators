@@ -13,11 +13,15 @@ transparancy-indicators/
 │   ├── THP_shapes.ttl              # SHACL-shapes voor Totale Heup Procedure
 │   ├── THP_example_data.ttl        # Voorbeelddata (3 patiënten, incl. exclusiegeval)
 │   └── THP_volume_2023.sparql      # SPARQL-query: volumetelling per locatie
-└── Voorbeeld PROM/
-    ├── indicator_4c_data_leesbaar.ttl   # Voorbeelddata indicator 4c (EQ-5D heup)
-    ├── indicator_4c_leesbaar.sparql     # SPARQL-query: verschilscore EQ-5D
-    ├── PROM ontologie en data.drawio    # Diagram (bewerkbaar)
-    └── PROM ontologie en data.png       # Diagram (afbeelding)
+├── Voorbeeld PROM/
+│   ├── indicator_4c_data_leesbaar.ttl   # Voorbeelddata indicator 4c (EQ-5D heup)
+│   ├── indicator_4c_leesbaar.sparql     # SPARQL-query: verschilscore EQ-5D
+│   ├── PROM ontologie en data.drawio    # Diagram (bewerkbaar)
+│   └── PROM ontologie en data.png       # Diagram (afbeelding)
+└── Voorbeeld Mortaliteit/
+    ├── birth_death_shapes.ttl           # SHACL-shapes voor geboortemoment en overlijdensmoment
+    ├── birth_death_example_data.ttl     # Voorbeelddata (2 patiënten: met en zonder overlijdensdatum)
+    └── geboorte_overlijden ontologie en data.png  # Diagram (afbeelding)
 ```
 
 ---
@@ -48,6 +52,16 @@ De kernontologie (`transparantie_indicatoren.owl`) heeft namespace `https://w3id
 
 Codesystemen (SNOMED CT, ICD-10, Zorgactiviteitcodes) worden gerepresenteerd als named individuals van het type `fairify:CodeSystem`. Codes zelf zijn `IAO:CRID`-instances die via `IAO:denotes` gekoppeld zijn aan de klinische entiteit.
 
+Toevoegingen voor het mortaliteitspatroon:
+
+| Klasse / Property | Type | Beschrijving |
+|-------------------|------|-------------|
+| `:BirthInstant` | `owl:Class` | Temporeel moment van geboorte; subklasse van `BFO:zero-dimensional temporal region` |
+| `:BirthProcess` | `owl:Class` | Biologisch geboorteproces; eindigt op het `BirthInstant` |
+| `:DeathInstant` | `owl:Class` | Temporeel moment van overlijden; subklasse van `BFO:zero-dimensional temporal region` |
+| `:hasBirthDate` | `owl:ObjectProperty` | Koppelt een menselijk organisme aan zijn `BirthInstant` |
+| `:hasDeathDate` | `owl:ObjectProperty` | Koppelt een menselijk organisme aan zijn `DeathInstant` (optioneel) |
+
 ---
 
 ## Voorbeelden
@@ -74,6 +88,19 @@ De query is parameteriseerbaar via `VALUES`-blokken: vervang de ZA-code en exclu
 | `indicator_4c_leesbaar.sparql` | Selecteert patiënten met complete PROM-cyclus en berekent `?score_post - ?score_pre`; temporele filters: ≤ 30 dagen voor OK, 60–120 dagen na OK |
 
 > **Let op:** de tijdrekenkundige expressies (`xsd:duration`-arithmetic) worden ondersteund door productie-triplestores (Apache Jena Fuseki, GraphDB, Virtuoso) maar niet door `rdflib`.
+
+### 3 · Mortaliteit – geboortemoment en overlijdensmoment
+
+**Wat wordt gemodelleerd:** hoe geboorte- en overlijdensdata van een patiënt semantisch correct worden vastgelegd, rekening houdend met variabele kalendernauwkeurigheid (datum, tijdstip, of alleen een jaar).
+
+De ontologie introduceert twee nieuwe klassen (`BirthInstant`, `DeathInstant`) als subklassen van `BFO:zero-dimensional temporal region`, en twee bijbehorende properties (`hasBirthDate`, `hasDeathDate`). Door `time:inXSDDate`, `time:inXSDDateTime` of `time:inXSDgYear` te gebruiken is de granulariteit van de datumwaarde flexibel.
+
+| Bestand | Beschrijving |
+|---------|-------------|
+| `birth_death_shapes.ttl` | SHACL-shapes: elk menselijk organisme (`NCBITAXON:9606`) moet precies één `BirthInstant` hebben en mag maximaal één `DeathInstant` hebben; elk moment moet één kalenderwaarde dragen |
+| `birth_death_example_data.ttl` | Twee patiënten: Maria de Vries (geboortedatum én overlijdensdatum bekend) en Jan Bakker (alleen geboortedatum – nog in leven of overlijden niet geregistreerd) |
+
+> **Ontwerpkeuze:** `BirthInstant` en `DeathInstant` zijn bewust *niet* gelijkgesteld aan `time:Instant`, zodat de ontologie geen commitment maakt aan de relatie tussen BFO en W3C Time. Een bridge-axioma kan beide gelijkstellen indien gewenst.
 
 ---
 
