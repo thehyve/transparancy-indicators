@@ -4,14 +4,14 @@
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 @prefix obo:     <http://purl.obolibrary.org/obo/> .
 @prefix time:    <http://www.w3.org/2006/time#> .
-@prefix fairify: <http://onto.fairify.com#> .
-@prefix :        <http://onto.fairify.com/shacl#> .
+@prefix ti-o:    <https://w3id.org/zinl/ti-o#> .
+@prefix :        <https://w3id.org/zinl/ti-o/shacl#> .
 
 # ---------------------------------------------------------------------------
 # Identifier pattern used throughout:
 #
 #   entity  <-- obo:IAO_0000219 (denotes) --  CRID (IAO_0000578)
-#   CRID    --> obo:BFO_0000050 (part_of) -->  fairify:CodeSystem
+#   CRID    --> obo:BFO_0000050 (part_of) -->  ti-o:CodeSystem
 #   CRID    --> obo:IAO_0000577            -->  xsd:string
 #
 # In SHACL we navigate via the inverse of denotes (IAO_0000235 / denoted by):
@@ -29,7 +29,7 @@
 
     sh:property [
         sh:path     obo:BFO_0000050 ;
-        sh:class    fairify:CodeSystem ;
+        sh:class    ti-o:CodeSystem ;
         sh:minCount 1 ;
         sh:name     "deel van codesysteem"@nl ;
         sh:message  "Een CRID moet deel zijn van minstens één CodeSystem via BFO part_of."@nl ;
@@ -54,10 +54,10 @@
 
     sh:property [
         sh:path     obo:BFO_0000050 ;
-        sh:hasValue fairify:SNOMEDCT ;
+        sh:hasValue ti-o:SNOMEDCT ;
         sh:minCount 1 ;
         sh:name     "deel van SNOMED CT"@nl ;
-        sh:message  "De CRID moet deel zijn van het SNOMED CT codesysteem (fairify:SNOMEDCT)."@nl ;
+        sh:message  "De CRID moet deel zijn van het SNOMED CT codesysteem (ti-o:SNOMEDCT)."@nl ;
     ] ;
 
     sh:property [
@@ -75,7 +75,7 @@
 
 :THPShape
     a sh:NodeShape ;
-    sh:targetClass fairify:THP ;
+    sh:targetClass ti-o:THP ;
     rdfs:label "Shape voor Totale Heup Procedure instances"@nl ;
 
     # THP has_participant some Homo Sapiens
@@ -90,7 +90,7 @@
     # THP has_participant some Prosthesis
     sh:property [
         sh:path     obo:RO_0000057 ;
-        sh:class    fairify:prosthesis ;
+        sh:class    ti-o:prosthesis ;
         sh:minCount 1 ;
         sh:name     "heeft deelnemer: protese"@nl ;
         sh:message  "Een THP moet minstens één prothese als deelnemer hebben."@nl ;
@@ -159,7 +159,7 @@
 
 :ProsthesisShape
     a sh:NodeShape ;
-    sh:targetClass fairify:prosthesis ;
+    sh:targetClass ti-o:prosthesis ;
     rdfs:label "Shape voor Prothese instances"@nl ;
 
     # Prosthesis denoted by some CRID

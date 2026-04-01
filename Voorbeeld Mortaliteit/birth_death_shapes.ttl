@@ -1,4 +1,4 @@
-@prefix :        <https://w3id.org/zinl/onto#> .
+@prefix :        <https://w3id.org/zinl/ti-o#> .
 @prefix sh:      <http://www.w3.org/ns/shacl#> .
 @prefix shapes:  <https://w3id.org/zinl/shapes#> .
 @prefix obo:     <http://purl.obolibrary.org/obo/> .

@@ -1,4 +1,4 @@
-@prefix :        <https://w3id.org/zinl/onto#> .
+@prefix :        <https://w3id.org/zinl/ti-o#> .
 @prefix ex:      <https://w3id.org/zinl/data/example#> .
 @prefix obo:     <http://purl.obolibrary.org/obo/> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .

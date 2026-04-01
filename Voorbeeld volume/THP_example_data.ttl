@@ -3,7 +3,7 @@
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 @prefix obo:     <http://purl.obolibrary.org/obo/> .
 @prefix time:    <http://www.w3.org/2006/time#> .
-@prefix onto:    <https://w3id.org/zinl/onto#> .
+@prefix onto:    <https://w3id.org/zinl/ti-o#> .
 @prefix ex:      <http://example.org/data#> .
 
 # ===========================================================================

@@ -8,7 +8,7 @@
 
 ```
 transparancy-indicators/
-├── transparantie_indicatoren.owl   # Kernontologie (OWL/Turtle)
+├── transparantie_indicatoren.owl.ttl   # Kernontologie (OWL/Turtle)
 ├── Voorbeeld volume/
 │   ├── THP_shapes.ttl              # SHACL-shapes voor Totale Heup Procedure
 │   ├── THP_example_data.ttl        # Voorbeelddata (3 patiënten, incl. exclusiegeval)
@@ -40,7 +40,7 @@ Het doel is dat ziekenhuissystemen data in een afgesproken semantisch formaat aa
 
 ## Ontologie
 
-De kernontologie (`transparantie_indicatoren.owl`) heeft namespace `https://w3id.org/zinl/onto#` en importeert:
+De kernontologie (`transparantie_indicatoren.owl.ttl`) heeft namespace `https://w3id.org/zinl/ti-o#` en importeert:
 
 | Ontologie | Doel |
 |-----------|------|
@@ -50,7 +50,7 @@ De kernontologie (`transparantie_indicatoren.owl`) heeft namespace `https://w3id
 | [RO](http://purl.obolibrary.org/obo/ro.owl) | Relaties (has participant, inheres in, …) |
 | [W3C Time](https://www.w3.org/TR/owl-time/) | Temporele modellering |
 
-Codesystemen (SNOMED CT, ICD-10, Zorgactiviteitcodes) worden gerepresenteerd als named individuals van het type `fairify:CodeSystem`. Codes zelf zijn `IAO:CRID`-instances die via `IAO:denotes` gekoppeld zijn aan de klinische entiteit.
+Codesystemen (SNOMED CT, ICD-10, Zorgactiviteitcodes) worden gerepresenteerd als named individuals van het type `ti-o:CodeSystem`. Codes zelf zijn `IAO:CRID`-instances die via `IAO:denotes` gekoppeld zijn aan de klinische entiteit.
 
 Toevoegingen voor het mortaliteitspatroon:
 
@@ -119,7 +119,7 @@ pip install pyshacl
 pyshacl \
   -s "Voorbeeld volume/THP_shapes.ttl" \
   -d "Voorbeeld volume/THP_example_data.ttl" \
-  --ont-graph transparantie_indicatoren.owl \
+  --ont-graph transparantie_indicatoren.owl.ttl \
   -f human
 ```
 

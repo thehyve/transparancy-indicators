@@ -3,7 +3,7 @@
 @prefix owl:              <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:              <http://www.w3.org/2001/XMLSchema#> .
 @prefix time:             <http://www.w3.org/2006/time#> .
-@prefix :                 <https://w3id.org/zinl/onto#> .
+@prefix :                 <https://w3id.org/zinl/ti-o#> .
 
 # OBO properties en klassen met leesbare aliassen
 @prefix deel_van:         <http://purl.obolibrary.org/obo/BFO_0000050> .   # part of

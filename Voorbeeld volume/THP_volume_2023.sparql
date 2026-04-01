@@ -1,6 +1,6 @@
 PREFIX obo:     <http://purl.obolibrary.org/obo/>
 PREFIX time:    <http://www.w3.org/2006/time#>
-PREFIX onto:    <https://w3id.org/zinl/onto#>
+PREFIX ti-o:    <https://w3id.org/zinl/ti-o#>
 PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
 
 # Variabelen:
@@ -26,7 +26,7 @@ WHERE {
 
     # --- Selectie behandeling via CRID ---
     ?cridBehandeling a obo:IAO_0000578 ;
-        obo:BFO_0000050  onto:ZorgactiviteitCode ;
+        obo:BFO_0000050  ti-o:ZorgactiviteitCode ;
         obo:IAO_0000577  ?behandelingCode ;
         obo:IAO_0000219  ?behandeling .
 
@@ -44,7 +44,7 @@ WHERE {
     FILTER NOT EXISTS {
         ?behandeling obo:RO_0000057 ?disorder .
         ?cridDisorder a obo:IAO_0000578 ;
-            obo:BFO_0000050  onto:SNOMEDCT ;
+            obo:BFO_0000050  ti-o:SNOMEDCT ;
             obo:IAO_0000577  ?exclusieCode ;
             obo:IAO_0000219  ?disorder .
     }

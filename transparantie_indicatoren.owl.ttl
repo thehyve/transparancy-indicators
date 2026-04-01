@@ -1,4 +1,4 @@
-@prefix : <https://w3id.org/zinl/onto#> .
+@prefix : <https://w3id.org/zinl/ti-o#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix obo: <http://purl.obolibrary.org/obo/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -16,9 +16,9 @@
 @prefix protege: <http://protege.stanford.edu/plugins/owl/protege#> .
 @prefix subsets: <http://purl.obolibrary.org/obo/ro/subsets#> .
 @prefix oboInOwl: <http://www.geneontology.org/formats/oboInOwl#> .
-@base <https://w3id.org/zinl/onto#> .
+@base <https://w3id.org/zinl/ti-o#> .
 
-<https://w3id.org/zinl/onto#> rdf:type owl:Ontology ;
+<https://w3id.org/zinl/ti-o#> rdf:type owl:Ontology ;
                                owl:imports <http://purl.obolibrary.org/obo/ogms/2021-08-19/ogms.owl> ,
                                            <http://www.w3.org/2006/time#2016> .
 
@@ -145,14 +145,14 @@ obo:RO_0002234 rdf:type owl:ObjectProperty ;
                rdfs:label "has output"@en .
 
 
-###  https://w3id.org/zinl/onto#hasBirthDate
+###  https://w3id.org/zinl/ti-o#hasBirthDate
 :hasBirthDate rdf:type owl:ObjectProperty ;
               rdfs:domain obo:OGMS_0000087 ;
               rdfs:range :BirthInstant ;
               rdfs:label "heeft geboortedatum"@nl .
 
 
-###  https://w3id.org/zinl/onto#hasCodeSystem
+###  https://w3id.org/zinl/ti-o#hasCodeSystem
 :hasCodeSystem rdf:type owl:ObjectProperty ;
                rdfs:domain obo:IAO_0000578 ;
                rdfs:range :CodeSystem ;
@@ -162,7 +162,7 @@ obo:RO_0002234 rdf:type owl:ObjectProperty ;
                                "Relates a centrally registered identifier to the code system within which it is defined."@en .
 
 
-###  https://w3id.org/zinl/onto#hasDeathDate
+###  https://w3id.org/zinl/ti-o#hasDeathDate
 :hasDeathDate rdf:type owl:ObjectProperty ;
               rdfs:domain obo:OGMS_0000087 ;
               rdfs:range :DeathInstant ;
@@ -456,7 +456,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                                              ] .
 
 
-###  https://w3id.org/zinl/onto#BMIMeasurementDatum
+###  https://w3id.org/zinl/ti-o#BMIMeasurementDatum
 :BMIMeasurementDatum rdf:type owl:Class ;
                      rdfs:subClassOf obo:IAO_0000027 ,
                                      [ rdf:type owl:Restriction ;
@@ -473,7 +473,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                      "Een gegevensitem dat de berekende Body Mass Index van een patiënt op een specifiek tijdstip vertegenwoordigt. BMI is geen kwaliteit van de patiënt; het is een ratio afgeleid van metingen van massa (PATO_0000128) en lengte (PATO_0000122), berekend als kg/m². Het geassocieerde tijdstip legt het meetmoment vast, wat contextueel gebruik mogelijk maakt zoals BMI ten tijde van de diagnose of ten tijde van chirurgische interventie. Patroon consistent met OBI_0001169."@nl .
 
 
-###  https://w3id.org/zinl/onto#BirthInstant
+###  https://w3id.org/zinl/ti-o#BirthInstant
 :BirthInstant rdf:type owl:Class ;
               rdfs:subClassOf obo:BFO_0000148 ,
                               [ rdf:type owl:Restriction ;
@@ -486,7 +486,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
               rdfs:label "geboortemoment"@nl .
 
 
-###  https://w3id.org/zinl/onto#BirthProcess
+###  https://w3id.org/zinl/ti-o#BirthProcess
 :BirthProcess rdf:type owl:Class ;
               rdfs:subClassOf obo:BFO_0000015 ,
                               [ rdf:type owl:Restriction ;
@@ -502,7 +502,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
               rdfs:label "geboorteproces"@nl .
 
 
-###  https://w3id.org/zinl/onto#CareLocation
+###  https://w3id.org/zinl/ti-o#CareLocation
 :CareLocation rdf:type owl:Class ;
               rdfs:subClassOf obo:BFO_0000029 ,
                               [ rdf:type owl:Restriction ;
@@ -515,7 +515,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                               "Een fysieke locatie waar zorgprocessen plaatsvinden, geassocieerd met één of meer zorginstellingen. Een zorglocatie is een fysieke plek, geen organisatie."@nl .
 
 
-###  https://w3id.org/zinl/onto#CareProviderRole
+###  https://w3id.org/zinl/ti-o#CareProviderRole
 :CareProviderRole rdf:type owl:Class ;
                   rdfs:subClassOf obo:BFO_0000023 ;
                   rdfs:label "care provider role"@en ,
@@ -524,7 +524,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                   "The role of a person as a provider of healthcare in the context of a healthcare process."@en .
 
 
-###  https://w3id.org/zinl/onto#ClinicalAdmission
+###  https://w3id.org/zinl/ti-o#ClinicalAdmission
 :ClinicalAdmission rdf:type owl:Class ;
                    rdfs:subClassOf obo:OGMS_0000096 ;
                    rdfs:label "clinical admission"@en ,
@@ -533,7 +533,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                    "Een zorgproces waarbij een patiënt voor een nacht of langere periode verblijft op een zorglocatie, met continue monitoring en behandeling."@nl .
 
 
-###  https://w3id.org/zinl/onto#ClinicalStagingProcess
+###  https://w3id.org/zinl/ti-o#ClinicalStagingProcess
 :ClinicalStagingProcess rdf:type owl:Class ;
                         rdfs:subClassOf :StagingProcess ;
                         rdfs:label "clinical staging process"@en ,
@@ -542,7 +542,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                         "Een stadiëringsproces gebaseerd op klinisch onderzoek, beeldvorming (bijv. CT, MRI, PET), endoscopie en/of biopsie zonder chirurgische resectie. Correspondeert met het 'c'-prefix in TNM-notatie (cTNM). Doorgaans uitgevoerd vóór chirurgische behandeling. Tumoruitbreiding wordt afgeleid uit indirecte gegevens. Het onderscheid met pathologische stadiëring is meerdimensionaal: methode, tijdstip en epistemische status; niet geaxiomatiseerd."@nl .
 
 
-###  https://w3id.org/zinl/onto#CodeSystem
+###  https://w3id.org/zinl/ti-o#CodeSystem
 :CodeSystem rdf:type owl:Class ;
             rdfs:subClassOf obo:IAO_0000030 ;
             rdfs:label "code system"@en ,
@@ -551,7 +551,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                             "Een informatiecontententiteit die een verzameling codes en hun betekenissen definieert, gebruikt om entiteiten in een domein te classificeren of te identificeren."@nl .
 
 
-###  https://w3id.org/zinl/onto#Death
+###  https://w3id.org/zinl/ti-o#Death
 :Death rdf:type owl:Class ;
        rdfs:subClassOf obo:BFO_0000035 ,
                        [ rdf:type owl:Restriction ;
@@ -564,7 +564,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                        "The process boundary marking the irreversible cessation of all vital functions of an organism; the terminal boundary of the dying process. Has exactly one associated time:Instant."@en .
 
 
-###  https://w3id.org/zinl/onto#DeathInstant
+###  https://w3id.org/zinl/ti-o#DeathInstant
 :DeathInstant rdf:type owl:Class ;
               rdfs:subClassOf obo:BFO_0000148 ,
                               [ rdf:type owl:Restriction ;
@@ -577,7 +577,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
               rdfs:label "overlijdensmoment"@nl .
 
 
-###  https://w3id.org/zinl/onto#Discharge
+###  https://w3id.org/zinl/ti-o#Discharge
 :Discharge rdf:type owl:Class ;
            rdfs:subClassOf obo:BFO_0000035 ,
                            [ rdf:type owl:Restriction ;
@@ -590,7 +590,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                            "The process boundary marking the end of a clinical admission; the moment at which the patient formally leaves the care of the admitting institution."@en .
 
 
-###  https://w3id.org/zinl/onto#DistantMetastasis
+###  https://w3id.org/zinl/ti-o#DistantMetastasis
 :DistantMetastasis rdf:type owl:Class ;
                    rdfs:subClassOf :TumourExtent ;
                    rdfs:label "distant metastasis"@en ,
@@ -599,7 +599,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                    "The physical presence of malignant tumour cells in organs or tissues distant from the primary tumour and beyond the regional lymph nodes. Corresponds to the M component of the TNM classification system. M0 denotes absence; M1 denotes presence. Subcategories are tumour-type specific and TNM-edition specific; not axiomatised in this ontology."@en .
 
 
-###  https://w3id.org/zinl/onto#DyingProcess
+###  https://w3id.org/zinl/ti-o#DyingProcess
 :DyingProcess rdf:type owl:Class ;
               rdfs:subClassOf obo:BFO_0000015 ,
                               [ rdf:type owl:Restriction ;
@@ -616,7 +616,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                               "The biological process leading to the irreversible cessation of all vital functions of an organism, ending at death."@en .
 
 
-###  https://w3id.org/zinl/onto#EQ5DScore
+###  https://w3id.org/zinl/ti-o#EQ5DScore
 :EQ5DScore rdf:type owl:Class ;
            rdfs:subClassOf :PROMScore ,
                            [ rdf:type owl:Restriction ;
@@ -629,7 +629,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                            "Een PROM-score die een samengestelde beoordeling van kwaliteit van leven vertegenwoordigt zoals gemeten met het EQ-5D-instrument. Betreft de samengestelde indexscore of VAS-thermometerscore afgeleid van de EQ-5D-vragenlijst. Subdimensiescores (mobiliteit, zelfzorg, dagelijkse activiteiten, pijn/ongemak, angst/depressie) worden gemodelleerd als onderdelen van de bijbehorende PatientReportedOutcomeMeasure en worden hier niet apart geclassificeerd."@nl .
 
 
-###  https://w3id.org/zinl/onto#HealthcareOrganisation
+###  https://w3id.org/zinl/ti-o#HealthcareOrganisation
 :HealthcareOrganisation rdf:type owl:Class ;
                         rdfs:subClassOf :Organisation ;
                         rdfs:label "healthcare organisation"@en ,
@@ -638,13 +638,13 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                         "Een organisatie waarvan het primaire doel de verlening van zorg aan patiënten is."@nl .
 
 
-###  https://w3id.org/zinl/onto#HipFracture
+###  https://w3id.org/zinl/ti-o#HipFracture
 :HipFracture rdf:type owl:Class ;
              rdfs:subClassOf obo:OGMS_0000102 ;
              skos:closeMatch <http://snomed.info/id/263225007> .
 
 
-###  https://w3id.org/zinl/onto#Organisation
+###  https://w3id.org/zinl/ti-o#Organisation
 :Organisation rdf:type owl:Class ;
               rdfs:subClassOf obo:BFO_0000027 ;
               rdfs:label "organisatie"@nl ,
@@ -653,7 +653,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                               "Een objectaggregaat bestaande uit personen die samenwerken met een gemeenschappelijk doel, doorgaans met een gedefinieerde structuur en bestuur."@nl .
 
 
-###  https://w3id.org/zinl/onto#OutpatientVisit
+###  https://w3id.org/zinl/ti-o#OutpatientVisit
 :OutpatientVisit rdf:type owl:Class ;
                  rdfs:subClassOf obo:OGMS_0000096 ;
                  rdfs:label "outpatient visit"@en ,
@@ -662,7 +662,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                  "Een zorgproces waarbij een patiënt een zorglocatie bezoekt voor beoordeling of behandeling zonder klinische opname."@nl .
 
 
-###  https://w3id.org/zinl/onto#PROMAdministration
+###  https://w3id.org/zinl/ti-o#PROMAdministration
 :PROMAdministration rdf:type owl:Class ;
                     rdfs:subClassOf obo:OBI_0000070 ,
                                     [ rdf:type owl:Restriction ;
@@ -683,7 +683,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                     "Een gepland proces waarbij een persoon een PROM-instrument invult, met als uitkomst een ingevulde patiënt gerapporteerde uitkomstmaat. De persoon is de deelnemer wiens kwaliteiten worden beoordeeld; deze wordt niet gemodelleerd als patiëntrol, omdat het invullen van een vragenlijst geen zorgrelatie veronderstelt. Het PROM-instrument is de input die het proces structureert. De temporele locatie van dit proces levert het meetmoment, onafhankelijk van een klinische interventie."@nl .
 
 
-###  https://w3id.org/zinl/onto#PROMInstrument
+###  https://w3id.org/zinl/ti-o#PROMInstrument
 :PROMInstrument rdf:type owl:Class ;
                 rdfs:subClassOf obo:IAO_0000030 ;
                 rdfs:label "PROM instrument"@en ,
@@ -692,7 +692,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                 "Een informatiecontententiteit die de structuur, vragen en scoringsregels definieert van een gestandaardiseerde zelfrapportagevragenlijst die wordt gebruikt om patiëntgerapporteerde beoordelingen van gezondheid, functioneren of kwaliteit van leven te verzamelen. Een PROM-instrument is het sjabloon waaruit individuele ingevulde vragenlijsten (PatientReportedOutcomeMeasure) worden geproduceerd."@nl .
 
 
-###  https://w3id.org/zinl/onto#PROMScore
+###  https://w3id.org/zinl/ti-o#PROMScore
 :PROMScore rdf:type owl:Class ;
            rdfs:subClassOf obo:IAO_0000027 ,
                            [ rdf:type owl:Restriction ;
@@ -713,7 +713,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                            "Een gegevensitem dat deel uitmaakt van een ingevulde patiënt gerapporteerde uitkomstmaat en een gekwantificeerde beoordeling vertegenwoordigt van een specifieke kwaliteit die inhereert in een persoon, zoals door die persoon zelf gerapporteerd op een specifiek tijdstip."@nl .
 
 
-###  https://w3id.org/zinl/onto#PathologicalStagingProcess
+###  https://w3id.org/zinl/ti-o#PathologicalStagingProcess
 :PathologicalStagingProcess rdf:type owl:Class ;
                             rdfs:subClassOf :StagingProcess ;
                             rdfs:label "pathological staging process"@en ,
@@ -722,7 +722,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                             "Een stadiëringsproces gebaseerd op histopathologisch onderzoek van chirurgisch gereseceerd tumorweefsel. Correspondeert met het 'p'-prefix in TNM-notatie (pTNM). Vereist voorafgaande chirurgische verwijdering van tumorweefsel. Tumoruitbreiding wordt direct gemeten aan gereseceerd weefsel. Het onderscheid met klinische stadiëring is meerdimensionaal: methode, tijdstip en epistemische status; niet geaxiomatiseerd."@nl .
 
 
-###  https://w3id.org/zinl/onto#PatientReportedOutcomeMeasure
+###  https://w3id.org/zinl/ti-o#PatientReportedOutcomeMeasure
 :PatientReportedOutcomeMeasure rdf:type owl:Class ;
                                rdfs:subClassOf obo:IAO_0000030 ,
                                                [ rdf:type owl:Restriction ;
@@ -735,7 +735,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                                "Een informatiecontententiteit die een ingevulde instantie vertegenwoordigt van een gestandaardiseerde zelfrapportagevragenlijst, door een persoon ingevuld op een specifiek tijdstip als uitkomst van een PROM-afnameproces. Bevat één of meer PROM-scores als onderdelen. Niet te verwarren met het instrument (PROMInstrument) dat de structuur van de vragenlijst definieert."@nl .
 
 
-###  https://w3id.org/zinl/onto#PatientRole
+###  https://w3id.org/zinl/ti-o#PatientRole
 :PatientRole rdf:type owl:Class ;
              rdfs:subClassOf obo:BFO_0000023 ;
              rdfs:label "patient role"@en ,
@@ -744,7 +744,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                              "The role of a person as a recipient of healthcare, inhering in that person by virtue of their participation in a healthcare process."@en .
 
 
-###  https://w3id.org/zinl/onto#PrimaryTumourExtent
+###  https://w3id.org/zinl/ti-o#PrimaryTumourExtent
 :PrimaryTumourExtent rdf:type owl:Class ;
                      rdfs:subClassOf :TumourExtent ;
                      rdfs:label "primaire tumoruitbreiding"@nl ,
@@ -753,7 +753,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                      "The physical extent of the primary malignant tumour, characterised by its size and degree of local tissue infiltration. Corresponds to the T component of the TNM classification system. The boundary criteria for T categories (T1 through T4) are tumour-type specific and TNM-edition specific; they are not axiomatised in this ontology."@en .
 
 
-###  https://w3id.org/zinl/onto#QualityOfLife
+###  https://w3id.org/zinl/ti-o#QualityOfLife
 :QualityOfLife rdf:type owl:Class ;
                rdfs:subClassOf obo:BFO_0000019 ;
                rdfs:label "kwaliteit van leven"@nl ,
@@ -762,7 +762,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                "Een kwaliteit die inhereert in een persoon en die hun subjectieve beoordeling weerspiegelt van hun eigen fysiek, mentaal en sociaal welbevinden op een bepaald tijdstip. Kwaliteit van leven is niet beperkt tot gezondheidsgebonden aspecten; de reikwijdte van de beoordeling wordt bepaald door het gebruikte meetinstrument. Meerdere instrumenten (bijv. EQ-5D, SF-36, OHS) kunnen verschillende facetten van deze kwaliteit meten."@nl .
 
 
-###  https://w3id.org/zinl/onto#RegionalLymphNodeInvolvement
+###  https://w3id.org/zinl/ti-o#RegionalLymphNodeInvolvement
 :RegionalLymphNodeInvolvement rdf:type owl:Class ;
                               rdfs:subClassOf :TumourExtent ;
                               rdfs:label "regional lymph node involvement"@en ,
@@ -771,7 +771,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                               "The physical state of regional lymph nodes with respect to metastatic tumour cell involvement. Corresponds to the N component of the TNM classification system. Criteria for N categories are tumour-type specific and TNM-edition specific; not axiomatised in this ontology."@en .
 
 
-###  https://w3id.org/zinl/onto#StagingAssessment
+###  https://w3id.org/zinl/ti-o#StagingAssessment
 :StagingAssessment rdf:type owl:Class ;
                    rdfs:subClassOf obo:IAO_0000027 ,
                                    [ rdf:type owl:Restriction ;
@@ -788,7 +788,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                    "Een gegevensitem dat het resultaat vastlegt van een stadiëringsproces voor een specifieke patiënt op een specifiek tijdstip. Gaat over (IAO_0000136) de tumoruitbreiding van de patiënt. De classificatiecode (bijv. 'pT2N1M0' of 'FIGO IIB') wordt gekoppeld via een CRID (IAO_0000578) die deze beoordeling aanduidt. De mapping tussen code en gemodelleerde biologische entiteiten is tumortype-, stadiëringssysteem- en editie-specifiek; niet geaxiomatiseerd."@nl .
 
 
-###  https://w3id.org/zinl/onto#StagingProcess
+###  https://w3id.org/zinl/ti-o#StagingProcess
 :StagingProcess rdf:type owl:Class ;
                 rdfs:subClassOf obo:OGMS_0000104 ,
                                 [ rdf:type owl:Restriction ;
@@ -801,7 +801,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                 "Een diagnostisch proces met als doel de uitbreiding van een maligne neoplasma in het lichaam van een patiënt vast te stellen, resulterend in een stadiëringsbeoordeling die de tumoruitbreiding classificeert volgens een stadiëringssysteem zoals TNM of FIGO."@nl .
 
 
-###  https://w3id.org/zinl/onto#SurgicalProcedure
+###  https://w3id.org/zinl/ti-o#SurgicalProcedure
 :SurgicalProcedure rdf:type owl:Class ;
                    rdfs:subClassOf obo:OGMS_0000090 ;
                    rdfs:label "chirurgische ingreep"@nl ,
@@ -810,14 +810,14 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                    "Een behandelproces waarbij een zorgverlener manueel of instrumenteel ingrijpt in of op het lichaam van een patiënt met therapeutisch doel."@nl .
 
 
-###  https://w3id.org/zinl/onto#THP
+###  https://w3id.org/zinl/ti-o#THP
 :THP rdf:type owl:Class ;
      rdfs:subClassOf :SurgicalProcedure ;
      rdfs:label "totale heup procedure"@nl ;
      skos:closeMatch <http://snomed.info/id/52734007> .
 
 
-###  https://w3id.org/zinl/onto#TumourExtent
+###  https://w3id.org/zinl/ti-o#TumourExtent
 :TumourExtent rdf:type owl:Class ;
               rdfs:subClassOf obo:OGMS_0000045 ,
                               [ rdf:type owl:Restriction ;
@@ -830,7 +830,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                               "The overall physical extent of a malignant neoplasm in a patient's body at a given point in time, comprising the primary tumour, any regional lymph node involvement, and any distant metastases. This is the biological reality that tumour staging systems such as TNM and FIGO classify and encode."@en .
 
 
-###  https://w3id.org/zinl/onto#prosthesis
+###  https://w3id.org/zinl/ti-o#prosthesis
 :prosthesis rdf:type owl:Class ;
             rdfs:subClassOf obo:BFO_0000030 ;
             rdfs:label "prothese"@nl ;
@@ -841,7 +841,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
 #    Individuals
 #################################################################
 
-###  https://w3id.org/zinl/onto#DBCCode
+###  https://w3id.org/zinl/ti-o#DBCCode
 :DBCCode rdf:type owl:NamedIndividual ,
                   :CodeSystem ;
          rdfs:label "DBC code"@en ,
@@ -850,7 +850,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                          "Diagnose Behandel Combinatie code; een Nederlandse administratieve code die diagnose en behandeling combineert voor declaratiedoeleinden."@nl .
 
 
-###  https://w3id.org/zinl/onto#EQ-5D-3L
+###  https://w3id.org/zinl/ti-o#EQ-5D-3L
 :EQ-5D-3L rdf:type owl:NamedIndividual ,
                    :PROMInstrument ;
           rdfs:label "EQ-5D-3L"@en ,
@@ -859,7 +859,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                           "The EQ-5D-3L instrument, a standardised self-report questionnaire developed by the EuroQol Group measuring health-related quality of life across five dimensions (mobility, self-care, usual activities, pain/discomfort, anxiety/depression) each at three severity levels, plus a visual analogue scale (VAS thermometer). Widely used in Dutch MSZ transparency indicators for orthopaedic and other elective procedures."@en .
 
 
-###  https://w3id.org/zinl/onto#FIGOSystem
+###  https://w3id.org/zinl/ti-o#FIGOSystem
 :FIGOSystem rdf:type owl:NamedIndividual ,
                      :CodeSystem ;
             rdfs:label "FIGO staging system"@en ,
@@ -868,7 +868,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                             "The staging system of the International Federation of Gynecology and Obstetrics (FIGO), used for gynaecological malignancies. FIGO stages (I–IV with substages) combine PrimaryTumourExtent, RegionalLymphNodeInvolvement, and DistantMetastasis into a single ordinal classification. Partially overlaps with TNM; mapping is tumour-type specific and edition specific; not axiomatised."@en .
 
 
-###  https://w3id.org/zinl/onto#ICD10
+###  https://w3id.org/zinl/ti-o#ICD10
 :ICD10 rdf:type owl:NamedIndividual ,
                 :CodeSystem ;
        rdfs:label "ICD-10"@en ,
@@ -876,7 +876,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
        skos:definition "International Classification of Diseases, 10th revision."@en .
 
 
-###  https://w3id.org/zinl/onto#SNOMEDCT
+###  https://w3id.org/zinl/ti-o#SNOMEDCT
 :SNOMEDCT rdf:type owl:NamedIndividual ,
                    :CodeSystem ;
           rdfs:label "SNOMED CT"@en ,
@@ -884,7 +884,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
           skos:definition "Systematized Nomenclature of Medicine – Clinical Terms."@en .
 
 
-###  https://w3id.org/zinl/onto#TNMSystem
+###  https://w3id.org/zinl/ti-o#TNMSystem
 :TNMSystem rdf:type owl:NamedIndividual ,
                     :CodeSystem ;
            rdfs:label "TNM classification system"@en ,
@@ -893,7 +893,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                            "The TNM Classification of Malignant Tumours, maintained by the Union for International Cancer Control (UICC). T encodes primary tumour extent (PrimaryTumourExtent), N encodes regional lymph node involvement (RegionalLymphNodeInvolvement), M encodes distant metastasis (DistantMetastasis). Prefixes 'c' and 'p' correspond to ClinicalStagingProcess and PathologicalStagingProcess respectively. Multiple editions exist (6, 7, 8); edition must be recorded alongside the code."@en .
 
 
-###  https://w3id.org/zinl/onto#ZorgactiviteitCode
+###  https://w3id.org/zinl/ti-o#ZorgactiviteitCode
 :ZorgactiviteitCode rdf:type owl:NamedIndividual ,
                              :CodeSystem ;
                     rdfs:label "zorgactiviteit code"@en ,
@@ -902,7 +902,7 @@ obo:PATO_0000128 rdf:type owl:Class ;
                                     "Nederlandse zorgactiviteitcode gebruikt in het DBC/DOT-systeem om specifieke klinische activiteiten te identificeren."@nl .
 
 
-###  https://w3id.org/zinl/onto#ZorgproductCode
+###  https://w3id.org/zinl/ti-o#ZorgproductCode
 :ZorgproductCode rdf:type owl:NamedIndividual ,
                           :CodeSystem ;
                  rdfs:label "zorgproduct code"@en ,
