@@ -1,0 +1,91 @@
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix obo:     <http://purl.obolibrary.org/obo/> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix onto:    <https://w3id.org/zinl/ti-o#> .
+@prefix ex:      <https://w3id.org/zinl/data/example-wachttijd#> .
+
+
+# ===========================================================================
+# Code systems (named individuals, already in ontology — repeated here for
+# self-containedness of this data file)
+# ===========================================================================
+
+onto:SNOMEDCT   a onto:CodeSystem .
+onto:ZorgactiviteitCode a onto:CodeSystem .
+
+# ===========================================================================
+# Care location
+# ===========================================================================
+
+ex:ZiekenhuisMCW
+    a obo:BFO_0000029 ;          # site (IndependentContinuant)
+    rdfs:label "Medisch Centrum West"@nl .
+
+# =============================================================================
+# PATIENT X — heeft screening en operatie gehad (telt mee in wachttijd indicator )
+# =============================================================================
+
+
+ex:PatientX
+    a obo:NCBITAXON_9606 ;
+    rdfs:label "Jan de Graaf"@nl .
+
+ex:AdenocarcinomaOfPancreas1
+    a onto:AdenocarcinomaOfPancreas ;
+    rdfs:label "Jan's Pancreas adenocarcinoom"@nl .
+
+ex:AdenocarcinomaOfPancreas
+    a obo:IAO_0000578 ;
+    obo:BFO_0000050  onto:SNOMEDCT ;
+    obo:IAO_0000577  "700423003"^^xsd:string .   # SNOMED: pancreatic adenocarcinoma
+
+## ---------------------------------------------------------------------------
+# Preoperatief poliklinisch contact (inclusief diagnostische activiteiten) — telt mee in wachttijd indicator
+
+ex:CRID_PreoperativeOutpatientContact1
+    a obo:IAO_0000578 ;
+    obo:BFO_0000050  onto:ZorgactiviteitCode ;
+    obo:IAO_0000577  "123456"^^xsd:string .    # fictieve ZA-code preoperatieve poliklinische contact
+
+ex:PreoperativeOutpatient_Interval1
+    a time:ProperInterval ;
+    time:hasBeginning [ a time:Instant ; time:inXSDDate "2023-04-05"^^xsd:date ] ;
+    time:hasEnd       [ a time:Instant ; time:inXSDDate "2023-04-05"^^xsd:date ] .
+
+ex:PreoperativeOutpatientContact1
+    a onto:PreoperativeOutpatientContact ;
+    rdfs:label "Jan's Preoperatieve (poliklinisch) contact"@nl ;
+    obo:RO_0000057 ex:PatientX ;
+    obo:RO_0000057 ex:AdenocarcinomaOfPancreas1 ;
+    obo:BFO_0000066 ex:ZiekenhuisMCW ;
+    time:hasTime ex:PreoperativeOutpatient_Interval1 ;
+    .
+
+ex:CRID_PreoperativeOutpatientContact1 obo:IAO_0000219 ex:PreoperativeOutpatientContact1 .
+
+## ---------------------------------------------------------------------------
+# Pancreaticoduodenectomy (Whipple procedure)
+
+ex:CRID_Snomed_Pancreaticoduodenectomy
+    a obo:IAO_0000578 ;
+    obo:BFO_0000050  onto:SNOMEDCT ;
+    obo:IAO_0000577  "116241004"^^xsd:string .    # SNOMED: pancreaticoduodenectomy
+
+ex:Pancreaticoduodenectomy_Interval1
+    a time:ProperInterval ;
+    time:hasBeginning [ a time:Instant ; time:inXSDDate "2023-05-03"^^xsd:date ] ;
+    time:hasEnd       [ a time:Instant ; time:inXSDDate "2023-05-03"^^xsd:date ] .
+
+ex:Pancreaticoduodenectomy1
+    a onto:Pancreaticoduodenectomy ;
+    rdfs:label "Jan's Pancreaticoduodenectomy"@nl ;
+    obo:RO_0000057 ex:PatientX ;
+    obo:RO_0000057 ex:AdenocarcinomaOfPancreas1 ;
+    obo:BFO_0000066 ex:ZiekenhuisMCW ;
+    obo:RO_0002404 ex:PreoperativeOutpatientContact1 ;  # causally downstream of
+    time:hasTime ex:Pancreaticoduodenectomy_Interval1 .
+
+ex:CRID_Snomed_Pancreaticoduodenectomy obo:IAO_0000219 ex:Pancreaticoduodenectomy1 .
+

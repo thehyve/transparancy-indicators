@@ -4,7 +4,7 @@
 @prefix obo:     <http://purl.obolibrary.org/obo/> .
 @prefix time:    <http://www.w3.org/2006/time#> .
 @prefix onto:    <https://w3id.org/zinl/ti-o#> .
-@prefix ex:      <http://example.org/data#> .
+@prefix ex:      <https://w3id.org/zinl/data/example-volume#> .
 
 # ===========================================================================
 # Code systems (named individuals, already in ontology — repeated here for
@@ -41,7 +41,7 @@ ex:CRID_Snomed_Coxartrose
     obo:BFO_0000050  onto:SNOMEDCT ;
     obo:IAO_0000577  "416940007"^^xsd:string .   # SNOMED: primary osteoarthritis of hip
 
-ex:CRID_Snomed_Coxartrose obo:IAO_0000219 ex:Disorder1_Coxartrose .
+ex:CRID_Snomed_Coxartrose obo:IAO_0000219 ex:Disorder1_Coxartrose . 
 
 # Prothese
 ex:Prosthesis1
