@@ -1,0 +1,127 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix obo:     <http://purl.obolibrary.org/obo/> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix ti-o:    <https://w3id.org/zinl/ti-o#> .
+@prefix :        <https://w3id.org/zinl/ti-o/shacl#> .
+
+
+# ===========================================================================
+# Shape: PreoperativeOutpatientContact
+# ===========================================================================
+
+:PreoperativeOutpatientContactShape
+    a sh:NodeShape ;
+    sh:targetClass ti-o:PreoperativeOutpatientContact ;
+    rdfs:label "Shape voor Preoperatief Poliklinisch Contact instances"@nl ;
+
+    # has_participant some Homo Sapiens
+    sh:property [
+        sh:path     obo:RO_0000057 ;
+        sh:qualifiedValueShape [ sh:class obo:NCBITAXON_9606 ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name     "heeft deelnemer: patiënt"@nl ;
+        sh:message  "Een preoperatief poliklinisch contact moet minstens één Homo sapiens als deelnemer hebben."@nl ;
+    ] ;
+
+    # has_participant some AdenocarcinomaOfPancreas
+    sh:property [
+        sh:path     obo:RO_0000057 ;
+        sh:qualifiedValueShape [ sh:class ti-o:AdenocarcinomaOfPancreas ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name     "heeft deelnemer: diagnose"@nl ;
+        sh:message  "Een preoperatief poliklinisch contact moet minstens één AdenocarcinomaOfPancreas als deelnemer hebben."@nl ;
+    ] ;
+
+    # occurs_in some IndependentContinuant (e.g. zorglocatie)
+    sh:property [
+        sh:path     obo:BFO_0000066 ;
+        sh:class    obo:BFO_0000004 ;
+        sh:minCount 1 ;
+        sh:name     "vindt plaats in: onafhankelijk continuant"@nl ;
+        sh:message  "Een preoperatief poliklinisch contact moet plaatsvinden in minstens één onafhankelijk continuant (bijv. een zorglocatie)."@nl ;
+    ] ;
+
+    # hasTime some TemporalEntity
+    sh:property [
+        sh:path     time:hasTime ;
+        sh:class    time:TemporalEntity ;
+        sh:minCount 1 ;
+        sh:name     "heeft tijdsaanduiding"@nl ;
+        sh:message  "Een preoperatief poliklinisch contact moet gekoppeld zijn aan minstens één temporele entiteit via time:hasTime."@nl ;
+    ] ;
+
+    # denoted by some CRID
+    sh:property [
+        sh:path     [ sh:alternativePath ( obo:IAO_0000235 [ sh:inversePath obo:IAO_0000219 ] ) ] ;
+        sh:class    obo:IAO_0000578 ;
+        sh:minCount 1 ;
+        sh:name     "aangeduid door CRID"@nl ;
+        sh:message  "Een preoperatief poliklinisch contact moet aangeduid worden door minstens één CRID."@nl ;
+    ] .
+
+
+# ===========================================================================
+# Shape: Pancreaticoduodenectomy
+# ===========================================================================
+
+:PancreaticoduodenectomyShape
+    a sh:NodeShape ;
+    sh:targetClass ti-o:Pancreaticoduodenectomy ;
+    rdfs:label "Shape voor Pancreaticoduodenectomie instances"@nl ;
+
+    # has_participant some Homo Sapiens
+    sh:property [
+        sh:path     obo:RO_0000057 ;
+        sh:qualifiedValueShape [ sh:class obo:NCBITAXON_9606 ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name     "heeft deelnemer: patiënt"@nl ;
+        sh:message  "Een pancreaticoduodenectomie moet minstens één Homo sapiens als deelnemer hebben."@nl ;
+    ] ;
+
+    # has_participant some AdenocarcinomaOfPancreas
+    sh:property [
+        sh:path     obo:RO_0000057 ;
+        sh:qualifiedValueShape [ sh:class ti-o:AdenocarcinomaOfPancreas ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name     "heeft deelnemer: diagnose"@nl ;
+        sh:message  "Een pancreaticoduodenectomie moet minstens één AdenocarcinomaOfPancreas als deelnemer hebben."@nl ;
+    ] ;
+
+    # occurs_in some IndependentContinuant (e.g. zorglocatie)
+    sh:property [
+        sh:path     obo:BFO_0000066 ;
+        sh:class    obo:BFO_0000004 ;
+        sh:minCount 1 ;
+        sh:name     "vindt plaats in: onafhankelijk continuant"@nl ;
+        sh:message  "Een pancreaticoduodenectomie moet plaatsvinden in minstens één onafhankelijk continuant (bijv. een zorglocatie)."@nl ;
+    ] ;
+
+    # causally downstream of some PreoperativeOutpatientContact
+    sh:property [
+        sh:path     obo:RO_0002404 ;
+        sh:class    ti-o:PreoperativeOutpatientContact ;
+        sh:minCount 1 ;
+        sh:name     "causaal gevolg van preoperatief contact"@nl ;
+        sh:message  "Een pancreaticoduodenectomie moet causaal volgen op minstens één preoperatief poliklinisch contact."@nl ;
+    ] ;
+
+    # hasTime some TemporalEntity
+    sh:property [
+        sh:path     time:hasTime ;
+        sh:class    time:TemporalEntity ;
+        sh:minCount 1 ;
+        sh:name     "heeft tijdsaanduiding"@nl ;
+        sh:message  "Een pancreaticoduodenectomie moet gekoppeld zijn aan minstens één temporele entiteit via time:hasTime."@nl ;
+    ] ;
+
+    # denoted by some CRID
+    sh:property [
+        sh:path     [ sh:alternativePath ( obo:IAO_0000235 [ sh:inversePath obo:IAO_0000219 ] ) ] ;
+        sh:class    obo:IAO_0000578 ;
+        sh:minCount 1 ;
+        sh:name     "aangeduid door CRID"@nl ;
+        sh:message  "Een pancreaticoduodenectomie moet aangeduid worden door minstens één CRID."@nl ;
+    ] .

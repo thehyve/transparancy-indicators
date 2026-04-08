@@ -179,6 +179,7 @@
 :prom_filled_B_pre
     rdf:type        :PatientReportedOutcomeMeasure ;
     heeft_deel:     :score_eq5d_B_pre ;
+    time:hasTime    :t_prom_B_pre ;
     rdfs:label      "Ingevulde EQ-5D preoperatief patient B" .
 
 :score_eq5d_B_pre

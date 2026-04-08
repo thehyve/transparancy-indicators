@@ -1,0 +1,155 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix obo:     <http://purl.obolibrary.org/obo/> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix ti-o:    <https://w3id.org/zinl/ti-o#> .
+@prefix :        <https://w3id.org/zinl/ti-o/shacl#> .
+
+
+# ===========================================================================
+# Shape: SurgicalProcedure
+# ===========================================================================
+
+:SurgicalProcedureShape
+    a sh:NodeShape ;
+    sh:targetClass ti-o:SurgicalProcedure ;
+    rdfs:label "Shape voor Chirurgische Ingreep instances"@nl ;
+
+    # has_participant some Homo Sapiens
+    sh:property [
+        sh:path     obo:RO_0000057 ;
+        sh:qualifiedValueShape [ sh:class obo:NCBITAXON_9606 ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name     "heeft deelnemer: patiënt"@nl ;
+        sh:message  "Een chirurgische ingreep moet minstens één Homo sapiens als deelnemer hebben."@nl ;
+    ] ;
+
+    # hasTime some TemporalEntity
+    sh:property [
+        sh:path     time:hasTime ;
+        sh:class    time:TemporalEntity ;
+        sh:minCount 1 ;
+        sh:name     "heeft tijdsaanduiding"@nl ;
+        sh:message  "Een chirurgische ingreep moet gekoppeld zijn aan minstens één temporele entiteit via time:hasTime."@nl ;
+    ] ;
+
+    # denoted by some CRID
+    sh:property [
+        sh:path     [ sh:alternativePath ( obo:IAO_0000235 [ sh:inversePath obo:IAO_0000219 ] ) ] ;
+        sh:class    obo:IAO_0000578 ;
+        sh:minCount 1 ;
+        sh:name     "aangeduid door CRID"@nl ;
+        sh:message  "Een chirurgische ingreep moet aangeduid worden door minstens één CRID."@nl ;
+    ] .
+
+
+# ===========================================================================
+# Shape: PROMAdministration
+# ===========================================================================
+
+:PROMAdministrationShape
+    a sh:NodeShape ;
+    sh:targetClass ti-o:PROMAdministration ;
+    rdfs:label "Shape voor PROM Afname instances"@nl ;
+
+    # has_participant some Homo Sapiens
+    sh:property [
+        sh:path     obo:RO_0000057 ;
+        sh:qualifiedValueShape [ sh:class obo:NCBITAXON_9606 ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name     "heeft deelnemer: patiënt"@nl ;
+        sh:message  "Een PROM afname moet minstens één Homo sapiens als deelnemer hebben."@nl ;
+    ] ;
+
+    # has_input some instrument
+    sh:property [
+        sh:path     obo:RO_0002233 ;
+        sh:minCount 1 ;
+        sh:name     "heeft instrument als input"@nl ;
+        sh:message  "Een PROM afname moet minstens één instrument als input hebben via RO has_input."@nl ;
+    ] ;
+
+    # has_output some PatientReportedOutcomeMeasure
+    sh:property [
+        sh:path     obo:RO_0002234 ;
+        sh:class    ti-o:PatientReportedOutcomeMeasure ;
+        sh:minCount 1 ;
+        sh:name     "heeft ingevulde PROM als output"@nl ;
+        sh:message  "Een PROM afname moet minstens één ingevulde PatientReportedOutcomeMeasure als output hebben."@nl ;
+    ] ;
+
+    # hasTime some TemporalEntity
+    sh:property [
+        sh:path     time:hasTime ;
+        sh:class    time:TemporalEntity ;
+        sh:minCount 1 ;
+        sh:name     "heeft tijdsaanduiding"@nl ;
+        sh:message  "Een PROM afname moet gekoppeld zijn aan minstens één temporele entiteit via time:hasTime."@nl ;
+    ] .
+
+
+# ===========================================================================
+# Shape: PatientReportedOutcomeMeasure
+# ===========================================================================
+
+:PatientReportedOutcomeMeasureShape
+    a sh:NodeShape ;
+    sh:targetClass ti-o:PatientReportedOutcomeMeasure ;
+    rdfs:label "Shape voor Ingevulde PROM instances"@nl ;
+
+    # has_part some EQ5DScore
+    sh:property [
+        sh:path     obo:BFO_0000051 ;
+        sh:class    ti-o:EQ5DScore ;
+        sh:minCount 1 ;
+        sh:name     "heeft scoreonderdeel"@nl ;
+        sh:message  "Een ingevulde PROM moet minstens één EQ5DScore als deel hebben."@nl ;
+    ] ;
+
+    # hasTime some TemporalEntity
+    sh:property [
+        sh:path     time:hasTime ;
+        sh:class    time:TemporalEntity ;
+        sh:minCount 1 ;
+        sh:name     "heeft tijdsaanduiding"@nl ;
+        sh:message  "Een ingevulde PROM moet gekoppeld zijn aan minstens één temporele entiteit via time:hasTime."@nl ;
+    ] .
+
+
+# ===========================================================================
+# Shape: EQ5DScore
+# ===========================================================================
+
+:EQ5DScoreShape
+    a sh:NodeShape ;
+    sh:targetClass ti-o:EQ5DScore ;
+    rdfs:label "Shape voor EQ-5D Score instances"@nl ;
+
+    # part_of some PatientReportedOutcomeMeasure
+    sh:property [
+        sh:path     obo:BFO_0000050 ;
+        sh:class    ti-o:PatientReportedOutcomeMeasure ;
+        sh:minCount 1 ;
+        sh:name     "deel van PROM"@nl ;
+        sh:message  "Een EQ-5D score moet deel zijn van minstens één PatientReportedOutcomeMeasure."@nl ;
+    ] ;
+
+    # is_about some Homo Sapiens
+    sh:property [
+        sh:path     obo:IAO_0000136 ;
+        sh:qualifiedValueShape [ sh:class obo:NCBITAXON_9606 ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name     "gaat over patiënt"@nl ;
+        sh:message  "Een EQ-5D score moet over minstens één Homo sapiens gaan via IAO is_about."@nl ;
+    ] ;
+
+    # has_measurement_value some xsd:decimal
+    sh:property [
+        sh:path     obo:IAO_0000004 ;
+        sh:datatype xsd:decimal ;
+        sh:minCount 1 ;
+        sh:name     "heeft meetwaarde"@nl ;
+        sh:message  "Een EQ-5D score moet minstens één decimale meetwaarde hebben via IAO has_measurement_value."@nl ;
+    ] .
