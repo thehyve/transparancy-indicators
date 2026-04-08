@@ -121,7 +121,7 @@ pyshacl \
   -im \
   -s "Voorbeeld volume/THP_shapes.ttl" \
   -d "Voorbeeld volume/THP_example_data.ttl" \
-  --ont-graph transparantie_indicatoren.owl.ttl \
+  --ont-graph transparantie_indicatoren.owl \
   -f table
 
 ```
