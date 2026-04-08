@@ -2,3 +2,4 @@ catalog-v001.xml
 .DS_Store
 *.drawio.bkp
 *.properties
+venv/*

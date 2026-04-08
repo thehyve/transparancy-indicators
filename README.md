@@ -117,10 +117,13 @@ De ontologie introduceert twee nieuwe klassen (`BirthInstant`, `DeathInstant`) a
 pip install pyshacl
 
 pyshacl \
+  -i rdfs \
+  -im \
   -s "Voorbeeld volume/THP_shapes.ttl" \
   -d "Voorbeeld volume/THP_example_data.ttl" \
   --ont-graph transparantie_indicatoren.owl.ttl \
-  -f human
+  -f table
+
 ```
 
 ### SPARQL-query uitvoeren (voorbeeld met Fuseki)

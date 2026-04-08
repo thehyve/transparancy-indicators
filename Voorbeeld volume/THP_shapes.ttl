@@ -7,66 +7,66 @@
 @prefix ti-o:    <https://w3id.org/zinl/ti-o#> .
 @prefix :        <https://w3id.org/zinl/ti-o/shacl#> .
 
-# # ---------------------------------------------------------------------------
-# # Identifier pattern used throughout:
-# #
-# #   entity  <-- obo:IAO_0000219 (denotes) --  CRID (IAO_0000578)
-# #   CRID    --> obo:BFO_0000050 (part_of) -->  ti-o:CodeSystem
-# #   CRID    --> obo:IAO_0000577            -->  xsd:string
-# #
-# # In SHACL we navigate via the inverse of denotes (IAO_0000235 / denoted by):
-# #   entity  --> obo:IAO_0000235 (denoted by) --> CRID
-# # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Identifier pattern used throughout:
+#
+#   entity  <-- obo:IAO_0000219 (denotes) --  CRID (IAO_0000578)
+#   CRID    --> obo:BFO_0000050 (part_of) -->  ti-o:CodeSystem
+#   CRID    --> obo:IAO_0000577            -->  xsd:string
+#
+# In SHACL we navigate via the inverse of denotes (IAO_0000235 / denoted by):
+#   entity  --> obo:IAO_0000235 (denoted by) --> CRID
+# ---------------------------------------------------------------------------
 
 
-# # ===========================================================================
-# # Reusable node shape: CRID (any code system)
-# # ===========================================================================
+# ===========================================================================
+# Reusable node shape: CRID (any code system)
+# ===========================================================================
 
-# :CRIDShape
-#     a sh:NodeShape ;
-#     rdfs:label "Shape voor CRID nodes"@nl ;
+:CRIDShape
+    a sh:NodeShape ;
+    rdfs:label "Shape voor CRID nodes"@nl ;
 
-#     sh:property [
-#         sh:path     obo:BFO_0000050 ;
-#         sh:class    ti-o:CodeSystem ;
-#         sh:minCount 1 ;
-#         sh:name     "deel van codesysteem"@nl ;
-#         sh:message  "Een CRID moet deel zijn van minstens één CodeSystem via BFO part_of."@nl ;
-#     ] ;
+    sh:property [
+        sh:path     obo:BFO_0000050 ;
+        sh:class    ti-o:CodeSystem ;
+        sh:minCount 1 ;
+        sh:name     "deel van codesysteem"@nl ;
+        sh:message  "Een CRID moet deel zijn van minstens één CodeSystem via BFO part_of."@nl ;
+    ] ;
 
-#     sh:property [
-#         sh:path     obo:IAO_0000577 ;
-#         sh:datatype xsd:string ;
-#         sh:minCount 1 ;
-#         sh:name     "identifier symbool"@nl ;
-#         sh:message  "Een CRID moet minstens één xsd:string symbool hebben via IAO_0000577."@nl ;
-#     ] .
+    sh:property [
+        sh:path     obo:IAO_0000577 ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:name     "identifier symbool"@nl ;
+        sh:message  "Een CRID moet minstens één xsd:string symbool hebben via IAO_0000577."@nl ;
+    ] .
 
 
-# # ===========================================================================
-# # Reusable node shape: CRID restricted to SNOMED CT
-# # ===========================================================================
+# ===========================================================================
+# Reusable node shape: CRID restricted to SNOMED CT
+# ===========================================================================
 
-# :SNOMEDCRIDShape
-#     a sh:NodeShape ;
-#     rdfs:label "Shape voor SNOMED CT CRID nodes"@nl ;
+:SNOMEDCRIDShape
+    a sh:NodeShape ;
+    rdfs:label "Shape voor SNOMED CT CRID nodes"@nl ;
 
-#     sh:property [
-#         sh:path     obo:BFO_0000050 ;
-#         sh:hasValue ti-o:SNOMEDCT ;
-#         sh:minCount 1 ;
-#         sh:name     "deel van SNOMED CT"@nl ;
-#         sh:message  "De CRID moet deel zijn van het SNOMED CT codesysteem (ti-o:SNOMEDCT)."@nl ;
-#     ] ;
+    sh:property [
+        sh:path     obo:BFO_0000050 ;
+        sh:hasValue ti-o:SNOMEDCT ;
+        sh:minCount 1 ;
+        sh:name     "deel van SNOMED CT"@nl ;
+        sh:message  "De CRID moet deel zijn van het SNOMED CT codesysteem (ti-o:SNOMEDCT)."@nl ;
+    ] ;
 
-#     sh:property [
-#         sh:path     obo:IAO_0000577 ;
-#         sh:datatype xsd:string ;
-#         sh:minCount 1 ;
-#         sh:name     "identifier symbool"@nl ;
-#         sh:message  "Een CRID moet minstens één xsd:string symbool hebben via IAO_0000577."@nl ;
-#     ] .
+    sh:property [
+        sh:path     obo:IAO_0000577 ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:name     "identifier symbool"@nl ;
+        sh:message  "Een CRID moet minstens één xsd:string symbool hebben via IAO_0000577."@nl ;
+    ] .
 
 
 # ===========================================================================
@@ -78,70 +78,70 @@
     sh:targetClass ti-o:THP ;
     rdfs:label "Shape voor Totale Heup Procedure instances"@nl ;
 
-#     # THP has_participant some Homo Sapiens
-#     sh:property [
-#         sh:path     obo:RO_0000057 ;
-#         sh:qualifiedValueShape [ sh:class obo:NCBITAXON_9606 ] ;
-#         sh:qualifiedMinCount 1 ;
-#         sh:name     "heeft deelnemer: mens"@nl ;
-#         sh:message  "Een THP moet minstens één Homo sapiens als deelnemer hebben."@nl ;
-#     ] ;
+    # THP has_participant some Homo Sapiens
+    sh:property [
+        sh:path     obo:RO_0000057 ;
+        sh:qualifiedValueShape [ sh:class obo:NCBITAXON_9606 ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name     "heeft deelnemer: mens"@nl ;
+        sh:message  "Een THP moet minstens één Homo sapiens als deelnemer hebben."@nl ;
+    ] ;
 
-#     # THP has_participant some Prosthesis
-#     sh:property [
-#         sh:path     obo:RO_0000057 ;
-#         sh:qualifiedValueShape [ sh:class ti-o:prosthesis ] ;
-#         sh:qualifiedMinCount 1 ;
-#         sh:name     "heeft deelnemer: protese"@nl ;
-#         sh:message  "Een THP moet minstens één prothese als deelnemer hebben."@nl ;
-#     ] ;
+    # THP has_participant some Prosthesis
+    sh:property [
+        sh:path     obo:RO_0000057 ;
+        sh:qualifiedValueShape [ sh:class ti-o:prosthesis ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name     "heeft deelnemer: protese"@nl ;
+        sh:message  "Een THP moet minstens één prothese als deelnemer hebben."@nl ;
+    ] ;
 
-#     # THP has_participant some Disorder (any disorder, including HipFracture)
-#     sh:property [
-#         sh:path     obo:RO_0000057 ;
-#         sh:qualifiedValueShape [ sh:class obo:OGMS_0000102 ] ;
-#         sh:qualifiedMinCount 1 ;
-#         sh:name     "heeft deelnemer: aandoening"@nl ;
-#         sh:message  "Een THP moet minstens één Disorder als deelnemer hebben."@nl ;
-#     ] ;
+    # THP has_participant some Disorder (any disorder, including HipFracture)
+    sh:property [
+        sh:path     obo:RO_0000057 ;
+        sh:qualifiedValueShape [ sh:class obo:OGMS_0000102 ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name     "heeft deelnemer: aandoening"@nl ;
+        sh:message  "Een THP moet minstens één Disorder als deelnemer hebben."@nl ;
+    ] ;
 
-#     # THP has_participant some FysiekeAfwijking (OGMS_0000045)
-#     # where that FysiekeAfwijking is denoted by a SNOMED CT CRID
-#     sh:property [
-#         sh:path     obo:RO_0000057 ;
-#         sh:qualifiedValueShape [ sh:node [
-#             sh:and (
-#                 [ sh:class obo:OGMS_0000045 ]
-#                 [ sh:property [
-#                     sh:path     obo:IAO_0000235 ;
-#                     sh:minCount 1 ;
-#                     sh:node     :SNOMEDCRIDShape ;
-#                 ] ]
-#             )
-#         ] ] ;
-#         sh:qualifiedMinCount 1 ;
-#         sh:name     "heeft deelnemer: fysieke afwijking (SNOMED CT)"@nl ;
-#         sh:message  "Een THP moet minstens één fysieke afwijking als deelnemer hebben die aangeduid wordt door een SNOMED CT CRID."@nl ;
-#     ] ;
+    # THP has_participant some FysiekeAfwijking (OGMS_0000045)
+    # where that FysiekeAfwijking is denoted by a SNOMED CT CRID
+    sh:property [
+        sh:path     obo:RO_0000057 ;
+        sh:qualifiedValueShape [ sh:node [
+            sh:and (
+                [ sh:class obo:OGMS_0000045 ]
+                [ sh:property [
+                    sh:path     [ sh:alternativePath ( obo:IAO_0000235 [ sh:inversePath obo:IAO_0000219 ] ) ] ;
+                    sh:minCount 1 ;
+                    sh:node     :SNOMEDCRIDShape ;
+                ] ]
+            )
+        ] ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name     "heeft deelnemer: fysieke afwijking (SNOMED CT)"@nl ;
+        sh:message  "Een THP moet minstens één fysieke afwijking als deelnemer hebben die aangeduid wordt door een SNOMED CT CRID."@nl ;
+    ] ;
 
-#     # THP denoted by some CRID
-#     sh:property [
-#         sh:path     obo:IAO_0000235 ;
-#         sh:class    obo:IAO_0000578 ;
-#         sh:minCount 1 ;
-#         sh:name     "aangeduid door CRID"@nl ;
-#         sh:message  "Een THP moet aangeduid worden door minstens één CRID."@nl ;
-#         sh:node     :CRIDShape ;
-#     ] ;
+    # THP denoted by some CRID
+    sh:property [
+        sh:path     [ sh:alternativePath ( obo:IAO_0000235 [ sh:inversePath obo:IAO_0000219 ] ) ] ;
+        sh:class    obo:IAO_0000578 ;
+        sh:minCount 1 ;
+        sh:name     "aangeduid door CRID"@nl ;
+        sh:message  "Een THP moet aangeduid worden door minstens één CRID."@nl ;
+        sh:node     :CRIDShape ;
+    ] ;
 
-#     # THP hasTime some TemporalEntity
-#     sh:property [
-#         sh:path     time:hasTime ;
-#         sh:class    time:TemporalEntity ;
-#         sh:minCount 1 ;
-#         sh:name     "heeft tijdsaanduiding"@nl ;
-#         sh:message  "Een THP moet gekoppeld zijn aan minstens één temporele entiteit via time:hasTime."@nl ;
-#     ] ;
+    # THP hasTime some TemporalEntity
+    sh:property [
+        sh:path     time:hasTime ;
+        sh:class    time:TemporalEntity ;
+        sh:minCount 1 ;
+        sh:name     "heeft tijdsaanduiding"@nl ;
+        sh:message  "Een THP moet gekoppeld zijn aan minstens één temporele entiteit via time:hasTime."@nl ;
+    ] ;
 
     # THP occurs_in some IndependentContinuant
     sh:property [
@@ -153,21 +153,21 @@
     ] .
 
 
-# # ===========================================================================
-# # Shape: prosthesis
-# # ===========================================================================
+# ===========================================================================
+# Shape: prosthesis
+# ===========================================================================
 
-# :ProsthesisShape
-#     a sh:NodeShape ;
-#     sh:targetClass ti-o:prosthesis ;
-#     rdfs:label "Shape voor Prothese instances"@nl ;
+:ProsthesisShape
+    a sh:NodeShape ;
+    sh:targetClass ti-o:prosthesis ;
+    rdfs:label "Shape voor Prothese instances"@nl ;
 
-#     # Prosthesis denoted by some CRID
-#     sh:property [
-#         sh:path     obo:IAO_0000235 ;
-#         sh:class    obo:IAO_0000578 ;
-#         sh:minCount 1 ;
-#         sh:name     "aangeduid door CRID"@nl ;
-#         sh:message  "Een prothese moet aangeduid worden door minstens één CRID."@nl ;
-#         sh:node     :CRIDShape ;
-#     ] .
+    # Prosthesis denoted by some CRID
+    sh:property [
+        sh:path     [ sh:alternativePath ( obo:IAO_0000235 [ sh:inversePath obo:IAO_0000219 ] ) ] ;
+        sh:class    obo:IAO_0000578 ;
+        sh:minCount 1 ;
+        sh:name     "aangeduid door CRID"@nl ;
+        sh:message  "Een prothese moet aangeduid worden door minstens één CRID."@nl ;
+        sh:node     :CRIDShape ;
+    ] .

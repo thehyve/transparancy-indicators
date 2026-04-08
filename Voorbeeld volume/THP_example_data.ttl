@@ -19,7 +19,7 @@ onto:ZorgactiviteitCode a onto:CodeSystem .
 # ===========================================================================
 
 ex:ZiekenhuisA
-    a obo:BFO_0000029 ;          # site (IndependentContinuant)
+    a onto:CareLocation ;          # site (IndependentContinuant)
     rdfs:label "Ziekenhuis A"@nl .
 
 # ===========================================================================
