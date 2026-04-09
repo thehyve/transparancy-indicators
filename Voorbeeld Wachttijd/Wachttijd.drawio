@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Page-1" id="sK56FHgUg-ltqtUPOhYt">
-    <mxGraphModel dx="1814" dy="1392" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+    <mxGraphModel dx="1801" dy="1380" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -273,25 +273,6 @@
         </mxCell>
         <mxCell id="PLlxbX9Oc2EbzXhEgdgX-88" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=17;fillColor=none;strokeColor=none;fontColor=#6F7681;shadow=0;" value="&lt;div&gt;&lt;span style=&quot;font-size: 21px;&quot;&gt;&lt;b&gt;Semantisch model brondata alvleesklier wachttijd&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="47.18" width="655" x="-86" y="-94.18" as="geometry" />
-        </mxCell>
-        <mxCell id="PLlxbX9Oc2EbzXhEgdgX-90" parent="0" value="Checks" />
-        <mxCell id="PLlxbX9Oc2EbzXhEgdgX-91" parent="PLlxbX9Oc2EbzXhEgdgX-90" style="sketch=0;html=1;aspect=fixed;strokeColor=none;shadow=0;align=center;fillColor=#2D9C5E;verticalAlign=top;labelPosition=center;verticalLabelPosition=bottom;shape=mxgraph.gcp2.check" value="" vertex="1">
-          <mxGeometry height="20" width="25" x="267" y="269" as="geometry" />
-        </mxCell>
-        <mxCell id="PLlxbX9Oc2EbzXhEgdgX-92" parent="PLlxbX9Oc2EbzXhEgdgX-90" style="sketch=0;html=1;aspect=fixed;strokeColor=none;shadow=0;align=center;fillColor=#2D9C5E;verticalAlign=top;labelPosition=center;verticalLabelPosition=bottom;shape=mxgraph.gcp2.check" value="" vertex="1">
-          <mxGeometry height="20" width="25" x="245" y="359" as="geometry" />
-        </mxCell>
-        <mxCell id="PLlxbX9Oc2EbzXhEgdgX-93" parent="PLlxbX9Oc2EbzXhEgdgX-90" style="sketch=0;html=1;aspect=fixed;strokeColor=none;shadow=0;align=center;fillColor=#2D9C5E;verticalAlign=top;labelPosition=center;verticalLabelPosition=bottom;shape=mxgraph.gcp2.check" value="" vertex="1">
-          <mxGeometry height="20" width="25" x="125" y="454" as="geometry" />
-        </mxCell>
-        <mxCell id="PLlxbX9Oc2EbzXhEgdgX-94" parent="PLlxbX9Oc2EbzXhEgdgX-90" style="sketch=0;html=1;aspect=fixed;strokeColor=none;shadow=0;align=center;fillColor=#2D9C5E;verticalAlign=top;labelPosition=center;verticalLabelPosition=bottom;shape=mxgraph.gcp2.check" value="" vertex="1">
-          <mxGeometry height="20" width="25" x="484" y="551" as="geometry" />
-        </mxCell>
-        <mxCell id="PLlxbX9Oc2EbzXhEgdgX-95" parent="PLlxbX9Oc2EbzXhEgdgX-90" style="sketch=0;html=1;aspect=fixed;strokeColor=none;shadow=0;align=center;fillColor=#2D9C5E;verticalAlign=top;labelPosition=center;verticalLabelPosition=bottom;shape=mxgraph.gcp2.check" value="" vertex="1">
-          <mxGeometry height="20" width="25" x="-110" y="515" as="geometry" />
-        </mxCell>
-        <mxCell id="PLlxbX9Oc2EbzXhEgdgX-97" parent="PLlxbX9Oc2EbzXhEgdgX-90" style="sketch=0;html=1;aspect=fixed;strokeColor=none;shadow=0;align=center;fillColor=#2D9C5E;verticalAlign=top;labelPosition=center;verticalLabelPosition=bottom;shape=mxgraph.gcp2.check" value="" vertex="1">
-          <mxGeometry height="20" width="25" x="240" y="643" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
