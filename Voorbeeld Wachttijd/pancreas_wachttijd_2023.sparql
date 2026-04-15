@@ -1,0 +1,50 @@
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+PREFIX obo:     <http://purl.obolibrary.org/obo/>
+PREFIX time:    <http://www.w3.org/2006/time#>
+PREFIX onto:    <https://w3id.org/zinl/ti-o#>
+
+
+SELECT ?patient ?locatie ?preopEindDatum ?operatieBeginDatum
+{
+    # Aanname: wachttijd wordt alleen meegenomen als er een operatie heeft 
+    #   plaatsgevonden (in het registratiejaar)
+    # Registratieperiode: 1 januari 2023 tot en met 31 december 2023
+    BIND (xsd:dateTime("2023-01-01T00:00:00") AS ?startDatum)
+    BIND (xsd:dateTime("2023-12-31T23:59:59") AS ?eindDatum)
+
+    # We gebruiken de Zorgactiviteitcode van preoperatief contact om te filteren. 
+    # Alternatief zou zijn om gelijk de juiste ontologie klasse te gebruiken.
+    BIND ("123456" AS ?preoperatiefCodesysteem)
+
+    # We gebruiken de SNOMED-CT code om te filteren op operatie. 
+    # Alternatief zou zijn om gelijk de juiste ontologie klasse te gebruiken.
+    BIND ("116241004" AS ?operatieCode)
+
+    ?patient a obo:NCBITAXON_9606 . 
+    ?locatie a obo:BFO_0000029 .
+
+    ?crid_preoperatief a obo:IAO_0000578 ;
+        obo:BFO_0000050 onto:ZorgactiviteitCode ;
+        obo:IAO_0000577 ?preoperatiefContactCode .
+
+    ?preoperatiefContact a onto:PreoperativeOutpatientContact ;
+        obo:RO_0000057 ?patient ;
+        obo:BFO_0000066 ?locatie ;
+        ^obo:IAO_0000219 ?crid_preoperatief ;
+        time:hasTime/time:hasEnd/time:inXSDDate ?preopEindDatum .
+
+    ?crid_operatie a obo:IAO_0000578 ;
+        obo:BFO_0000050 onto:SNOMEDCT ;
+        obo:IAO_0000577 ?operatieCode .
+
+    ?operatie a onto:Pancreaticoduodenectomy ;
+        obo:RO_0000057 ?patient ;
+        obo:BFO_0000066 ?locatie ;
+        ^obo:IAO_0000219 ?crid_operatie ;
+        obo:RO_0002404 ?preoperatiefContact ;  # causally downstream of
+        time:hasTime/time:hasBeginning/time:inXSDDate ?operatieBeginDatum .
+    
+    FILTER (?operatieBeginDatum >= ?startDatum && ?operatieBeginDatum <= ?eindDatum)
+}
