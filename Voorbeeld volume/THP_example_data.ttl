@@ -33,7 +33,8 @@ ex:Patient1
 
 # Fysieke afwijking: coxartrose
 ex:Disorder1_Coxartrose
-    a obo:OGMS_0000045 ,          # FysiekeAfwijking
+    a onto:Coxarthrosis ,           # subclass van Disorder
+      obo:OGMS_0000045 ,          # FysiekeAfwijking
       obo:OGMS_0000102 .          # Disorder
 
 ex:CRID_Snomed_Coxartrose
@@ -87,8 +88,9 @@ ex:Patient2
     rdfs:label "Patiënt 2"@nl .
 
 ex:Disorder2_AvasculaireNecrose
-    a obo:OGMS_0000045 ,
-      obo:OGMS_0000102 .
+    a onto:AvascularNecrosis ,    
+      obo:OGMS_0000045 ,          
+      obo:OGMS_0000102 .          
 
 ex:CRID_Snomed_AvasculaireNecrose
     a obo:IAO_0000578 ;
