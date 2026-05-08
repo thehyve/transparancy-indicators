@@ -33,9 +33,11 @@ ex:Patient1
 
 # Fysieke afwijking: coxartrose
 ex:Disorder1_Coxartrose
-    a onto:Coxarthrosis ,           # subclass van Disorder
+    a onto:Coxarthrosis ,         # subclass van Disorder
       obo:OGMS_0000045 ,          # FysiekeAfwijking
       obo:OGMS_0000102 .          # Disorder
+
+ex:Patient1 obo:BFO_00000137 ex:Disorder1_Coxartrose . # Heeft op een bepaald moment als deel
 
 ex:CRID_Snomed_Coxartrose
     a obo:IAO_0000578 ;
@@ -71,6 +73,12 @@ ex:THP1
     obo:BFO_0000066  ex:ZiekenhuisA ;
     time:hasTime     ex:THP1_Interval .
 
+ex:Patient1_in_THP_Role
+    a obo:OBI_0000093 ;       # 'role'
+    obo:BFO_0000054 ex:THP1 . # 'realized in'
+
+ex:Patient1 obo:RO_0000087 ex:Patient1_in_THP_Role . # 'has role'
+
 ex:CRID_THP1
     a obo:IAO_0000578 ;
     obo:BFO_0000050  onto:ZorgactiviteitCode ;
@@ -91,6 +99,9 @@ ex:Disorder2_AvasculaireNecrose
     a onto:AvascularNecrosis ,    
       obo:OGMS_0000045 ,          
       obo:OGMS_0000102 .          
+
+ex:Patient2 obo:BFO_00000137 ex:Disorder2_AvasculaireNecrose .
+
 
 ex:CRID_Snomed_AvasculaireNecrose
     a obo:IAO_0000578 ;
@@ -123,6 +134,12 @@ ex:THP2
     obo:BFO_0000066  ex:ZiekenhuisA ;
     time:hasTime     ex:THP2_Interval .
 
+ex:Patient2_in_THP_Role
+    a obo:OBI_0000093 ;       # 'role'
+    obo:BFO_0000054 ex:THP2 . # 'realized in'
+
+ex:Patient2 obo:RO_0000087 ex:Patient2_in_THP_Role . # 'has role'
+
 ex:CRID_THP2
     a obo:IAO_0000578 ;
     obo:BFO_0000050  onto:ZorgactiviteitCode ;
@@ -143,6 +160,8 @@ ex:Disorder3_HipFracture
     a obo:OGMS_0000045 ,
       obo:OGMS_0000102 ,
       onto:HipFracture .       # subclass van Disorder; dit is de reden van exclusie
+
+ex:Patient3 obo:BFO_00000137 ex:Disorder3_HipFracture .
 
 ex:CRID_Snomed_HipFracture
     a obo:IAO_0000578 ;
@@ -174,6 +193,12 @@ ex:THP3
     obo:RO_0000057   ex:Disorder3_HipFracture ;
     obo:BFO_0000066  ex:ZiekenhuisA ;
     time:hasTime     ex:THP3_Interval .
+
+ex:Patient3_in_THP_Role
+    a obo:OBI_0000093 ;       # 'role'
+    obo:BFO_0000054 ex:THP3 . # 'realized in'
+
+ex:Patient3 obo:RO_0000087 ex:Patient3_in_THP_Role . # 'has role'
 
 ex:CRID_THP3
     a obo:IAO_0000578 ;
