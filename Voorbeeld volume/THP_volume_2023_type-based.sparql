@@ -1,7 +1,7 @@
 PREFIX obo:     <http://purl.obolibrary.org/obo/>
 PREFIX time:    <http://www.w3.org/2006/time#>
-PREFIX ti-o:    <https://w3id.org/zinl/ti-o#>
 PREFIX xsd:     <http://www.w3.org/2001/XMLSchema#>
+PREFIX ti-o:    <https://w3id.org/zinl/ti-o#>
 
 
 # Variabelen:
@@ -25,22 +25,26 @@ WHERE {
     BIND(ti-o:HipFracture AS ?exclusie)
 
     # --- Tijdsbinding: begindatum van de behandeling valt binnen verslagperiode ---
-    ?behandeling time:hasTime ?interval .
-    ?interval time:hasBeginning ?beginMoment .
-    ?beginMoment time:inXSDDate ?datum .
-    FILTER ( ?datum >= ?verslagPeriodeStart && ?datum < ?verslagPeriodeEind )
+    ?behandeling time:hasTime/time:hasBeginning/time:inXSDDate ?datumBehandeling .
+    FILTER ( ?datumBehandeling >= ?verslagPeriodeStart 
+            && ?datumBehandeling < ?verslagPeriodeEind )
 
-    # --- Zorglocatie ---
+    # --- Patient met aandoening die wordt behandeld ---
     ?behandeling
         a ?behandelingType ;
-        obo:BFO_0000066 ?locatie . # 'occurs in' (vindt plaats in)
+        obo:RO_0000057 ?patient ;   # 'has participant' (heeft als deelnemer)
+        obo:RO_0000057 ?disorder .
+
+    ?patient
+        a obo:NCBITAXON_9606 ;
+        obo:BFO_00000137 ?disorder . # 'has continuant part at some time' (de disorder is van de deelnemende persoon)
 
     # --- Exclusie: behandeling heeft geen deelnemende disorder
     #     die aangeduid wordt door een exclusie klasse ---
-    FILTER NOT EXISTS {
-        ?behandeling obo:RO_0000057 ?disorder . # 'has participant' (heeft als deelnemer)
-        ?disorder a ?exclusie .
-    }
+    FILTER NOT EXISTS { ?disorder a ?exclusie . }
+
+    # --- Zorglocatie ---
+    ?behandeling obo:BFO_0000066 ?locatie . # 'occurs in' (vindt plaats in)
 }
 GROUP BY ?locatie
 ORDER BY ?locatie
