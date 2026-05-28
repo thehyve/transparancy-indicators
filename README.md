@@ -151,7 +151,7 @@ curl -X POST http://localhost:3030/ds/query \
 
 ## Licentie
 
-Dit project heeft als licentie: CC BY-NC-SA 4.0
+Dit project heeft als licentie: **CC BY-NC-SA 4.0**
 
 **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International**
 
