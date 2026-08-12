@@ -4,3 +4,6 @@
 - name: HHM_heroperatie
   template: unplanned_reoperation
   disease: HeadNeckMalignancy
+- name: HHM_volume
+  template: volume
+  disease: HeadNeckMalignancy
