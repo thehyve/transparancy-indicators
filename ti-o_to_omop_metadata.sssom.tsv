@@ -1,0 +1,12 @@
+#curie_map:
+#  obo:     http://purl.obolibrary.org/obo/
+#  time:    http://www.w3.org/2006/time#
+#  xsd:     http://www.w3.org/2001/XMLSchema#
+#  ti-o:    https://w3id.org/zinl/ti-o#
+#  skos:    http://www.w3.org/2004/02/skos/core#
+#mapping_set_id: https://w3id.org/zinl/ti-o#ti-o_to_omop.sssom.tsv
+#mapping_set_description: Manually curated transformation of ti-o to OMOP.
+#license: https://creativecommons.org/licenses/by/4.0/
+#mapping_date: 2022-05-02
+#creator_label:
+#  - "Loes van den Biggelaar"

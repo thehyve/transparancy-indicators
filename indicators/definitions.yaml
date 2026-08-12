@@ -1,0 +1,6 @@
+- name: THP_volume
+  template: volume
+  disease: THP
+- name: HHM_heroperatie
+  template: unplanned_reoperation
+  disease: HeadNeckMalignancy

@@ -470,6 +470,78 @@ obo:PATO_0000128 rdf:type owl:Class ;
                    skos:closeMatch <http://snomed.info/id/31384009> .
 
 
+###  https://w3id.org/zinl/ti-o#HeadNeckOralCavity
+:HeadNeckOralCavity rdf:type owl:Class ;
+                   rdfs:subClassOf obo:OGMS_0000147 ;
+                   rdfs:label "Oral cavity malignancy"@en ,
+                              "Maligniteit van de mondholte"@nl ;
+                   obo:IAO_0000115 "Malignant neoplasm of oral cavity sites (lips, tongue, palate, gum, etc.) per ICD-O-3 topography codes C00, C02-C04, C05.0, C05.8-9, C06.0-8; inclusion criterion for Indicator 3 (DHNA)."@en ,
+                                   "Maligne neoplasmata van mondholte (lippen, tong, gehemelte, tandvlees, etc.) volgens ICD-O-3 topografie codes C00, C02-C04, C05.0, C05.8-9, C06.0-8; inclusie criterium voor Indicator 3 (DHNA)."@nl .
+
+
+###  https://w3id.org/zinl/ti-o#HeadNeckOropharynx
+:HeadNeckOropharynx rdf:type owl:Class ;
+                   rdfs:subClassOf obo:OGMS_0000147 ;
+                   rdfs:label "Oropharynx malignancy"@en ,
+                              "Maligniteit van de orofarynx"@nl ;
+                   obo:IAO_0000115 "Malignant neoplasm of oropharynx sites (base of tongue, soft palate, tonsils, etc.) per ICD-O-3 topography codes C01, C05.1-2, C09-C10, C14; inclusion criterion for Indicator 3 (DHNA)."@en ,
+                                   "Maligne neoplasmata van orofarynx (tongruis, zachte gehemelte, amandelen, etc.) volgens ICD-O-3 topografie codes C01, C05.1-2, C09-C10, C14; inclusie criterium voor Indicator 3 (DHNA)."@nl .
+
+
+###  https://w3id.org/zinl/ti-o#HeadNeckNasopharynx
+:HeadNeckNasopharynx rdf:type owl:Class ;
+                    rdfs:subClassOf obo:OGMS_0000147 ;
+                    rdfs:label "Nasopharynx malignancy"@en ,
+                               "Maligniteit van de nasofarynx"@nl ;
+                    obo:IAO_0000115 "Malignant neoplasm of nasopharynx (ICD-O-3 topography code C11); inclusion criterion for Indicator 3 (DHNA)."@en ,
+                                    "Maligne neoplasmata van nasofarynx (ICD-O-3 topografie code C11); inclusie criterium voor Indicator 3 (DHNA)."@nl .
+
+
+###  https://w3id.org/zinl/ti-o#HeadNeckHypopharynx
+:HeadNeckHypopharynx rdf:type owl:Class ;
+                    rdfs:subClassOf obo:OGMS_0000147 ;
+                    rdfs:label "Hypopharynx malignancy"@en ,
+                               "Maligniteit van de hypofarynx"@nl ;
+                    obo:IAO_0000115 "Malignant neoplasm of hypopharynx (ICD-O-3 topography codes C12-C13); inclusion criterion for Indicator 3 (DHNA)."@en ,
+                                    "Maligne neoplasmata van hypofarynx (ICD-O-3 topografie codes C12-C13); inclusie criterium voor Indicator 3 (DHNA)."@nl .
+
+
+###  https://w3id.org/zinl/ti-o#HeadNeckLarynx
+:HeadNeckLarynx rdf:type owl:Class ;
+                rdfs:subClassOf obo:OGMS_0000147 ;
+                rdfs:label "Larynx malignancy"@en ,
+                           "Maligniteit van het strottenhoofd"@nl ;
+                obo:IAO_0000115 "Malignant neoplasm of larynx sites (glottis, supraglottis, subglottis) per ICD-O-3 topography codes C32.0-2, C32.8-9; inclusion criterion for Indicator 3 (DHNA)."@en ,
+                                "Maligne neoplasmata van larynx (glottis, supraglottis, subglottis) volgens ICD-O-3 topografie codes C32.0-2, C32.8-9; inclusie criterium voor Indicator 3 (DHNA)."@nl .
+
+
+###  https://w3id.org/zinl/ti-o#HeadNeckNasalCavityAndSinuses
+:HeadNeckNasalCavityAndSinuses rdf:type owl:Class ;
+                                   rdfs:subClassOf obo:OGMS_0000147 ;
+                                   rdfs:label "Nasal cavity and sinuses malignancy"@en ,
+                                              "Maligniteit van neus- en bijholten"@nl ;
+                                   obo:IAO_0000115 "Malignant neoplasm of nasal cavity and paranasal sinuses (ICD-O-3 topography codes C30-C31); inclusion criterion for Indicator 3 (DHNA)."@en ,
+                                                   "Maligne neoplasmata van neusholte en bijholten (ICD-O-3 topografie codes C30-C31); inclusie criterium voor Indicator 3 (DHNA)."@nl .
+
+
+###  https://w3id.org/zinl/ti-o#HeadNeckSalivaryGlands
+:HeadNeckSalivaryGlands rdf:type owl:Class ;
+                                 rdfs:subClassOf obo:OGMS_0000147 ;
+                                 rdfs:label "Malignant salivary glands malignancy"@en ,
+                                            "Maligniteit van speekselklieren"@nl ;
+                                 obo:IAO_0000115 "Malignant neoplasm of major salivary glands (parotid, submandibular, sublingual, and minor salivary) per ICD-O-3 topography codes C07-C08; inclusion criterion for Indicator 3 (DHNA)."@en ,
+                                                 "Maligne neoplasmata van speekselklieren (parotis, submandibulaire, sublinguale en kleinere speekselklieren) volgens ICD-O-3 topografie codes C07-C08; inclusie criterium voor Indicator 3 (DHNA)."@nl .
+
+
+###  https://w3id.org/zinl/ti-o#HeadNeckLymphNodeMetastases
+:HeadNeckLymphNodeMetastases rdf:type owl:Class ;
+                              rdfs:subClassOf obo:OGMS_0000147 ;
+                              rdfs:label "Lymph node metastases of unknown primary (squamous cell carcinoma)"@en ,
+                                         "Lymfkliermetastasen van onbekende origine (plaveiselcelcarcinoom)"@nl ;
+                              obo:IAO_0000115 "Lymph node metastases of squamous cell carcinoma of unknown primary (ICD-O-3 topography code C80); inclusion criterion for Indicator 3 (DHNA)."@en ,
+                                              "Lymfkliermetastasen van plaveiselcelcarcinoom van onbekende origine (ICD-O-3 topografie code C80); inclusie criterium voor Indicator 3 (DHNA)."@nl .
+
+
 ###  https://w3id.org/zinl/ti-o#BMIMeasurementDatum
 :BMIMeasurementDatum rdf:type owl:Class ;
                      rdfs:subClassOf obo:IAO_0000027 ,

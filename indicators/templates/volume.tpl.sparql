@@ -1,0 +1,49 @@
+-- volume.tpl.sparql — generic "treatment volume" indicator template for RDF/OWL
+--
+-- Disease-agnostic SPARQL query: counts distinct treatment procedures per
+-- location in the reporting period, excluding patients with a disqualifying
+-- condition. Which ti-o concepts count as inclusion/exclusion are supplied
+-- per disease via diseases/<Disease>/sparql/ blocks, similar to the SQL
+-- version.
+--
+-- The {{ti-o:...}} tokens are left as-is for hospital-side resolution via
+-- localize_sparql.py or equivalent SPARQL resolver.
+--
+-- Usage: substitute ${...} blocks at maintainer time (compose.py), then
+-- substitute {{ti-o:...}} tokens at hospital time (localize_sparql.py or
+-- by hand).
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX omop: <http://example.org/omop#>
+PREFIX ti-o: <https://w3id.org/zinl/ti-o#>
+
+SELECT
+    ?locatie
+    (COUNT(DISTINCT ?procedure_occurrence) AS ?aantal)
+WHERE {
+    # Reporting period filter
+    ${rapportagejaar}
+
+    # Procedures that count as inclusion (disease-specific)
+    ?procedure_occurrence rdf:type omop:ProcedureOccurrence ;
+                          omop:procedure_concept_id ?procedure_concept ;
+                          omop:procedure_date ?procedure_date ;
+                          omop:person_id ?person_id .
+
+    VALUES ?procedure_concept { ${inclusie_concepten} }
+
+    # Location information
+    ${locatie}
+
+    # Exclusion: patient must not have a disqualifying condition
+    FILTER NOT EXISTS {
+        ?condition_occurrence rdf:type omop:ConditionOccurrence ;
+                              omop:person_id ?person_id ;
+                              omop:condition_concept_id ?exclusion_concept .
+        VALUES ?exclusion_concept { ${exclusie_concepten} }
+    }
+}
+GROUP BY ?locatie
+ORDER BY ?locatie

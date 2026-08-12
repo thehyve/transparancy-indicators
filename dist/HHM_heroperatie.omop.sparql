@@ -1,0 +1,82 @@
+-- unplanned_reoperation.tpl.sparql — generic "unplanned reoperation after
+-- primary resection" indicator template for RDF/OWL
+--
+-- Disease-agnostic SPARQL query: percentage of patients with a primary
+-- condition who underwent a resection procedure in the reporting period,
+-- who then had an unplanned reoperation for a complication within 30 days —
+-- excluding patients with a disqualifying condition.
+--
+-- The {{ti-o:...}} tokens are left as-is for hospital-side resolution via
+-- localize_sparql.py or equivalent SPARQL resolver.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX omop: <http://example.org/omop#>
+PREFIX ti-o: <https://w3id.org/zinl/ti-o#>
+
+SELECT
+    ?locatie
+    (COUNT(DISTINCT ?heroperatie) AS ?teller_heroperaties)
+    (COUNT(DISTINCT ?resectie) AS ?noemer_resecties)
+    (ROUND(100.0 * COUNT(DISTINCT ?heroperatie) / COALESCE(COUNT(DISTINCT ?resectie), 1), 1) AS ?percentage_heroperaties)
+WHERE {
+    # Reporting period filter
+    BIND(xsd:date('{{START_DATE}}') AS ?jaar_start)
+BIND(xsd:date('{{END_DATE}}') AS ?jaar_eind)
+FILTER(?procedure_date >= ?jaar_start && ?procedure_date < ?jaar_eind)
+
+
+    # Primary condition (inclusion criterion)
+    ?condition rdf:type omop:ConditionOccurrence ;
+               omop:person_id ?person_id ;
+               omop:condition_concept_id ?inclusion_concept ;
+               omop:condition_start_date ?condition_start_date .
+    VALUES ?inclusion_concept { {{ti-o:HeadNeckOralCavity}}
+        | {{ti-o:HeadNeckOropharynx}}
+        | {{ti-o:HeadNeckNasopharynx}}
+        | {{ti-o:HeadNeckHypopharynx}}
+        | {{ti-o:HeadNeckLarynx}}
+        | {{ti-o:HeadNeckNasalCavityAndSinuses}}
+        | {{ti-o:HeadNeckSalivaryGlands}}
+        | {{ti-o:HeadNeckLymphNodeMetastases}}
+ }
+
+    # Resection procedure (disease-specific definition)
+    ?resectie rdf:type omop:ProcedureOccurrence ;
+              omop:person_id ?person_id ;
+              omop:procedure_concept_id ?resection_concept ;
+              omop:procedure_date ?resection_date ;
+              omop:visit_occurrence_id ?visit .
+    VALUES ?resection_concept { {{ti-o:HeadNeckResection}}
+ }
+    FILTER(?resection_date >= ?condition_start_date)
+
+    # Location information
+    ?visit rdf:type omop:VisitOccurrence ;
+           omop:care_site_id ?care_site_id .
+    ?care_site rdf:type omop:CareSite ;
+               omop:care_site_id ?care_site_id ;
+               omop:care_site_name ?locatie .
+
+    # Exclusion: patient must not have a disqualifying condition
+    FILTER NOT EXISTS {
+        ?exclusion_condition rdf:type omop:ConditionOccurrence ;
+                             omop:person_id ?person_id ;
+                             omop:condition_concept_id ?exclusion_concept .
+        VALUES ?exclusion_concept { {{ti-o:CarcinomaInSitu}}, {{ti-o:HeadNeckOtherExcludedHistology}}
+ }
+    }
+
+    # Optional: unplanned reoperation within 30 days
+    OPTIONAL {
+        ?heroperatie rdf:type omop:ProcedureOccurrence ;
+                     omop:person_id ?person_id ;
+                     omop:procedure_concept_id ti-o:UnplannedReoperationForComplication ;
+                     omop:procedure_date ?heroperatie_date .
+        FILTER(?heroperatie_date > ?resection_date &&
+               ?heroperatie_date <= ?resection_date + "P30D"^^xsd:duration)
+    }
+}
+GROUP BY ?locatie
+ORDER BY ?locatie

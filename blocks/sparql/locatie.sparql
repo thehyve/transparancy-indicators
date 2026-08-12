@@ -1,0 +1,4 @@
+?procedure_occurrence omop:care_site_id ?care_site_id .
+?care_site rdf:type omop:CareSite ;
+           omop:care_site_id ?care_site_id ;
+           omop:care_site_name ?locatie .

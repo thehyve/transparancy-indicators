@@ -1,0 +1,3 @@
+BIND(xsd:date('{{START_DATE}}') AS ?jaar_start)
+BIND(xsd:date('{{END_DATE}}') AS ?jaar_eind)
+FILTER(?procedure_date >= ?jaar_start && ?procedure_date < ?jaar_eind)

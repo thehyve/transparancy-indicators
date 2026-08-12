@@ -1,0 +1,8 @@
+{{ti-o:HeadNeckOralCavity}}
+        | {{ti-o:HeadNeckOropharynx}}
+        | {{ti-o:HeadNeckNasopharynx}}
+        | {{ti-o:HeadNeckHypopharynx}}
+        | {{ti-o:HeadNeckLarynx}}
+        | {{ti-o:HeadNeckNasalCavityAndSinuses}}
+        | {{ti-o:HeadNeckSalivaryGlands}}
+        | {{ti-o:HeadNeckLymphNodeMetastases}}
