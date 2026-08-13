@@ -4,6 +4,9 @@
 
 ---
 
+## Quick access
+view the [Summary table](summary_table.md) to get an overview of all the available indicators and diseases
+
 ## Inhoud
 
 ```

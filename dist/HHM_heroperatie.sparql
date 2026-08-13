@@ -36,7 +36,15 @@ SELECT
 WHERE {
     # --- Primary condition: the disorder being treated (inclusion criterion) ---
     ?disorder a ?inclusionType .
-    VALUES ?inclusionType { ${inclusie_concepten} }
+    VALUES ?inclusionType { {{ti-o:HeadNeckOralCavity}}
+        {{ti-o:HeadNeckOropharynx}}
+        {{ti-o:HeadNeckNasopharynx}}
+        {{ti-o:HeadNeckHypopharynx}}
+        {{ti-o:HeadNeckLarynx}}
+        {{ti-o:HeadNeckNasalCavityAndSinuses}}
+        {{ti-o:HeadNeckSalivaryGlands}}
+        {{ti-o:HeadNeckLymphNodeMetastases}}
+ }
 
     # --- Resection: treatment of the primary condition, in the reporting period ---
     ?resectie
@@ -46,7 +54,8 @@ WHERE {
         obo:BFO_0000066 ?locatie ;
         time:hasTime/time:hasBeginning/time:inXSDDate ?resectieDatum .
 
-    VALUES ?resectionType { ${resectie_concepten} }
+    VALUES ?resectionType { {{ti-o:HeadNeckResection}}
+ }
 
     FILTER(?resectieDatum >= xsd:date('{{START_DATE}}') && ?resectieDatum < xsd:date('{{END_DATE}}'))
 
@@ -58,7 +67,8 @@ WHERE {
     FILTER NOT EXISTS {
         ?patient obo:BFO_0000051 ?exclusieDisorder .
         ?exclusieDisorder a ?exclusieType .
-        VALUES ?exclusieType { ${exclusie_concepten} }
+        VALUES ?exclusieType { {{ti-o:CarcinomaInSitu}} {{ti-o:HeadNeckOtherExcludedHistology}}
+ }
     }
 
     # --- Optional: unplanned reoperation for complication within 30 days ---

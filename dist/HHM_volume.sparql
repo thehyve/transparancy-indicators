@@ -34,7 +34,15 @@ WHERE {
         obo:RO_0000057 ?patient ;
         obo:RO_0000057 ?disorder .
 
-    VALUES ?behandelingType { ${inclusie_concepten} }
+    VALUES ?behandelingType { {{ti-o:HeadNeckOralCavity}}
+        {{ti-o:HeadNeckOropharynx}}
+        {{ti-o:HeadNeckNasopharynx}}
+        {{ti-o:HeadNeckHypopharynx}}
+        {{ti-o:HeadNeckLarynx}}
+        {{ti-o:HeadNeckNasalCavityAndSinuses}}
+        {{ti-o:HeadNeckSalivaryGlands}}
+        {{ti-o:HeadNeckLymphNodeMetastases}}
+ }
 
     ?patient
         a obo:NCBITAXON_9606 ;
@@ -47,7 +55,8 @@ WHERE {
     #     disqualifying class ---
     FILTER NOT EXISTS {
         ?disorder a ?exclusieType .
-        VALUES ?exclusieType { ${exclusie_concepten} }
+        VALUES ?exclusieType { {{ti-o:CarcinomaInSitu}} {{ti-o:HeadNeckOtherExcludedHistology}}
+ }
     }
 }
 GROUP BY ?locatie

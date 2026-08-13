@@ -34,7 +34,7 @@ indicators/definitions.yaml is a list, one entry per indicator to build:
     - name: HHM_heroperatie
       template: unplanned_reoperation
       disease: HeadNeckMalignancy
-`name` becomes dist/<name>.omop.sql, dist/<name>.omop.sparql, etc.
+`name` becomes dist/<name>.sql, dist/<name>.sparql, etc.
 
 All substitution uses Python's built-in string.Template ($name / ${name}
 syntax). {{ti-o:...}} and {{START_DATE}}/{{END_DATE}} tokens are left
@@ -130,6 +130,37 @@ def compose(config: dict, fmt: str) -> str:
 
     return result
 
+def report(definitions) -> None:
+    """Print a summary of the current indicator definitions and templates.
+    In a readme, there is a table with each row an indicator and each column a disease.
+    The cells populate a reference to the template if it exists.
+    """
+
+    EXT = "sparql"
+
+    # Extract all the the unique templates and diseases from the definitions
+    templates = sorted(set(d["template"] for d in definitions))
+    diseases = sorted(set(d["disease"] for d in definitions))
+
+    # Print a summary table as a pretty markdown table
+    with open("summary_table.md", "w") as f:
+
+        print("\n# **Summary Table**", file=f)
+        print("\nThis table summarizes the current indicator definitions and templates.\n", file=f)
+        print("| Indicator | " + " | ".join([f"[{disease}](diseases/{disease})" for disease in diseases]) + " |", file=f)
+        print("|----------" + "|".join(["----------"] * len(diseases) + ["----------"]) + "|", file=f)
+        for template in templates:
+            row = [f"[{template}](indicators/templates/{template}.tpl.{EXT})"]
+            for disease in diseases:
+                cell = [d["name"] for d in definitions if d["template"] == template and d["disease"] == disease]
+                cell = f"[{cell[0]}](dist/{cell[0]}.{EXT})" if cell else ""
+                row.append(cell)
+
+            print("| " + " | ".join(row) + " |", file=f)
+  
+    return
+
+    
 
 def main() -> None:
     # Set up colored logging handler
@@ -151,14 +182,14 @@ def main() -> None:
         for fmt in FORMAT_EXTS.keys():
             text = compose(config, fmt)
             ext = FORMAT_EXTS[fmt]
-            out_path = DIST_DIR / f"{config['name']}.omop{ext}"
+            out_path = DIST_DIR / f"{config['name']}{ext}"
             out_path.write_text(text)
             log.info("\twrote %s%s%s\n", _Color.GREEN, out_path.relative_to(ROOT), _Color.RESET)
             total_outputs += 1
 
     log.info("\n%s%sdone%s — composed %d indicator(s) × %d format(s) = %d output file(s) into %s%s%s", _Color.BOLD, _Color.GREEN, _Color.RESET, len(definitions), len(FORMAT_EXTS), total_outputs, _Color.BLUE, DIST_DIR.relative_to(ROOT), _Color.RESET)
 
-
+    report(definitions)
 
 if __name__ == "__main__":
     main()

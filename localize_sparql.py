@@ -8,12 +8,22 @@ Fills in a generated dist/<indicator>.omop.sparql file with:
   - the reporting period ({{START_DATE}} / {{END_DATE}})
   - concept URIs (ti-o:... URIs), resolved via a SSSOM crosswalk file
 
-By default, ti-o: URIs are resolved using our shipped ti-o_to_omop_mapping.tsv.
-Hospitals using different local vocabulary/coding for a ti-o concept can
-copy that file, edit the `object_id` for the relevant row(s), and pass their
-own copy via --sssom-file. The indicator's set of ti-o concepts itself
-(inclusion/exclusion definitions) cannot be changed this way — only which
-local code(s) they resolve to.
+Two query "shapes" are supported, auto-detected from the query text itself:
+  - OMOP-shaped queries (declare `PREFIX omop: <...>`): the underlying data
+    is an RDF-ized OMOP CDM, so {{ti-o:...}} tokens are crosswalked to the
+    hospital's local vocabulary codes (e.g. SNOMED/ICD URIs) via SSSOM,
+    exactly like localize_sql.py does for the SQL version.
+  - ti-o-native queries (no `omop:` prefix, e.g. volume.tpl.sparql): the
+    underlying RDF graph is expected to type resources directly with ti-o
+    classes (as in Voorbeeld volume/volume.ipynb), so {{ti-o:...}} tokens are
+    simply resolved to the bare ti-o: URI itself — no SSSOM crosswalk is
+    applied, since there is no local vocabulary code to crosswalk to.
+
+For OMOP-shaped queries, hospitals using different local vocabulary/coding
+for a ti-o concept can copy ti-o_to_omop_mapping.tsv, edit the `object_id`
+for the relevant row(s), and pass their own copy via --sssom-file. The
+indicator's set of ti-o concepts itself (inclusion/exclusion definitions)
+cannot be changed this way — only which local code(s) they resolve to.
 
 The SSSOM mapping translates ti-o concepts to (vocabulary, code) pairs, which
 are then formatted as URIs (e.g., SNOMED:52734007 → <http://snomed.info/id/52734007>,
@@ -82,22 +92,46 @@ def concept_to_uri(vocabulary_id: str, concept_code: str) -> str:
 PLACEHOLDER_VOCABULARIES = {"TODO"}
 
 
+# Matches a `PREFIX omop: <...>` declaration, used to auto-detect whether a
+# query is OMOP-shaped (RDF-ized OMOP CDM) or ti-o-native (see module
+# docstring).
+OMOP_PREFIX_RE = re.compile(r"PREFIX\s+omop:", re.IGNORECASE)
+
+
+def is_native_query(sparql_text: str) -> bool:
+    """True if the query doesn't declare an omop: prefix, i.e. it's ti-o-native
+    (types resources directly with ti-o classes, as in volume.ipynb) rather
+    than OMOP-shaped (RDF-ized OMOP CDM tables/columns).
+    """
+    return not OMOP_PREFIX_RE.search(sparql_text)
+
+
 def resolve_ti_o_token(
     ti_o_concept: str,
     mapping: dict[str, list[tuple[str, str]]],
     unresolved: list[str],
+    native: bool = False,
 ) -> str:
     """Resolve a ti-o concept to a SPARQL VALUES list of URIs.
 
-    If found in SSSOM, returns mapped URIs (e.g., <http://snomed.info/id/52734007>).
-    If not found (or only a TODO:VERIFY placeholder row), falls back to the bare
-    ti-o URI (e.g., ti-o:HipFracture) so the query remains syntactically valid
-    and can execute (even if it finds no results) — but the concept is recorded
-    in `unresolved` so a warning can be printed.
+    If `native` is True (ti-o-native query, no SSSOM crosswalk applies), the
+    bare ti-o URI (e.g., ti-o:THP) is always returned unchanged — that IS the
+    correct, final value, since the RDF graph itself types data with ti-o
+    classes directly.
+
+    Otherwise (OMOP-shaped query): if found in SSSOM, returns mapped URIs
+    (e.g., <http://snomed.info/id/52734007>). If not found (or only a
+    TODO:VERIFY placeholder row), falls back to the bare ti-o URI (e.g.,
+    ti-o:HipFracture) so the query remains syntactically valid and can
+    execute (even if it finds no results) — but the concept is recorded in
+    `unresolved` so a warning can be printed.
     """
     # Skip documentation placeholders like ti-o:... (with ellipsis)
     if ti_o_concept == "ti-o:...":
         return f"{{{{{ti_o_concept}}}}}"  # Return unchanged
+
+    if native:
+        return ti_o_concept
 
     codes = mapping.get(ti_o_concept)
     real_codes = [(vocab, code) for vocab, code in (codes or []) if vocab not in PLACEHOLDER_VOCABULARIES]
@@ -117,10 +151,11 @@ def localize_sparql(sparql_text: str, start_date: str, end_date: str, sssom_path
     """Substitute {{ti-o:...}} tokens and date placeholders in SPARQL text."""
     mapping = load_sssom(sssom_path)
     unresolved: list[str] = []
+    native = is_native_query(sparql_text)
 
     def replace_token(match: re.Match) -> str:
         ti_o_concept = match.group(1)  # e.g., "ti-o:THP"
-        return resolve_ti_o_token(ti_o_concept, mapping, unresolved)
+        return resolve_ti_o_token(ti_o_concept, mapping, unresolved, native=native)
 
     sparql_text = TI_O_TOKEN_RE.sub(replace_token, sparql_text)
     sparql_text = sparql_text.replace("{{START_DATE}}", start_date)
