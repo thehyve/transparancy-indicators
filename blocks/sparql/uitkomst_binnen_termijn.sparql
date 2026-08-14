@@ -1,0 +1,17 @@
+# --- Uitkomst binnen termijn: generic "outcome within a time window after
+#     a reference event" shape, reused across indicator templates (e.g.
+#     unplanned reoperation, mortality, recurrence — each a variant of
+#     "N patients with <event> who had <uitkomst> within <termijn> days").
+#     Expects ?referentie / ?referentieDatum / ?uitkomst_type / ?termijn to
+#     already be bound (e.g. via BIND) by the template before this block —
+#     which ti-o concept counts as the uitkomst and how long the termijn is
+#     are fixed per indicator TEMPLATE, not disease- or hospital-specific. ---
+OPTIONAL {
+    ?uitkomst
+        a ?uitkomst_type ;
+        obo:RO_0000057 ?patient ;
+        obo:RO_0002404 ?referentie ;
+        time:hasTime/time:hasBeginning/time:inXSDDate ?uitkomstDatum .
+    FILTER(?uitkomstDatum > ?referentieDatum &&
+           ?uitkomstDatum <= ?referentieDatum + ?termijn)
+}

@@ -108,12 +108,17 @@ exclusie_concepten AS (
 )
 , 
 
--- #teller: procedure — ongeplande heroperatie i.v.m. complicatie(s). This
--- defines the indicator itself (not disease-specific), so it's fixed here.
-heroperatie_concepten AS (
+-- #teller: procedure — ongeplande heroperatie i.v.m. complicatie(s), en
+-- de termijn waarbinnen die telt. This defines the indicator itself (not
+-- disease-specific), so it's fixed here rather than supplied per disease.
+uitkomst_concepten AS (
     SELECT concept_id
     FROM concept
     WHERE {{ti-o:UnplannedReoperationForComplication}}   -- <== EDIT HERE (or run localize_sql.py)
+),
+
+uitkomst_parameters AS (
+    SELECT 30 AS termijn_dagen
 ),
 
 -- ============================================================================
@@ -166,36 +171,48 @@ behandelingen_met_locatie AS (
     INNER JOIN visit_occurrence vo
         ON b.visit_occurrence_id = vo.visit_occurrence_id
 )
+,
 
-
--- #heroperaties (teller: ongeplande heroperatie binnen 30 dagen) ---------
-heroperaties AS (
+-- #uitkomst_binnen_termijn (teller: uitkomst binnen N dagen) — shared
+-- building block; see blocks/sql/uitkomst_binnen_termijn.sql. Expects
+-- uitkomst_concepten / uitkomst_parameters (defined above, fixed for THIS
+-- indicator) and behandelingen (defined above) to already exist.
+-- #uitkomsten: generic "outcome within a time window after a reference
+-- event" shape, reused across indicator templates (e.g. unplanned
+-- reoperation, mortality, recurrence). Expects `behandelingen`
+-- (person_id, procedure_date), `uitkomst_concepten` (concept_id) and
+-- `uitkomst_parameters` (termijn_dagen) to already be defined by the
+-- template — which ti-o concept counts as the uitkomst and how long the
+-- termijn is are fixed per indicator TEMPLATE, not disease- or
+-- hospital-specific.
+uitkomsten AS (
     SELECT DISTINCT
-        bl.procedure_occurrence_id
-    FROM behandelingen_met_locatie bl
-    INNER JOIN behandelingen b
-        ON b.procedure_occurrence_id = bl.procedure_occurrence_id
-    INNER JOIN procedure_occurrence reop
-        ON reop.person_id = b.person_id
-       AND reop.procedure_date > b.procedure_date
-       AND reop.procedure_date <= b.procedure_date + INTERVAL '30' DAY
-    INNER JOIN heroperatie_concepten hoc
-        ON reop.procedure_concept_id = hoc.concept_id
+        b.procedure_occurrence_id
+    FROM behandelingen b
+    CROSS JOIN uitkomst_parameters up
+    INNER JOIN procedure_occurrence uitkomst
+        ON uitkomst.person_id = b.person_id
+       AND uitkomst.procedure_date > b.procedure_date
+       AND uitkomst.procedure_date <= b.procedure_date + (up.termijn_dagen * INTERVAL '1' DAY)
+    INNER JOIN uitkomst_concepten uc
+        ON uitkomst.procedure_concept_id = uc.concept_id
 )
+
+
 
 -- #resultaat --------------------------------------------------------------
 SELECT
     cs.care_site_name AS locatie,
-    COUNT(DISTINCT h.procedure_occurrence_id) AS teller_heroperaties,
+    COUNT(DISTINCT u.procedure_occurrence_id) AS teller_heroperaties,
     COUNT(DISTINCT bl.procedure_occurrence_id) AS noemer_resecties,
     ROUND(
-        100.0 * COUNT(DISTINCT h.procedure_occurrence_id)
+        100.0 * COUNT(DISTINCT u.procedure_occurrence_id)
         / NULLIF(COUNT(DISTINCT bl.procedure_occurrence_id), 0),
     1) AS percentage_heroperaties
 FROM behandelingen_met_locatie bl
 INNER JOIN care_site cs
     ON bl.care_site_id = cs.care_site_id
-LEFT JOIN heroperaties h
-    ON h.procedure_occurrence_id = bl.procedure_occurrence_id
+LEFT JOIN uitkomsten u
+    ON u.procedure_occurrence_id = bl.procedure_occurrence_id
 GROUP BY cs.care_site_name
 ORDER BY locatie;

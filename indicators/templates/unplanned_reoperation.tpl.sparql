@@ -11,6 +11,14 @@
 -- inclusion/exclusion/resection are supplied per disease via
 -- diseases/<Disease>/*.sparql blocks.
 --
+-- The "outcome within N days of a reference event" shape itself is
+-- shared with other indicator templates (e.g. mortality/recurrence-
+-- within-window) via blocks/sparql/uitkomst_binnen_termijn.sparql; which
+-- ti-o concept counts as the outcome and how long the window is are
+-- fixed for THIS indicator directly below (via BIND), not in a separate
+-- config file — since they define the indicator itself, not disease- or
+-- hospital-specific.
+--
 -- Note: the "within 30 days" window uses xsd:duration arithmetic on a
 -- date, which production triplestores (Fuseki, GraphDB, Virtuoso) support
 -- but rdflib does not — see Voorbeeld PROM/indicator_4c_leesbaar.sparql.
@@ -30,25 +38,14 @@ PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
 SELECT
     ?locatie
-    (COUNT(DISTINCT ?heroperatie) AS ?teller_heroperaties)
+    (COUNT(DISTINCT ?uitkomst) AS ?teller_heroperaties)
     (COUNT(DISTINCT ?resectie) AS ?noemer_resecties)
-    (ROUND(100.0 * COUNT(DISTINCT ?heroperatie) / COALESCE(COUNT(DISTINCT ?resectie), 1), 1) AS ?percentage_heroperaties)
+    (ROUND(100.0 * COUNT(DISTINCT ?uitkomst) / COALESCE(COUNT(DISTINCT ?resectie), 1), 1) AS ?percentage_heroperaties)
 WHERE {
-    # --- Primary condition: the disorder being treated (inclusion criterion) ---
+    # --- Cohort: primary condition (inclusion criterion) and the patient
+    #     it belongs to ---
     ?disorder a ?inclusionType .
     VALUES ?inclusionType { ${inclusie_concepten} }
-
-    # --- Resection: treatment of the primary condition, in the reporting period ---
-    ?resectie
-        a ?resectionType ;
-        obo:RO_0000057 ?patient ;
-        obo:RO_0000057 ?disorder ;
-        obo:BFO_0000066 ?locatie ;
-        time:hasTime/time:hasBeginning/time:inXSDDate ?resectieDatum .
-
-    VALUES ?resectionType { ${resectie_concepten} }
-
-    FILTER(?resectieDatum >= xsd:date('{{START_DATE}}') && ?resectieDatum < xsd:date('{{END_DATE}}'))
 
     ?patient
         a obo:NCBITAXON_9606 ;
@@ -61,16 +58,31 @@ WHERE {
         VALUES ?exclusieType { ${exclusie_concepten} }
     }
 
-    # --- Optional: unplanned reoperation for complication within 30 days ---
-    OPTIONAL {
-        ?heroperatie
-            a ti-o:UnplannedReoperationForComplication ;
-            obo:RO_0000057 ?patient ;
-            obo:RO_0002404 ?resectie ;
-            time:hasTime/time:hasBeginning/time:inXSDDate ?heroperatieDatum .
-        FILTER(?heroperatieDatum > ?resectieDatum &&
-               ?heroperatieDatum <= ?resectieDatum + "P30D"^^xsd:duration)
-    }
+    # --- Resection (noemer): treatment of the primary condition, in the
+    #     reporting period ---
+    ?resectie
+        a ?resectionType ;
+        obo:RO_0000057 ?patient ;
+        obo:RO_0000057 ?disorder ;
+        obo:BFO_0000066 ?locatie ;
+        time:hasTime/time:hasBeginning/time:inXSDDate ?resectieDatum .
+
+    VALUES ?resectionType { ${resectie_concepten} }
+
+    FILTER(?resectieDatum >= xsd:date('{{START_DATE}}') && ?resectieDatum < xsd:date('{{END_DATE}}'))
+
+    # --- Outcome within window (teller, shared building block) —
+    #     reference event is the resection ---
+    # type of outcome we measure
+    BIND(ti-o:UnplannedReoperationForComplication AS ?uitkomst_type)
+
+    #time window
+    BIND("P30D"^^xsd:duration AS ?termijn)
+
+    # reference event and its date
+    BIND(?resectie AS ?referentie)
+    BIND(?resectieDatum AS ?referentieDatum)
+    ${uitkomst_binnen_termijn}
 }
 GROUP BY ?locatie
 ORDER BY ?locatie

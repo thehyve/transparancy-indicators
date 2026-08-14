@@ -25,8 +25,8 @@ SELECT
     (COUNT(DISTINCT ?behandeling) AS ?aantal)
 WHERE {
     # --- Reporting period: treatment's begin date falls within the period ---
-    ?behandeling time:hasTime/time:hasBeginning/time:inXSDDate ?datumBehandeling .
-    FILTER(?datumBehandeling >= xsd:date('{{START_DATE}}') && ?datumBehandeling < xsd:date('{{END_DATE}}'))
+    ?behandeling time:hasTime/time:hasBeginning/time:inXSDDate ?procedure_date .
+    ${rapportagejaar}
 
     # --- Treatment of an included type, with participating patient and disorder ---
     ?behandeling
