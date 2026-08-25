@@ -46,8 +46,8 @@ inclusie_concepten AS (
     SELECT concept_id
     FROM concept
     WHERE {{ti-o:THP}}
-)
-,
+    OR {{DHD:0000071917}}
+),
 
 -- #exclusie — which condition disqualifies a patient (fixed per disease;
 -- full CTE supplied by diseases/<Disease>/exclusie_concepten.sql)

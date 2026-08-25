@@ -37,7 +37,7 @@ FILTER(?procedure_date >= ?jaar_start && ?procedure_date < ?jaar_eind)
         obo:RO_0000057 ?patient ;
         obo:RO_0000057 ?disorder .
 
-    VALUES ?behandelingType { {{ti-o:THP}}
+    VALUES ?behandelingType { {{ti-o:THP}} {{DHD:0000071917}}
  }
 
     ?patient
