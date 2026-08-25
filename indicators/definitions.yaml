@@ -7,3 +7,6 @@
 - name: HHM_volume
   template: volume
   disease: HeadNeckMalignancy
+- name: BladderCarcinoma_volume
+  template: volume
+  disease: BladderCarcinoma
