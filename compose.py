@@ -99,6 +99,34 @@ class _ColoredFormatter(logging.Formatter):
 UNRESOLVED_PLACEHOLDER = re.compile(r"\$\{(\w+)\}")
 
 
+def _strip_optional_exclusion(text: str, fmt: str) -> str:
+    """Remove exclusion-specific query fragments when no exclusion block exists."""
+    # Remove the optional placeholder line from the WITH/parameter section.
+    text = re.sub(r"^[ \t]*\$\{exclusie_concepten\},?[ \t]*\n", "", text, flags=re.MULTILINE)
+
+    if fmt == "sql":
+        # Remove condition-level exclusion filters that depend on exclusie_concepten.
+        text = re.sub(
+            r"\n[ \t]*WHERE NOT EXISTS \(\n(?:.*\n)*?[ \t]*INNER JOIN exclusie_concepten ec\n(?:.*\n)*?[ \t]*\)\n",
+            "\n",
+            text,
+        )
+        text = re.sub(
+            r"\n[ \t]*AND NOT EXISTS \(\n(?:.*\n)*?[ \t]*INNER JOIN exclusie_concepten ec\n(?:.*\n)*?[ \t]*\)\n",
+            "\n",
+            text,
+        )
+    else:
+        # Remove SPARQL exclusion filter block that depends on exclusie_concepten.
+        text = re.sub(
+            r"\n[ \t]*FILTER NOT EXISTS \{\n(?:.*\n)*?\$\{exclusie_concepten\}(?:.*\n)*?[ \t]*\}\n",
+            "\n",
+            text,
+        )
+
+    return text
+
+
 
 def compose(config: dict, fmt: str) -> str:
     """Compose a single indicator in a specific format (sql or sparql)."""
@@ -121,6 +149,17 @@ def compose(config: dict, fmt: str) -> str:
     result = Template(text).safe_substitute(blocks)
 
     unresolved = sorted(set(UNRESOLVED_PLACEHOLDER.findall(result)))
+
+    # Some diseases intentionally have no exclusion block. Keep warning,
+    # and remove exclusion-specific logic from the composed query.
+    if "exclusie_concepten" in unresolved:
+        log.warning(
+            "optional exclusion placeholder ${exclusie_concepten} is unresolved; "
+            "removing exclusion logic from composed output"
+        )
+        result = _strip_optional_exclusion(result, fmt)
+        unresolved.remove("exclusie_concepten")
+
     if unresolved:
         log.warning(
             "unresolved placeholder(s) left in output: %s "
