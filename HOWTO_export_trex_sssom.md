@@ -49,7 +49,7 @@ python export_trex_sssom.py --date 2026-08-18 --start-id 50000 --max-id 50100 --
 ## Resume behavior
 
 The script reuses existing output rows and a state file:
-- `dist/trex/.trex_processed_ids.txt`
+- `dist/trex/.trex_processed_ids.tsv`
 
 So reruns skip already processed IDs and avoid unnecessary API calls.
 
