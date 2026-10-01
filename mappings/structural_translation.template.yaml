@@ -1,0 +1,61 @@
+# structural_translation.template.yaml
+#
+# Simple hospital-facing structural mapping template.
+#
+# Goal:
+#   Map canonical indicator SQL fields to your local schema.
+#   Concept mapping stays in SSSOM.
+#
+# How to use:
+#   1) Copy this file to mappings/<hospital>.structural.yaml
+#   2) Replace values on the right side only
+#   3) Keep the keys on the left unchanged
+
+profile_id: hospital-template
+sql_dialect: ansi
+
+tables:
+  procedure_occurrence: procedure_occurrence
+  condition_occurrence: condition_occurrence
+  visit_occurrence: visit_occurrence
+  care_site: care_site
+  concept: concept
+
+columns:
+  # procedure_occurrence
+  po_id: procedure_occurrence_id
+  po_person_id: person_id
+  po_date: procedure_date
+  po_visit_id: visit_occurrence_id
+  po_concept_id: procedure_concept_id
+
+  # condition_occurrence
+  co_person_id: person_id
+  co_date: condition_start_date
+  co_concept_id: condition_concept_id
+
+  # visit_occurrence
+  vo_id: visit_occurrence_id
+  vo_care_site_id: care_site_id
+
+  # care_site
+  cs_id: care_site_id
+  cs_name: care_site_name
+
+  # concept
+  concept_id: concept_id
+  concept_vocabulary: vocabulary_id
+  concept_code: concept_code
+
+optional_sql_expressions:
+  interval_one_day: INTERVAL '1' DAY
+
+example_non_omop:
+  tables:
+    procedure_occurrence: hospital_dw.procedures
+    concept: hospital_ref.concept_dictionary
+  columns:
+    po_date: CAST(proc_dtm AS DATE)
+    po_concept_id: procedure_code_fk
+    concept_vocabulary: source_vocab
+    concept_code: source_code

@@ -1,0 +1,34 @@
+# sparql_structural_translation.template.yaml
+#
+# Purpose:
+#   Structural mapping for SPARQL queries.
+#   Use this alongside concept SSSOM mapping:
+#     - SSSOM: maps ti-o concept tokens to local concepts/codes
+#     - this file: maps canonical predicates/classes to local graph structure
+#
+# How to use:
+#   1) Copy to mappings/<hospital>.sparql_structural.yaml
+#   2) Fill in predicate/class mappings
+#   3) Apply with localize_sparql_structure.py
+
+profile_id: hospital-template
+profile_version: 0.1.0
+
+prefixes:
+  # Add any local prefixes your mapped predicates/classes use.
+  # Canonical prefixes (obo, time, ti-o, xsd) can stay as-is.
+  ex: "http://example.org/local#"
+
+mappings:
+  # Predicate mappings (including path expressions if needed).
+  # Left side: canonical predicate/path used in template
+  # Right side: local predicate/path in your graph
+  predicates:
+    obo:RO_0000057: ex:hasParticipant
+    obo:BFO_0000051: ex:hasPart
+    obo:BFO_0000066: ex:occursAt
+    time:hasTime/time:hasBeginning/time:inXSDDate: ex:procedureDate
+
+  # Class mappings.
+  classes:
+    obo:NCBITAXON_9606: ex:Person
